@@ -52,13 +52,29 @@ class EntityRevisionRepo {
 			$id = $id->getPrefixedId();
 		}
 
+		return $this->newEntityRevisionFromResult( $this->getEntityResultById( $id ) );
+	}
+	
+	/**
+	 * @param string $id
+	 * @return array
+	 */
+	private function getEntityResultById( $id ) {
 		$result = $this->api->getAction( 'wbgetentities', array( 'ids' => $id ) );
-
+		return array_shift( $result['entities'] );
+	}
+	
+	/**
+	 * @param array $entityResult
+	 * @returns Entity
+	 */
+	private function newEntityRevisionFromResult( array $entityResult ) {
 		$deserializer = $this->deserializerFactory->newEntityDeserializer();
-		$entityResult = array_shift( $result['entities'] );
-		$entity = $deserializer->deserialize( $entityResult );
 
-		return new EntityRevision( $entity, $entityResult['lastrevid'] );
+		return new EntityRevision(
+			$deserializer->deserialize( $entityResult ),
+			$entityResult['lastrevid']
+		);
 	}
 
 	/**
