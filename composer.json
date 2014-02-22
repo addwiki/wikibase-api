@@ -1,0 +1,30 @@
+{
+	"name": "addwiki/wikibase-api",
+	"type": "library",
+	"description": "A Wikibase api lib",
+	"keywords": ["Mediawiki","wikibase","wikidata"],
+	"authors": [
+		{
+			"name": "Addshore"
+		}
+	],
+	"minimum-stability" : "dev",
+	"require": {
+		"addwiki/mediawiki-api": "dev-master",
+		"wikibase/data-model-serialization": "dev-master",
+		"wikibase/data-model": "0.6",
+		"data-values/data-values": "~0.1",
+		"data-values/common": "~0.1",
+		"data-values/geo": "~0.1",
+		"data-values/number": "~0.2",
+		"data-values/time": "~0.1",
+		"data-values/validators": "~0.1",
+		"data-values/data-types": "~0.1",
+		"data-values/serialization": "~0.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"Wikibase\\Api\\": "src/"
+		}
+	}
+}
