@@ -45,7 +45,7 @@ class EntityRevisionRepo {
 
 	/**
 	 * @param string|EntityId $id
-	 * @returns Entity
+	 * @returns EntityRevision
 	 */
 	public function getFromId( $id ) {
 		if( $id instanceof EntityId ) {
@@ -63,7 +63,7 @@ class EntityRevisionRepo {
 
 	/**
 	 * @param string|SiteLink $siteLink
-	 * @returns Entity
+	 * @returns EntityRevision
 	 */
 	public function getFromSiteLink( $siteLink ) {
 		//TODO
