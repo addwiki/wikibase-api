@@ -49,6 +49,25 @@ class EntityRevisionRepo {
 		$result = $this->api->getAction( 'wbgetentities', array( 'ids' => $id ) );
 		return array_shift( $result['entities'] );
 	}
+
+	/**
+	 * @param string|SiteLink $siteLink
+	 * @returns EntityRevision
+	 */
+	public function getFromSiteLink( $siteLink ) {
+		$result = $this->api->getAction( 'wbgetentities', array( 'sites' => $siteLink->getSiteId(), 'titles' => $siteLink->getPageName() ) );
+		return array_shift( $result['entities'] );
+	}
+
+	/**
+	 * @param string $siteId
+	 * @param string $title
+	 * @returns EntityRevision
+	 */
+	public function getFromSiteAndTitle( $siteId, $title ) {
+		$result = $this->api->getAction( 'wbgetentities', array( 'sites' => $siteId, 'titles' => $title ) );
+		return array_shift( $result['entities'] );
+	}
 	
 	/**
 	 * @param array $entityResult
@@ -59,14 +78,6 @@ class EntityRevisionRepo {
 			$this->entityDeserializer->deserialize( $entityResult ),
 			$entityResult['lastrevid']
 		);
-	}
-
-	/**
-	 * @param string|SiteLink $siteLink
-	 * @returns EntityRevision
-	 */
-	public function getFromSiteLink( $siteLink ) {
-		//TODO
 	}
 
 }
