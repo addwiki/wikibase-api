@@ -3,6 +3,7 @@
 namespace Wikibase\Api\Repos;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
 use Wikibase\Api\DataModel\EntityRevision;
 use Wikibase\DataModel\DeserializerFactory;
@@ -19,28 +20,13 @@ class EntityRevisionRepo {
 	protected $api;
 
 	/**
-	 * @var DeserializerFactory
+	 * @var Deserializer
 	 */
-	protected $deserializerFactory;
+	protected $entityDeserializer;
 
-	/**
-	 * @param MediawikiApi $api
-	 */
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( MediawikiApi $api, Deserializer $entityDeserializer ) {
 		$this->api = $api;
-		$this->deserializerFactory =  new DeserializerFactory(
-			new DataValueDeserializer( array(
-				'number' => 'DataValues\NumberValue',
-				'string' => 'DataValues\StringValue',
-				'globecoordinate' => 'DataValues\GlobeCoordinateValue',
-				'monolingualtext' => 'DataValues\MonolingualTextValue',
-				'multilingualtext' => 'DataValues\MultilingualTextValue',
-				'quantity' => 'DataValues\QuantityValue',
-				'time' => 'DataValues\TimeValue',
-				'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue', )
-			),
-			new BasicEntityIdParser()
-		);
+		$this->entityDeserializer = $entityDeserializer;
 	}
 
 	/**
@@ -69,10 +55,8 @@ class EntityRevisionRepo {
 	 * @returns Entity
 	 */
 	private function newEntityRevisionFromResult( array $entityResult ) {
-		$deserializer = $this->deserializerFactory->newEntityDeserializer();
-
 		return new EntityRevision(
-			$deserializer->deserialize( $entityResult ),
+			$this->entityDeserializer->deserialize( $entityResult ),
 			$entityResult['lastrevid']
 		);
 	}
