@@ -2,12 +2,9 @@
 
 namespace Wikibase\Api\Repos;
 
-use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
 use Wikibase\Api\DataModel\EntityRevision;
-use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
