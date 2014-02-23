@@ -8,6 +8,9 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
 
+/**
+ * @author Adam Shorland
+ */
 class EntityRevisionRepo {
 
 	/**

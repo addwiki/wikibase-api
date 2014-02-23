@@ -3,15 +3,15 @@
 	"type": "library",
 	"description": "A Wikibase api lib",
 	"keywords": ["Mediawiki","wikibase","wikidata"],
+	"license": "GPL-2.0+",
 	"authors": [
 		{
 			"name": "Addshore"
 		}
 	],
-	"minimum-stability" : "dev",
 	"require": {
-		"addwiki/mediawiki-api": "dev-master",
-		"wikibase/data-model-serialization": "dev-master",
+		"addwiki/mediawiki-api": "0.1.*",
+		"wikibase/data-model-serialization": "0.1.*",
 		"wikibase/data-model": "0.6",
 		"data-values/data-values": "~0.1",
 		"data-values/common": "~0.1",

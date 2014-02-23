@@ -7,6 +7,9 @@ use Mediawiki\Api\MediawikiApi;
 use Mediawiki\DataModel\EditFlags;
 use Wikibase\DataModel\SerializerFactory;
 
+/**
+ * @author Adam Shorland
+ */
 class EntityRevisionSaver {
 
 	/**

@@ -8,6 +8,13 @@ On Packagist:
 [![Latest Stable Version](https://poser.pugx.org/addwiki/wikibase-api/version.png)](https://packagist.org/packages/addwiki/wikibase-api)
 [![Download count](https://poser.pugx.org/addwiki/wikibase-api/d/total.png)](https://packagist.org/packages/addwiki/wikibase-api)
 
+## Installation
+
+Use composer to install the library and all its dependencies:
+
+    composer require "addwiki/wikibase-api:0.1.*"
+
+
 Example Usage
 ------
 
