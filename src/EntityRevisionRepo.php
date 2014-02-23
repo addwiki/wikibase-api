@@ -1,10 +1,9 @@
 <?php
 
-namespace Wikibase\Api\Repos;
+namespace Wikibase\Api;
 
 use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
-use Wikibase\Api\DataModel\EntityRevision;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Api\DataModel;
+namespace Wikibase\Api;
 
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;

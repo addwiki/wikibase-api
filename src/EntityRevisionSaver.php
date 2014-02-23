@@ -1,11 +1,10 @@
 <?php
 
-namespace Wikibase\Api\Savers;
+namespace Wikibase\Api;
 
 use DataValues\Serializers\DataValueSerializer;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\DataModel\EditFlags;
-use Wikibase\Api\DataModel\EntityRevision;
 use Wikibase\DataModel\SerializerFactory;
 
 class EntityRevisionSaver {

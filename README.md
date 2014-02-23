@@ -17,7 +17,7 @@ require_once( __DIR__ . "/vendor/autoload.php" );
 $api = new \Mediawiki\Api\MediawikiApi( "http://www.wikidata.org/w/api.php" );
 $repoFactory = new \Wikibase\Api\RepositoryFactory( $api );
 $repo = $repoFactory->newEntityRevisionRepo();
-$saver = new \Wikibase\Api\Savers\EntityRevisionSaver( $api );
+$saver = new \Wikibase\Api\EntityRevisionSaver( $api );
 
 //Get an Entity
 $entityRev = $repo->getFromId( 'Q4115189' );

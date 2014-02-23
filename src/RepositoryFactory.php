@@ -4,7 +4,6 @@ namespace Wikibase\Api;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Mediawiki\Api\MediawikiApi;
-use Wikibase\Api\Repos\EntityRevisionRepo;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 

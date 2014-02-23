@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Api\Test\DataModel;
+namespace Wikibase\Api\Test;
 
-use Wikibase\Api\DataModel\EntityRevision;
+use Wikibase\Api\EntityRevision;
 
 /**
- * @covers Wikibase\Api\DataModel\EntityRevision
+ * @covers Wikibase\Api\EntityRevision
  */
 class EntityRevisionTest extends \PHPUnit_Framework_TestCase{
 

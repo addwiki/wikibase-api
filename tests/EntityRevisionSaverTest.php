@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Api\Test\Savers;
+namespace Wikibase\Api\Test;
 
-use Wikibase\Api\Savers\EntityRevisionSaver;
+use Wikibase\Api\EntityRevisionSaver;
 
 /**
- * @covers Wikibase\Api\Savers\EntityRevisionSaver
+ * @covers Wikibase\Api\EntityRevisionSaver
  */
 class EntityRevisionSaverTest extends \PHPUnit_Framework_TestCase {
 

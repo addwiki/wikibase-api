@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Api\Test\Repos;
+namespace Wikibase\Api\Test;
 
-use Wikibase\Api\Repos\EntityRevisionRepo;
+use Wikibase\Api\EntityRevisionRepo;
 
 /**
- * @covers Wikibase\Api\Repos\EntityRevisionRepo
+ * @covers Wikibase\Api\EntityRevisionRepo
  */
 class EntityRevisionRepoTest extends \PHPUnit_Framework_TestCase {
 
