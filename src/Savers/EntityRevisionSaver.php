@@ -4,6 +4,7 @@ namespace Wikibase\Api\Savers;
 
 use DataValues\Serializers\DataValueSerializer;
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\DataModel\EditFlags;
 use Wikibase\Api\DataModel\EntityRevision;
 use Wikibase\DataModel\SerializerFactory;
 
@@ -31,9 +32,11 @@ class EntityRevisionSaver {
 
 	/**
 	 * @param EntityRevision $entityRevision
+	 * @param EditFlags|null $editFlags
+	 *
 	 * @returns bool
 	 */
-	public function save( EntityRevision $entityRevision ) {
+	public function save( EntityRevision $entityRevision, EditFlags $editFlags = null ) {
 		$serializer = $this->serializerFactory->newEntitySerializer();
 		$entity = $entityRevision->getData();
 		$serialized = $serializer->serialize( $entity );
@@ -53,6 +56,19 @@ class EntityRevisionSaver {
 			$params['id'] = $entityId->getPrefixedId();
 		} else {
 			$params['new'] = $entity->getType();
+		}
+
+		if( !is_null( $editFlags ) ) {
+			if( $editFlags->getBot() ) {
+				$params['bot'] = true;
+			}
+			if( $editFlags->getMinor() ) {
+				$params['minor'] = true;
+			}
+			$summary = $editFlags->getSummary();
+			if( !empty( $summary ) ) {
+				$params['summary'] = $summary;
+			}
 		}
 
 		$this->api->postAction( 'wbeditentity', $params );

@@ -17,8 +17,14 @@ require_once( __DIR__ . "/vendor/autoload.php" );
 $api = new \Mediawiki\Api\MediawikiApi( "http://www.wikidata.org/w/api.php" );
 $repoFactory = new \Wikibase\Api\RepositoryFactory( $api );
 $repo = $repoFactory->newEntityRevisionRepo();
-$entityRev = $repo->getFromId( 'Q4115189' );
-$entityRev->getData()->setLabel( 'en', 'test' );
 $saver = new \Wikibase\Api\Savers\EntityRevisionSaver( $api );
+
+//Get an Entity
+$entityRev = $repo->getFromId( 'Q4115189' );
+//Modify an Entity
+$entityRev->getData()->setLabel( 'en', 'test' );
+//Save an Entity
 $saver->save( $entityRev );
+//Create an Entity
+$saver->save( new EntityRevision( Item::newEmpty() ) );
 ```
