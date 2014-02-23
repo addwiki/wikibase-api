@@ -37,12 +37,25 @@ class EntityRevisionSaver {
 		$serializer = $this->serializerFactory->newEntitySerializer();
 		$entity = $entityRevision->getData();
 		$serialized = $serializer->serialize( $entity );
-		$this->api->postAction( 'wbeditentity', array(
-			'id' => $entity->getId()->getPrefixedId(),
+
+		$params = array(
 			'data' => json_encode( $serialized ),
-			'baserevid' => $entityRevision->getLastRevId(),
 			'token' => $this->api->getToken()
-		) );
+		);
+
+		$baseRevId = $entityRevision->getLastRevId();
+		if( !is_null( $baseRevId ) ) {
+			$params['baserevid'] = $baseRevId;
+		}
+
+		$entityId = $entity->getId();
+		if( !is_null( $entityId ) ) {
+			$params['id'] = $entityId->getPrefixedId();
+		} else {
+			$params['new'] = $entity->getType();
+		}
+
+		$this->api->postAction( 'wbeditentity', $params );
 		return true;
 	}
 

@@ -8,20 +8,27 @@ use Wikibase\DataModel\Entity\Property;
 
 class EntityRevision {
 
+	/**
+	 * @var Entity
+	 */
 	protected $dataEntity;
+
+	/**
+	 * @var int|null
+	 */
 	protected $lastRevId;
 
 	/**
 	 * @param Entity $dataItem
-	 * @param int $lastRevId
+	 * @param int|null $lastRevId
 	 */
-	public function __construct( Entity $dataItem, $lastRevId ) {
+	public function __construct( Entity $dataItem, $lastRevId = null ) {
 		$this->dataEntity = $dataItem;
 		$this->lastRevId = $lastRevId;
 	}
 
 	/**
-	 * @return int
+	 * @return int|null
 	 */
 	public function getLastRevId() {
 		return $this->lastRevId;

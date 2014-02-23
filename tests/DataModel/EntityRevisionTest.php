@@ -28,6 +28,7 @@ class EntityRevisionTest extends \PHPUnit_Framework_TestCase{
 		return array(
 			array( $mockItem, 1234 ),
 			array( $mockProperty, 1234 ),
+			array( $mockProperty, null ),
 		);
 	}
 
