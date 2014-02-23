@@ -21,17 +21,21 @@ Example Usage
 ```php
 require_once( __DIR__ . "/vendor/autoload.php" );
 
-$api = new \Mediawiki\Api\MediawikiApi( "http://www.wikidata.org/w/api.php" );
+$api = new \Mediawiki\Api\MediawikiApi( "http://localhost/w/api.php" );
 $repoFactory = new \Wikibase\Api\RepositoryFactory( $api );
-$repo = $repoFactory->newEntityRevisionRepo();
-$saver = new \Wikibase\Api\EntityRevisionSaver( $api );
+$repo = $repoFactory->newRevisionRepo();
+$saver = new \Wikibase\Api\RevisionSaver( $api );
 
-//Get an Entity
-$entityRev = $repo->getFromId( 'Q4115189' );
-//Modify an Entity
-$entityRev->getData()->setLabel( 'en', 'test' );
-//Save an Entity
-$saver->save( $entityRev );
-//Create an Entity
-$saver->save( new EntityRevision( Item::newEmpty() ) );
+// Create a new Entity
+$edit = new \Mediawiki\Api\DataModel\NewRevision( Wikibase\DataModel\Entity\Item::newEmpty() );
+$saver->save( $edit );
+
+// Edit an existing Entity
+$currentRevision = $repo->getFromId( 'Q87' );
+$edit = \Mediawiki\Api\DataModel\NewRevision::fromRevision( $currentRevision );
+/** @var Wikibase\DataModel\Entity\Item $item */
+$item = $edit->getContent();
+$item->setDescription( 'en', 'I am a description' );
+$saver->save( $edit );
+
 ```

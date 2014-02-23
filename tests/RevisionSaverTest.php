@@ -2,12 +2,12 @@
 
 namespace Wikibase\Api\Test;
 
-use Wikibase\Api\EntityRevisionSaver;
+use Wikibase\Api\RevisionSaver;
 
 /**
- * @covers Wikibase\Api\EntityRevisionSaver
+ * @covers Wikibase\Api\RevisionSaver
  */
-class EntityRevisionSaverTest extends \PHPUnit_Framework_TestCase {
+class RevisionSaverTest extends \PHPUnit_Framework_TestCase {
 
 	private function getMockApi() {
 		$mock = $this->getMockBuilder( '\Mediawiki\Api\MediawikiApi' )
@@ -17,7 +17,7 @@ class EntityRevisionSaverTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testValidConstructionWorks() {
-		new EntityRevisionSaver( $this->getMockApi() );
+		new RevisionSaver( $this->getMockApi() );
 		$this->assertTrue( true );
 	}
 

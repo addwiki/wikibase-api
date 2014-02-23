@@ -15,8 +15,8 @@ class RepositoryFactory {
 		$this->api = $api;
 	}
 
-	public function newEntityRevisionRepo() {
-		return new EntityRevisionRepo(
+	public function newRevisionRepo() {
+		return new RevisionRepo(
 			$this->api,
 			$this->newDataModelDeserializerFactory()->newEntityDeserializer()
 		);

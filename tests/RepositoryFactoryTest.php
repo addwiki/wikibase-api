@@ -21,10 +21,10 @@ class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( true );
 	}
 
-	public function testNewEntityRevisionRepo() {
+	public function testNewRevisionRepo() {
 		$factory = new RepositoryFactory( $this->getMockApi() );
-		$repo = $factory->newEntityRevisionRepo();
-		$this->assertInstanceOf( '\Wikibase\Api\EntityRevisionRepo', $repo );
+		$repo = $factory->newRevisionRepo();
+		$this->assertInstanceOf( '\Wikibase\Api\RevisionRepo', $repo );
 	}
 
 } 

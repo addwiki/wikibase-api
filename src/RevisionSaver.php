@@ -3,14 +3,16 @@
 namespace Wikibase\Api;
 
 use DataValues\Serializers\DataValueSerializer;
+use InvalidArgumentException;
+use Mediawiki\Api\DataModel\NewRevision;
 use Mediawiki\Api\MediawikiApi;
-use Mediawiki\DataModel\EditFlags;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\SerializerFactory;
 
 /**
  * @author Adam Shorland
  */
-class EntityRevisionSaver {
+class RevisionSaver {
 
 	/**
 	 * @var MediawikiApi
@@ -33,14 +35,20 @@ class EntityRevisionSaver {
 	}
 
 	/**
-	 * @param EntityRevision $entityRevision
-	 * @param EditFlags|null $editFlags
+	 * @param NewRevision $revision
+	 *
+	 * @throws InvalidArgumentException
 	 *
 	 * @returns bool
 	 */
-	public function save( EntityRevision $entityRevision, EditFlags $editFlags = null ) {
+	public function save( NewRevision $revision ) {
 		$serializer = $this->serializerFactory->newEntitySerializer();
-		$entity = $entityRevision->getData();
+		$entity = $revision->getContent();
+
+		if( !$entity instanceof Entity ) {
+			throw new InvalidArgumentException( 'Revision is not of an entity' );
+		}
+
 		$serialized = $serializer->serialize( $entity );
 
 		$params = array(
@@ -48,9 +56,9 @@ class EntityRevisionSaver {
 			'token' => $this->api->getToken()
 		);
 
-		$baseRevId = $entityRevision->getLastRevId();
-		if( !is_null( $baseRevId ) ) {
-			$params['baserevid'] = $baseRevId;
+		$revId = $revision->getId();
+		if( !is_null( $revId ) ) {
+			$params['baserevid'] = $revId;
 		}
 
 		$entityId = $entity->getId();
@@ -60,17 +68,16 @@ class EntityRevisionSaver {
 			$params['new'] = $entity->getType();
 		}
 
-		if( !is_null( $editFlags ) ) {
-			if( $editFlags->getBot() ) {
-				$params['bot'] = true;
-			}
-			if( $editFlags->getMinor() ) {
-				$params['minor'] = true;
-			}
-			$summary = $editFlags->getSummary();
-			if( !empty( $summary ) ) {
-				$params['summary'] = $summary;
-			}
+		$editInfo = $revision->getEditInfo();
+		if( $editInfo->getBot() ) {
+			$params['bot'] = true;
+		}
+		if( $editInfo->getMinor() ) {
+			$params['minor'] = true;
+		}
+		$summary = $editInfo->getSummary();
+		if( !empty( $summary ) ) {
+			$params['summary'] = $summary;
 		}
 
 		$this->api->postAction( 'wbeditentity', $params );

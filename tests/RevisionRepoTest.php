@@ -2,12 +2,12 @@
 
 namespace Wikibase\Api\Test;
 
-use Wikibase\Api\EntityRevisionRepo;
+use Wikibase\Api\RevisionRepo;
 
 /**
- * @covers Wikibase\Api\EntityRevisionRepo
+ * @covers Wikibase\Api\RevisionRepo
  */
-class EntityRevisionRepoTest extends \PHPUnit_Framework_TestCase {
+class RevisionRepoTest extends \PHPUnit_Framework_TestCase {
 
 	private function getMockApi() {
 		$mock = $this->getMockBuilder( '\Mediawiki\Api\MediawikiApi' )
@@ -24,7 +24,7 @@ class EntityRevisionRepoTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testValidConstructionWorks() {
-		new EntityRevisionRepo( $this->getMockApi(), $this->getMockDeserializer() );
+		new RevisionRepo( $this->getMockApi(), $this->getMockDeserializer() );
 		$this->assertTrue( true );
 	}
 

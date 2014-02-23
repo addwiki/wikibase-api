@@ -4,14 +4,14 @@ namespace Wikibase\Api;
 
 use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
-use Wikibase\DataModel\Entity\Entity;
+use Mediawiki\DataModel\Revision;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
 
 /**
  * @author Adam Shorland
  */
-class EntityRevisionRepo {
+class RevisionRepo {
 
 	/**
 	 * @var MediawikiApi
@@ -23,6 +23,10 @@ class EntityRevisionRepo {
 	 */
 	protected $entityDeserializer;
 
+	/**
+	 * @param MediawikiApi $api
+	 * @param Deserializer $entityDeserializer
+	 */
 	public function __construct( MediawikiApi $api, Deserializer $entityDeserializer ) {
 		$this->api = $api;
 		$this->entityDeserializer = $entityDeserializer;
@@ -30,14 +34,14 @@ class EntityRevisionRepo {
 
 	/**
 	 * @param string|EntityId $id
-	 * @returns EntityRevision
+	 * @returns Revision
 	 */
 	public function getFromId( $id ) {
 		if( $id instanceof EntityId ) {
 			$id = $id->getPrefixedId();
 		}
 
-		return $this->newEntityRevisionFromResult( $this->getEntityResultById( $id ) );
+		return $this->newRevisionFromResult( $this->getEntityResultById( $id ) );
 	}
 	
 	/**
@@ -51,7 +55,7 @@ class EntityRevisionRepo {
 
 	/**
 	 * @param string|SiteLink $siteLink
-	 * @returns EntityRevision
+	 * @returns Revision
 	 */
 	public function getFromSiteLink( $siteLink ) {
 		$result = $this->api->getAction( 'wbgetentities', array( 'sites' => $siteLink->getSiteId(), 'titles' => $siteLink->getPageName() ) );
@@ -61,7 +65,7 @@ class EntityRevisionRepo {
 	/**
 	 * @param string $siteId
 	 * @param string $title
-	 * @returns EntityRevision
+	 * @returns Revision
 	 */
 	public function getFromSiteAndTitle( $siteId, $title ) {
 		$result = $this->api->getAction( 'wbgetentities', array( 'sites' => $siteId, 'titles' => $title ) );
@@ -70,12 +74,16 @@ class EntityRevisionRepo {
 	
 	/**
 	 * @param array $entityResult
-	 * @returns Entity
+	 * @returns Revision
 	 */
-	private function newEntityRevisionFromResult( array $entityResult ) {
-		return new EntityRevision(
+	private function newRevisionFromResult( array $entityResult ) {
+		return new Revision(
 			$this->entityDeserializer->deserialize( $entityResult ),
-			$entityResult['lastrevid']
+			$entityResult['pageid'],
+			$entityResult['lastrevid'],
+			null,
+			null,
+			$entityResult['modified']
 		);
 	}
 
