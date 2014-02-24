@@ -9,8 +9,9 @@
 			"name": "Addshore"
 		}
 	],
+	"minimum-stability":"dev",
 	"require": {
-		"addwiki/mediawiki-api": "0.2.*",
+		"addwiki/mediawiki-api": "dev-master",
 		"wikibase/data-model-serialization": "0.1.*",
 		"wikibase/data-model": "0.6",
 		"data-values/data-values": "~0.1",

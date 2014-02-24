@@ -2,7 +2,7 @@
 
 namespace Wikibase\Api\Test;
 
-use Wikibase\Api\RevisionRepo;
+use Wikibase\Api\Service\RevisionRepo;
 
 /**
  * @covers Wikibase\Api\RevisionRepo

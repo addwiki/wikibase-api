@@ -1,11 +1,17 @@
 <?php
 
-namespace Wikibase\Api;
+namespace Wikibase\Api\Service;
 
 use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\DataModel\Revision;
+use RuntimeException;
+use Wikibase\Api\DataModel\ItemContent;
+use Wikibase\Api\DataModel\PropertyContent;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -78,13 +84,30 @@ class RevisionRepo {
 	 */
 	private function newRevisionFromResult( array $entityResult ) {
 		return new Revision(
-			$this->entityDeserializer->deserialize( $entityResult ),
+			$this->getContentFromEntity( $this->entityDeserializer->deserialize( $entityResult ) ),
 			$entityResult['pageid'],
 			$entityResult['lastrevid'],
 			null,
 			null,
 			$entityResult['modified']
 		);
+	}
+
+	/**
+	 * @param Entity $entity
+	 *
+	 * @throws RuntimeException
+	 * @return ItemContent|PropertyContent
+	 */
+	private function getContentFromEntity( $entity ) {
+		switch ( $entity->getType() ) {
+			case Item::ENTITY_TYPE:
+				return new ItemContent( $entity );
+			case Property::ENTITY_TYPE:
+				return new PropertyContent( $entity );
+			default:
+				throw new RuntimeException( 'I cant get a content for this type of entity' );
+		}
 	}
 
 }

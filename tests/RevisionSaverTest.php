@@ -2,7 +2,7 @@
 
 namespace Wikibase\Api\Test;
 
-use Wikibase\Api\RevisionSaver;
+use Wikibase\Api\Service\RevisionSaver;
 
 /**
  * @covers Wikibase\Api\RevisionSaver

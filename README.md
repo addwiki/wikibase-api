@@ -12,7 +12,7 @@ On Packagist:
 
 Use composer to install the library and all its dependencies:
 
-    composer require "addwiki/wikibase-api:0.1.*"
+    composer require "addwiki/wikibase-api:dev-master"
 
 
 Example Usage
@@ -21,21 +21,20 @@ Example Usage
 ```php
 require_once( __DIR__ . "/vendor/autoload.php" );
 
-$api = new \Mediawiki\Api\MediawikiApi( "http://localhost/w/api.php" );
-$repoFactory = new \Wikibase\Api\RepositoryFactory( $api );
-$repo = $repoFactory->newRevisionRepo();
-$saver = new \Wikibase\Api\RevisionSaver( $api );
+$services = new \Wikibase\Api\ServiceFactory(
+	new \Mediawiki\Api\MediawikiApi( "http://localhost/w/api.php" )
+);
+$repo = $services->newRevisionRepo();
+$saver = $services->newRevisionSaver();
 
 // Create a new Entity
-$edit = new \Mediawiki\Api\DataModel\NewRevision( Wikibase\DataModel\Entity\Item::newEmpty() );
+$edit = new \Mediawiki\DataModel\Revision(
+	new \Wikibase\Api\DataModel\ItemContent( Wikibase\DataModel\Entity\Item::newEmpty() )
+);
 $saver->save( $edit );
 
 // Edit an existing Entity
-$currentRevision = $repo->getFromId( 'Q87' );
-$edit = \Mediawiki\Api\DataModel\NewRevision::fromRevision( $currentRevision );
-/** @var Wikibase\DataModel\Entity\Item $item */
-$item = $edit->getContent();
-$item->setDescription( 'en', 'I am a description' );
-$saver->save( $edit );
-
+$entityRevision = $repo->getFromId( 'Q87' );
+$entityRevision->getContent()->getNativeData()->setDescription( 'en', 'I am A description' );
+$saver->save( $entityRevision );
 ```

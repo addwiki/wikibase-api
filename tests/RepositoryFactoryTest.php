@@ -2,7 +2,7 @@
 
 namespace Wikibase\Api\Test;
 
-use Wikibase\Api\RepositoryFactory;
+use Wikibase\Api\ServiceFactory;
 
 /**
  * @covers Wikibase\Api\RepositoryFactory
@@ -17,14 +17,14 @@ class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testValidConstructionWorks() {
-		new RepositoryFactory( $this->getMockApi() );
+		new ServiceFactory( $this->getMockApi() );
 		$this->assertTrue( true );
 	}
 
 	public function testNewRevisionRepo() {
-		$factory = new RepositoryFactory( $this->getMockApi() );
+		$factory = new ServiceFactory( $this->getMockApi() );
 		$repo = $factory->newRevisionRepo();
-		$this->assertInstanceOf( '\Wikibase\Api\RevisionRepo', $repo );
+		$this->assertInstanceOf( '\Wikibase\Api\Service\RevisionRepo', $repo );
 	}
 
 } 
