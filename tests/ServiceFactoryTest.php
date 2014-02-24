@@ -5,9 +5,9 @@ namespace Wikibase\Api\Test;
 use Wikibase\Api\ServiceFactory;
 
 /**
- * @covers Wikibase\Api\RepositoryFactory
+ * @covers Wikibase\Api\ServiceFactory
  */
-class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase {
+class ServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function getMockApi() {
 		$mock = $this->getMockBuilder( '\Mediawiki\Api\MediawikiApi' )

@@ -19,11 +19,13 @@ Example Usage
 ------
 
 ```php
+// Load all of the things
 require_once( __DIR__ . "/vendor/autoload.php" );
 
-$services = new \Wikibase\Api\ServiceFactory(
-	new \Mediawiki\Api\MediawikiApi( "http://localhost/w/api.php" )
-);
+// Set stuff up and login
+$api = new \Mediawiki\Api\MediawikiApi( "http://localhost/w/api.php" );
+$api->login( new \Mediawiki\Api\ApiUser( 'username', 'password' ) );
+$services = new \Wikibase\Api\ServiceFactory( $api );
 $repo = $services->newRevisionRepo();
 $saver = $services->newRevisionSaver();
 

@@ -5,7 +5,7 @@ namespace Wikibase\Api\Test;
 use Wikibase\Api\Service\RevisionRepo;
 
 /**
- * @covers Wikibase\Api\RevisionRepo
+ * @covers Wikibase\Api\Service\RevisionRepo
  */
 class RevisionRepoTest extends \PHPUnit_Framework_TestCase {
 
