@@ -31,7 +31,7 @@ $saver = $services->newRevisionSaver();
 
 // Create a new Entity
 $edit = new \Mediawiki\DataModel\Revision(
-	new \Wikibase\Api\DataModel\ItemContent( Wikibase\DataModel\Entity\Item::newEmpty() )
+	new \Wikibase\DataModel\ItemContent( Wikibase\DataModel\Entity\Item::newEmpty() )
 );
 $saver->save( $edit );
 

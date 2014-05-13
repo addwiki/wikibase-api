@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Api\DataModel;
+namespace Wikibase\DataModel;
 
 use Mediawiki\DataModel\Content;
 use Wikibase\DataModel\Entity\Property;

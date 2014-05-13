@@ -7,8 +7,8 @@ use InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\DataModel\Revision;
 use RuntimeException;
-use Wikibase\Api\DataModel\ItemContent;
-use Wikibase\Api\DataModel\PropertyContent;
+use Wikibase\DataModel\ItemContent;
+use Wikibase\DataModel\PropertyContent;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\SerializerFactory;
 
