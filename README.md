@@ -25,7 +25,7 @@ require_once( __DIR__ . "/vendor/autoload.php" );
 // Set stuff up and login
 $api = new \Mediawiki\Api\MediawikiApi( "http://localhost/w/api.php" );
 $api->login( new \Mediawiki\Api\ApiUser( 'username', 'password' ) );
-$services = new \Wikibase\Api\ServiceFactory( $api );
+$services = new \Wikibase\Api\WikibaseFactory( $api );
 $repo = $services->newRevisionRepo();
 $saver = $services->newRevisionSaver();
 

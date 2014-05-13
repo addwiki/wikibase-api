@@ -9,7 +9,7 @@ use Wikibase\Api\Service\RevisionSaver;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
-class ServiceFactory {
+class WikibaseFactory {
 
 	/**
 	 * @var MediawikiApi

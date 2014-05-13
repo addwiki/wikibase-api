@@ -2,12 +2,12 @@
 
 namespace Wikibase\Api\Test;
 
-use Wikibase\Api\ServiceFactory;
+use Wikibase\Api\WikibaseFactory;
 
 /**
- * @covers Wikibase\Api\ServiceFactory
+ * @covers Wikibase\Api\WikibaseFactory
  */
-class ServiceFactoryTest extends \PHPUnit_Framework_TestCase {
+class WikibaseFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function getMockApi() {
 		$mock = $this->getMockBuilder( '\Mediawiki\Api\MediawikiApi' )
@@ -17,12 +17,12 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testValidConstructionWorks() {
-		new ServiceFactory( $this->getMockApi() );
+		new WikibaseFactory( $this->getMockApi() );
 		$this->assertTrue( true );
 	}
 
 	public function testNewRevisionRepo() {
-		$factory = new ServiceFactory( $this->getMockApi() );
+		$factory = new WikibaseFactory( $this->getMockApi() );
 		$repo = $factory->newRevisionRepo();
 		$this->assertInstanceOf( '\Wikibase\Api\Service\RevisionRepo', $repo );
 	}

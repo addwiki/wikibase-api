@@ -6,6 +6,7 @@ These are the release notes for the [wikibase-api](README.md).
 * Internal classes renamed
 * Introduced a Service namespace and ServiceFactory
 * Introduce Property and Item Content objects
+* Renamed ServiceFactory to WikibaseFactory
 
 ## Version 0.1 (2014-02-23)
 
