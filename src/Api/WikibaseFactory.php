@@ -9,6 +9,9 @@ use Wikibase\Api\Service\RevisionSaver;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
+/**
+ * @author Jeroen De Dauw
+ */
 class WikibaseFactory {
 
 	/**
