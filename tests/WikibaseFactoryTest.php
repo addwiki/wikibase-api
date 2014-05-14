@@ -21,10 +21,10 @@ class WikibaseFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( true );
 	}
 
-	public function testNewRevisionRepo() {
+	public function testNewRevisionGetter() {
 		$factory = new WikibaseFactory( $this->getMockApi() );
-		$repo = $factory->newRevisionRepo();
-		$this->assertInstanceOf( '\Wikibase\Api\Service\RevisionRepo', $repo );
+		$getter = $factory->newRevisionGetter();
+		$this->assertInstanceOf( '\Wikibase\Api\Service\RevisionGetter', $getter );
 	}
 
 } 

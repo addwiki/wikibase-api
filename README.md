@@ -26,7 +26,7 @@ require_once( __DIR__ . "/vendor/autoload.php" );
 $api = new \Mediawiki\Api\MediawikiApi( "http://localhost/w/api.php" );
 $api->login( new \Mediawiki\Api\ApiUser( 'username', 'password' ) );
 $services = new \Wikibase\Api\WikibaseFactory( $api );
-$repo = $services->newRevisionRepo();
+$getter = $services->newRevisionGetter();
 $saver = $services->newRevisionSaver();
 
 // Create a new Entity
@@ -36,7 +36,7 @@ $edit = new \Mediawiki\DataModel\Revision(
 $saver->save( $edit );
 
 // Edit an existing Entity
-$entityRevision = $repo->getFromId( 'Q87' );
+$entityRevision = $getter->getFromId( 'Q87' );
 $entityRevision->getContent()->getNativeData()->setDescription( 'en', 'I am A description' );
 $saver->save( $entityRevision );
 ```

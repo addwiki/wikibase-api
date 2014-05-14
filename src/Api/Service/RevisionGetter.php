@@ -17,7 +17,7 @@ use Wikibase\DataModel\SiteLink;
 /**
  * @author Adam Shorland
  */
-class RevisionRepo {
+class RevisionGetter {
 
 	/**
 	 * @var MediawikiApi

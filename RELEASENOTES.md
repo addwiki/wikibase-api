@@ -7,6 +7,7 @@ These are the release notes for the [wikibase-api](README.md).
 * Introduced a Service namespace and ServiceFactory
 * Introduce Property and Item Content objects
 * Renamed ServiceFactory to WikibaseFactory
+* Renamed RevisionRepo to RevisionGetter
 
 ## Version 0.1 (2014-02-23)
 

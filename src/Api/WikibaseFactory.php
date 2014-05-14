@@ -4,7 +4,7 @@ namespace Wikibase\Api;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Mediawiki\Api\MediawikiApi;
-use Wikibase\Api\Service\RevisionRepo;
+use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\Api\Service\RevisionSaver;
 use Wikibase\Api\Service\ValueParser;
 use Wikibase\DataModel\DeserializerFactory;
@@ -37,10 +37,10 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.1
-	 * @return RevisionRepo
+	 * @return RevisionGetter
 	 */
-	public function newRevisionRepo() {
-		return new RevisionRepo(
+	public function newRevisionGetter() {
+		return new RevisionGetter(
 			$this->api,
 			$this->newDataModelDeserializerFactory()->newEntityDeserializer()
 		);
