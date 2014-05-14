@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use Mediawiki\Api\MediawikiApi;
 use Wikibase\Api\Service\RevisionRepo;
 use Wikibase\Api\Service\RevisionSaver;
+use Wikibase\Api\Service\ValueParser;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
@@ -27,6 +28,7 @@ class WikibaseFactory {
 	}
 
 	/**
+	 * @since 0.1
 	 * @return RevisionSaver
 	 */
 	public function newRevisionSaver() {
@@ -34,12 +36,24 @@ class WikibaseFactory {
 	}
 
 	/**
+	 * @since 0.1
 	 * @return RevisionRepo
 	 */
 	public function newRevisionRepo() {
 		return new RevisionRepo(
 			$this->api,
 			$this->newDataModelDeserializerFactory()->newEntityDeserializer()
+		);
+	}
+
+	/**
+	 * @since 0.2
+	 * @return ValueParser
+	 */
+	public function newValueParser() {
+		return new ValueParser(
+			$this->api,
+			$this->newDataValueDeserializer()
 		);
 	}
 

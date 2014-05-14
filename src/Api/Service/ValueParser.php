@@ -15,18 +15,25 @@ class ValueParser {
 	/**
 	 * @var MediawikiApi
 	 */
-	protected $api;
+	private $api;
+
+	/**
+	 * @var DataValueDeserializer
+	 */
+	private $dataValueDeserializer;
 
 	/**
 	 * @param MediawikiApi $api
+	 * @param DataValueDeserializer $dataValueDeserializer
 	 */
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( MediawikiApi $api, DataValueDeserializer $dataValueDeserializer ) {
 		$this->api = $api;
+		$this->dataValueDeserializer = $dataValueDeserializer;
 	}
 
 	/**
-	 * @param $value
-	 * @param $parser
+	 * @param string $value
+	 * @param string $parser Id of the ValueParser to use
 	 *
 	 * @internal param string $value
 	 *
@@ -34,17 +41,7 @@ class ValueParser {
 	 */
 	public function parse( $value, $parser ) {
 		$result = $this->api->getAction( 'wbparsevalue', array( 'parser' => $parser, 'values' => $value ) );
-		$deserializer = new DataValueDeserializer( array(
-			'number' => 'DataValues\NumberValue',
-			'string' => 'DataValues\StringValue',
-			'globecoordinate' => 'DataValues\GlobeCoordinateValue',
-			'monolingualtext' => 'DataValues\MonolingualTextValue',
-			'multilingualtext' => 'DataValues\MultilingualTextValue',
-			'quantity' => 'DataValues\QuantityValue',
-			'time' => 'DataValues\TimeValue',
-			'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue', ) );
-		$resultobject = $deserializer->deserialize( $result["results"][0] );
-		return $resultobject;
+		return $this->dataValueDeserializer->deserialize( $result['results'][0] );
 	}
 
 } 
