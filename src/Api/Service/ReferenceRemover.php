@@ -12,6 +12,7 @@ use Wikibase\DataModel\Reference;
 class ReferenceRemover {
 
 	/**
+	 * @since 0.2
 	 * @param Reference|string $reference Reference object or hash
 	 * @param Claim|ClaimGuid|string $target Claim object or GUID
 	 */

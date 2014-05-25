@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
 class ClaimCreator {
 
 	/**
+	 * @since 0.2
 	 * @param Claim $label
 	 * @param EntityId|Entity $target
 	 */

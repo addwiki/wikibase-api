@@ -12,6 +12,7 @@ use Wikibase\DataModel\Term\Term;
 class DescriptionSetter {
 
 	/**
+	 * @since 0.2
 	 * @param Term $description
 	 * @param EntityId|Entity $target
 	 */

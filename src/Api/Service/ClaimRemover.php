@@ -11,6 +11,7 @@ use Wikibase\DataModel\Claim\ClaimGuid;
 class ClaimRemover {
 
 	/**
+	 * @since 0.2
 	 * @param Claim|ClaimGuid|string $claim Claim object or GUID
 	 */
 	public function removeClaim( $claim ) {

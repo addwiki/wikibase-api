@@ -38,6 +38,7 @@ class RevisionSaver {
 	}
 
 	/**
+	 * @since 0.1
 	 * @param Revision $revision
 	 *
 	 * @throws RuntimeException

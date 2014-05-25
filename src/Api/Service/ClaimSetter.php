@@ -10,6 +10,7 @@ use Wikibase\DataModel\Claim\Claim;
 class ClaimSetter {
 
 	/**
+	 * @since 0.2
 	 * @param Claim $claim
 	 */
 	public function setClaim( Claim $claim ) {

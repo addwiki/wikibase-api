@@ -12,6 +12,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 class AliasGroupListSetter {
 
 	/**
+	 * @since 0.2
 	 * @param AliasGroupList $description
 	 * @param EntityId|Entity $target
 	 */

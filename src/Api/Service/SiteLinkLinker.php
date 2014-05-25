@@ -10,6 +10,7 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkLinker {
 
 	/**
+	 * @since 0.2
 	 * @param SiteLink $link1
 	 * @param SiteLink $link2
 	 *

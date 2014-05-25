@@ -39,6 +39,7 @@ class RevisionGetter {
 	}
 
 	/**
+	 * @since 0.1
 	 * @param string|EntityId $id
 	 * @returns Revision
 	 */
@@ -60,6 +61,7 @@ class RevisionGetter {
 	}
 
 	/**
+	 * @since 0.1
 	 * @param string|SiteLink $siteLink
 	 * @returns Revision
 	 */
@@ -69,6 +71,7 @@ class RevisionGetter {
 	}
 
 	/**
+	 * @since 0.1
 	 * @param string $siteId
 	 * @param string $title
 	 * @returns Revision

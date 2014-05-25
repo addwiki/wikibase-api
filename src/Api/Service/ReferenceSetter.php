@@ -12,6 +12,7 @@ use Wikibase\DataModel\Reference;
 class ReferenceSetter {
 
 	/**
+	 * @since 0.2
 	 * @param Reference $reference
 	 * @param Claim|ClaimGuid|string $target Claim object or GUID
 	 */

@@ -32,6 +32,8 @@ class ValueParser {
 	}
 
 	/**
+	 * @since 0.2
+	 *
 	 * @param string $value
 	 * @param string $parser Id of the ValueParser to use
 	 *

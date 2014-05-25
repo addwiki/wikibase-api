@@ -12,6 +12,7 @@ use Wikibase\DataModel\Term\Term;
 class LabelSetter {
 
 	/**
+	 * @since 0.2
 	 * @param Term $label
 	 * @param EntityId|Entity $target
 	 */

@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 class ItemMerger {
 
 	/**
+	 * @since 0.2
 	 * @param Item $from
 	 * @param Item $to
 	 *

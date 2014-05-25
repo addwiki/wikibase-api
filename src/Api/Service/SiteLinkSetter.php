@@ -12,6 +12,7 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkSetter {
 
 	/**
+	 * @since 0.2
 	 * @param SiteLink $label
 	 * @param EntityId|Entity $target
 	 */

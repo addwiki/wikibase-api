@@ -10,6 +10,8 @@ use DataValues\DataValue;
 class ValueFormatter {
 
 	/**
+	 * @since 0.2
+	 *
 	 * @param DataValue $value
 	 *
 	 * @returns string
