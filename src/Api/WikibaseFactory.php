@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Mediawiki\Api\MediawikiApi;
+use Wikibase\Api\Service\ItemMerger;
 use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\Api\Service\RevisionSaver;
 use Wikibase\Api\Service\ValueParser;
@@ -75,6 +76,14 @@ class WikibaseFactory {
 				'time' => 'DataValues\TimeValue',
 				'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue', )
 		);
+	}
+
+	/**
+	 * @since 0.2
+	 * @return ItemMerger
+	 */
+	public function newItemMerger() {
+		return new ItemMerger( $this->api );
 	}
 
 }
