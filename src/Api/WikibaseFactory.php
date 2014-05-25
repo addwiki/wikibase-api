@@ -4,9 +4,20 @@ namespace Wikibase\Api;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Mediawiki\Api\MediawikiApi;
+use Wikibase\Api\Service\AliasGroupListSetter;
+use Wikibase\Api\Service\ClaimCreator;
+use Wikibase\Api\Service\ClaimRemover;
+use Wikibase\Api\Service\ClaimSetter;
+use Wikibase\Api\Service\DescriptionSetter;
 use Wikibase\Api\Service\ItemMerger;
+use Wikibase\Api\Service\LabelSetter;
+use Wikibase\Api\Service\ReferenceRemover;
+use Wikibase\Api\Service\ReferenceSetter;
 use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\Api\Service\RevisionSaver;
+use Wikibase\Api\Service\SiteLinkLinker;
+use Wikibase\Api\Service\SiteLinkSetter;
+use Wikibase\Api\Service\ValueFormatter;
 use Wikibase\Api\Service\ValueParser;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -58,6 +69,14 @@ class WikibaseFactory {
 		);
 	}
 
+	/**
+	 * @since 0.2
+	 * @return ValueFormatter
+	 */
+	public function newValueFormatter() {
+		return new ValueFormatter( $this->api );
+	}
+
 	private function newDataModelDeserializerFactory() {
 		return new DeserializerFactory(
 			$this->newDataValueDeserializer(),
@@ -84,6 +103,86 @@ class WikibaseFactory {
 	 */
 	public function newItemMerger() {
 		return new ItemMerger( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @return AliasGroupListSetter
+	 */
+	public function newAliasGroupListSetter() {
+		return new AliasGroupListSetter( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @return ClaimCreator
+	 */
+	public function newClaimCreator() {
+		return new ClaimCreator( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @return ClaimRemover
+	 */
+	public function newClaimRemover() {
+		return new ClaimRemover( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @return ClaimSetter
+	 */
+	public function newClaimSetter() {
+		return new ClaimSetter( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @return DescriptionSetter
+	 */
+	public function newDescriptionSetter() {
+		return new DescriptionSetter( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @return LabelSetter
+	 */
+	public function newLabelSetter() {
+		return new LabelSetter( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @return ReferenceRemover
+	 */
+	public function newReferenceRemover() {
+		return new ReferenceRemover( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @return ReferenceSetter
+	 */
+	public function newReferenceSetter() {
+		return new ReferenceSetter( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @return SiteLinkLinker
+	 */
+	public function newSiteLinkLinker() {
+		return new SiteLinkLinker( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @return SiteLinkSetter
+	 */
+	public function newSiteLinkSetter() {
+		return new SiteLinkSetter( $this->api );
 	}
 
 }
