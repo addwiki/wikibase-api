@@ -10,8 +10,8 @@
 		}
 	],
 	"require": {
-		"addwiki/mediawiki-api": "dev-master as 0.3.0",
-		"addwiki/mediawiki-datamodel": "dev-master as 0.3.0",
+		"addwiki/mediawiki-api": "~0.3.0",
+		"addwiki/mediawiki-datamodel": "~0.3.0",
 		"wikibase/data-model-serialization": "~1.0.0",
 		"wikibase/data-model": "~0.8.1",
 		"data-values/data-values": "~0.1.0",
