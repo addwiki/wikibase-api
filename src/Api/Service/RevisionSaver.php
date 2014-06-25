@@ -48,7 +48,7 @@ class RevisionSaver {
 	public function save( Revision $revision ) {
 		$serializer = $this->serializerFactory->newEntitySerializer();
 
-		if( !in_array( $revision->getContent()->getModel(), array( PropertyContent::contentModel, ItemContent::contentModel ) ) ) {
+		if( !in_array( $revision->getContent()->getModel(), array( PropertyContent::MODEL, ItemContent::MODEL ) ) ) {
 			throw new RuntimeException( 'Can not save revisions with the given content model' );
 		}
 

@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Property;
 
 class PropertyContent extends Content {
 
-	const contentModel = 'wikibase-property';
+	const MODEL = 'wikibase-property';
 
 	/**
 	 * @var Property
@@ -19,7 +19,7 @@ class PropertyContent extends Content {
 	 */
 	public function __construct( Property $property ) {
 		$this->property = $property;
-		parent::__construct( self::contentModel );
+		parent::__construct( self::MODEL );
 	}
 
 	/**

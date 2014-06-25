@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 
 class ItemContent extends Content {
 
-	const contentModel = 'wikibase-item';
+	const MODEL = 'wikibase-item';
 
 	/**
 	 * @var Item
@@ -19,7 +19,7 @@ class ItemContent extends Content {
 	 */
 	public function __construct( Item $item ) {
 		$this->item = $item;
-		parent::__construct( self::contentModel );
+		parent::__construct( self::MODEL );
 	}
 
 	/**

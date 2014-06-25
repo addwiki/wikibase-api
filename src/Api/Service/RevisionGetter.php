@@ -62,10 +62,10 @@ class RevisionGetter {
 
 	/**
 	 * @since 0.1
-	 * @param string|SiteLink $siteLink
+	 * @param SiteLink $siteLink
 	 * @returns Revision
 	 */
-	public function getFromSiteLink( $siteLink ) {
+	public function getFromSiteLink( SiteLink $siteLink ) {
 		$result = $this->api->getAction( 'wbgetentities', array( 'sites' => $siteLink->getSiteId(), 'titles' => $siteLink->getPageName() ) );
 		return array_shift( $result['entities'] );
 	}
