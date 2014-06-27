@@ -24,14 +24,21 @@ class SiteLinkLinker {
 
 	/**
 	 * @since 0.2
-	 * @param SiteLink $link1
-	 * @param SiteLink $link2
+	 * @param SiteLink $toSiteLink
+	 * @param SiteLink $fromSiteLink
 	 *
 	 * @returns bool
 	 */
-	public function link ( SiteLink $link1, SiteLink $link2 ) {
-		//TODO implement me
-		throw new \BadMethodCallException( 'Not yet implemented' );
+	public function link ( SiteLink $toSiteLink, SiteLink $fromSiteLink ) {
+		$params = array(
+			'tosite' => $toSiteLink->getSiteId(),
+			'totitle' => $toSiteLink->getPageName(),
+			'fromsite' => $fromSiteLink->getSiteId(),
+			'fromtitle' => $fromSiteLink->getPageName(),
+		);
+
+		$this->api->postAction( 'wblinktitles', $params );
+		return true;
 	}
 
 } 
