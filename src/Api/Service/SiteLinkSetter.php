@@ -33,7 +33,7 @@ class SiteLinkSetter {
 	 *
 	 * @return bool
 	 */
-	public function setSiteLink( SiteLink $siteLink, $target ) {
+	public function set( SiteLink $siteLink, $target ) {
 		$params = $this->getTargetParamsFromTarget(
 			$this->getEntityIdFromTarget( $target )
 		);

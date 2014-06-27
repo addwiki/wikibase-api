@@ -29,7 +29,7 @@ class AliasGroupListSetter {
 	 * @param AliasGroupList $description
 	 * @param EntityId|Entity $target
 	 */
-	public function setAliasGroupList( AliasGroupList $aliasGroupList, $target ) {
+	public function set( AliasGroupList $aliasGroupList, $target ) {
 		//TODO implement me
 		throw new \BadMethodCallException( 'Not yet implemented' );
 	}

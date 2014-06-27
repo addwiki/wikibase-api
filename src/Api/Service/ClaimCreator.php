@@ -31,7 +31,7 @@ class ClaimCreator {
 	 * @param Claim $label
 	 * @param EntityId|Entity $target
 	 */
-	public function createClaim( Claim $claim, $target ) {
+	public function create( Claim $claim, $target ) {
 		//TODO implement me
 		throw new \BadMethodCallException( 'Not yet implemented' );
 	}

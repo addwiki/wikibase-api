@@ -29,7 +29,7 @@ class DescriptionSetter {
 	 * @param Term $description
 	 * @param EntityId|Entity $target
 	 */
-	public function setDescription( Term $description, $target ) {
+	public function set( Term $description, $target ) {
 		//TODO implement me
 		throw new \BadMethodCallException( 'Not yet implemented' );
 	}

@@ -29,7 +29,7 @@ class ReferenceRemover {
 	 * @param Reference|string $reference Reference object or hash
 	 * @param Claim|ClaimGuid|string $target Claim object or GUID
 	 */
-	public function setReference( $reference, $target ) {
+	public function set( $reference, $target ) {
 		//TODO implement me
 		throw new \BadMethodCallException( 'Not yet implemented' );
 	}

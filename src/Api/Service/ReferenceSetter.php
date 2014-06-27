@@ -29,7 +29,7 @@ class ReferenceSetter {
 	 * @param Reference $reference
 	 * @param Claim|ClaimGuid|string $target Claim object or GUID
 	 */
-	public function setReference( Reference $reference, $target ) {
+	public function set( Reference $reference, $target ) {
 		//TODO implement me
 		throw new \BadMethodCallException( 'Not yet implemented' );
 	}

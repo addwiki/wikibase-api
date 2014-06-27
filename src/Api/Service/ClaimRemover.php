@@ -27,7 +27,7 @@ class ClaimRemover {
 	 * @since 0.2
 	 * @param Claim|ClaimGuid|string $claim Claim object or GUID
 	 */
-	public function removeClaim( $claim ) {
+	public function remove( $claim ) {
 		//TODO implement me
 		throw new \BadMethodCallException( 'Not yet implemented' );
 	}

@@ -29,7 +29,7 @@ class LabelSetter {
 	 * @param Term $label
 	 * @param EntityId|Entity $target
 	 */
-	public function setLabel( Term $label, $target ) {
+	public function set( Term $label, $target ) {
 		//TODO implement me
 		throw new \BadMethodCallException( 'Not yet implemented' );
 	}
