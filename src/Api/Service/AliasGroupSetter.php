@@ -7,12 +7,12 @@ use UnexpectedValueException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\AliasGroup;
 
 /**
  * @author Adam Shorland
  */
-class DescriptionSetter {
+class AliasGroupSetter {
 
 	/**
 	 * @var MediawikiApi
@@ -29,20 +29,20 @@ class DescriptionSetter {
 	/**
 	 * @since 0.2
 	 *
-	 * @param Term $description
+	 * @param AliasGroup $aliasGroup
 	 * @param EntityId|Entity|SiteLink $target
 	 *
 	 * @return bool
 	 */
-	public function set( Term $description, $target ) {
+	public function set( AliasGroup $aliasGroup, $target ) {
 		$params = $this->getTargetParamsFromTarget(
 			$this->getEntityIdFromTarget( $target )
 		);
 
-		$params['language'] = $description->getLanguageCode();
-		$params['value'] = $description->getText();
+		$params['language'] = $aliasGroup->getLanguageCode();
+		$params['set'] = $aliasGroup->getAliases();
 
-		$this->api->postAction( 'wbsetdescription', $params );
+		$this->api->postAction( 'wbsetaliases', $params );
 		return true;
 	}
 

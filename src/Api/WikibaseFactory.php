@@ -4,7 +4,7 @@ namespace Wikibase\Api;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Mediawiki\Api\MediawikiApi;
-use Wikibase\Api\Service\AliasGroupListSetter;
+use Wikibase\Api\Service\AliasGroupSetter;
 use Wikibase\Api\Service\ClaimCreator;
 use Wikibase\Api\Service\ClaimRemover;
 use Wikibase\Api\Service\ClaimSetter;
@@ -107,10 +107,10 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.2
-	 * @return AliasGroupListSetter
+	 * @return AliasGroupSetter
 	 */
-	public function newAliasGroupListSetter() {
-		return new AliasGroupListSetter( $this->api );
+	public function newAliasGroupSetter() {
+		return new AliasGroupSetter( $this->api );
 	}
 
 	/**

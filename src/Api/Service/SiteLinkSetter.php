@@ -50,6 +50,8 @@ class SiteLinkSetter {
 	 *
 	 * @throws UnexpectedValueException
 	 * @return EntityId|SiteLink
+	 *
+	 * @todo Fix duplicated code
 	 */
 	private function getEntityIdFromTarget( $target ) {
 		if( $target instanceof EntityId || $target instanceof SiteLink ) {
@@ -71,6 +73,8 @@ class SiteLinkSetter {
 	 *
 	 * @throws UnexpectedValueException
 	 * @return array
+	 *
+	 * @todo Fix duplicated code
 	 */
 	private function getTargetParamsFromTarget( $target ) {
 		if( $target instanceof EntityId ) {
