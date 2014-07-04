@@ -3,6 +3,7 @@
 namespace Wikibase\Api\Service;
 
 use DataValues\DataValue;
+use DataValues\Serializers\DataValueSerializer;
 use Mediawiki\Api\MediawikiApi;
 use Wikibase\Api\GenericOptions;
 
@@ -17,10 +18,17 @@ class ValueFormatter {
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @var DataValueSerializer
 	 */
-	public function __construct( MediawikiApi $api ) {
+	private $dataValueSerializer;
+
+	/**
+	 * @param MediawikiApi $api
+	 * @param DataValueSerializer $dataValueSerializer
+	 */
+	public function __construct( MediawikiApi $api, DataValueSerializer $dataValueSerializer ) {
 		$this->api = $api;
+		$this->dataValueSerializer = $dataValueSerializer;
 	}
 
 	/**
@@ -32,9 +40,19 @@ class ValueFormatter {
 	 *
 	 * @returns string
 	 */
-	public function format( DataValue $value, $dataTypeId, GenericOptions $options ) {
-		//TODO implement me
-		throw new \BadMethodCallException( 'Not yet implemented' );
+	public function format( DataValue $value, $dataTypeId, GenericOptions $options = null ) {
+		if( $options === null ) {
+			$options = new GenericOptions();
+		}
+
+		$params = array(
+			'datavalue' => json_encode( $this->dataValueSerializer->serialize( $value ) ),
+			'datatype' => $dataTypeId,
+			'options' => json_encode( $options->getOptions() ),
+		);
+
+		$result = $this->api->getAction( 'wbformatvalue', $params );
+		return $result['result'];
 	}
 
 } 

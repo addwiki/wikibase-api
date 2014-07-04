@@ -77,7 +77,10 @@ class WikibaseFactory {
 	 * @return ValueFormatter
 	 */
 	public function newValueFormatter() {
-		return new ValueFormatter( $this->api );
+		return new ValueFormatter(
+			$this->api,
+			$this->newDataValueSerializer()
+		);
 	}
 
 	/**
@@ -200,6 +203,10 @@ class WikibaseFactory {
 				'time' => 'DataValues\TimeValue',
 				'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue', )
 		);
+	}
+
+	private function newDataValueSerializer() {
+		return new DataValueSerializer();
 	}
 
 	private function newDataModelSerializerFactory() {
