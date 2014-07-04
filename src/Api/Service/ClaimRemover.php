@@ -3,6 +3,7 @@
 namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
+use UnexpectedValueException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuid;
 
@@ -25,11 +26,32 @@ class ClaimRemover {
 
 	/**
 	 * @since 0.2
+	 *
 	 * @param Claim|ClaimGuid|string $claim Claim object or GUID
+	 *
+	 * @return bool
+	 * @throws UnexpectedValueException
 	 */
 	public function remove( $claim ) {
-		//TODO implement me
-		throw new \BadMethodCallException( 'Not yet implemented' );
+		if( is_string( $claim ) ) {
+			$guid = $claim;
+		} else if ( $claim instanceof ClaimGuid ) {
+			$guid = $claim->getSerialization();
+		} else if ( $claim instanceof Claim ) {
+			$guid = $claim->getGuid();
+		} else {
+			throw new UnexpectedValueException( 'Could not get claim guid from $claim' );
+		}
+		if( !is_string( $guid ) ) {
+			throw new UnexpectedValueException( 'Unexpected claim guid got from $claim' );
+		}
+
+		$params = array(
+			'claim' => $guid,
+		);
+
+		$this->api->postAction( 'wbremoveclaims', $params );
+		return true;
 	}
 
 } 
