@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Serializers\DataValueSerializer;
 use Mediawiki\Api\MediawikiApi;
 use Wikibase\Api\Service\AliasGroupSetter;
 use Wikibase\Api\Service\ClaimCreator;
@@ -22,6 +23,7 @@ use Wikibase\Api\Service\ValueFormatter;
 use Wikibase\Api\Service\ValueParser;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\SerializerFactory;
 
 /**
  * @author Jeroen De Dauw
@@ -78,26 +80,6 @@ class WikibaseFactory {
 		return new ValueFormatter( $this->api );
 	}
 
-	private function newDataModelDeserializerFactory() {
-		return new DeserializerFactory(
-			$this->newDataValueDeserializer(),
-			new BasicEntityIdParser()
-		);
-	}
-
-	private function newDataValueDeserializer() {
-		return new DataValueDeserializer( array(
-				'number' => 'DataValues\NumberValue',
-				'string' => 'DataValues\StringValue',
-				'globecoordinate' => 'DataValues\GlobeCoordinateValue',
-				'monolingualtext' => 'DataValues\MonolingualTextValue',
-				'multilingualtext' => 'DataValues\MultilingualTextValue',
-				'quantity' => 'DataValues\QuantityValue',
-				'time' => 'DataValues\TimeValue',
-				'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue', )
-		);
-	}
-
 	/**
 	 * @since 0.2
 	 * @return ItemMerger
@@ -135,7 +117,10 @@ class WikibaseFactory {
 	 * @return ClaimSetter
 	 */
 	public function newClaimSetter() {
-		return new ClaimSetter( $this->api );
+		return new ClaimSetter(
+			$this->api,
+			$this->newDataModelSerializerFactory()->newClaimSerializer()
+		);
 	}
 
 	/**
@@ -191,7 +176,34 @@ class WikibaseFactory {
 	 * @return ClaimGetter
 	 */
 	public function newClaimGetter() {
-		return new ClaimGetter( $this->api );
+		return new ClaimGetter(
+			$this->api,
+			$this->newDataModelDeserializerFactory()->newClaimDeserializer()
+		);
+	}
+
+	private function newDataModelDeserializerFactory() {
+		return new DeserializerFactory(
+			$this->newDataValueDeserializer(),
+			new BasicEntityIdParser()
+		);
+	}
+
+	private function newDataValueDeserializer() {
+		return new DataValueDeserializer( array(
+				'number' => 'DataValues\NumberValue',
+				'string' => 'DataValues\StringValue',
+				'globecoordinate' => 'DataValues\GlobeCoordinateValue',
+				'monolingualtext' => 'DataValues\MonolingualTextValue',
+				'multilingualtext' => 'DataValues\MultilingualTextValue',
+				'quantity' => 'DataValues\QuantityValue',
+				'time' => 'DataValues\TimeValue',
+				'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue', )
+		);
+	}
+
+	private function newDataModelSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer() );
 	}
 
 }

@@ -3,15 +3,8 @@
 
 namespace Wikibase\Api\Service;
 
-use DataValues\Deserializers\DataValueDeserializer;
 use Mediawiki\Api\MediawikiApi;
 use Wikibase\DataModel\Deserializers\ClaimDeserializer;
-use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
-use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
-use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
-use Wikibase\DataModel\Deserializers\SnakDeserializer;
-use Wikibase\DataModel\Deserializers\SnakListDeserializer;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * @author Adam Shorland
@@ -24,10 +17,17 @@ class ClaimGetter {
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @var ClaimDeserializer
 	 */
-	public function __construct( MediawikiApi $api ) {
+	private $claimDeserializer;
+
+	/**
+	 * @param MediawikiApi $api
+	 * @param ClaimDeserializer $claimDeserializer
+	 */
+	public function __construct( MediawikiApi $api, ClaimDeserializer $claimDeserializer ) {
 		$this->api = $api;
+		$this->claimDeserializer = $claimDeserializer;
 	}
 
 	/**
@@ -44,19 +44,7 @@ class ClaimGetter {
 
 		$claimSerialization = array_shift( array_shift( $result['claims'] ) );
 
-		//TODO inject me
-		$snakDeserializer = new SnakDeserializer(
-			new DataValueDeserializer(),
-			new EntityIdDeserializer( new BasicEntityIdParser() )
-		);
-		//TODO inject me
-		$claimDeserializer = new ClaimDeserializer(
-			$snakDeserializer,
-			new SnakListDeserializer( $snakDeserializer ),
-			new ReferenceListDeserializer( new ReferenceDeserializer( $snakDeserializer ) )
-		);
-
-		return $claimDeserializer->deserialize( $claimSerialization );
+		return $this->claimDeserializer->deserialize( $claimSerialization );
 	}
 
 } 

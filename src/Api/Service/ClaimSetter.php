@@ -2,15 +2,10 @@
 
 namespace Wikibase\Api\Service;
 
-use DataValues\Serializers\DataValueSerializer;
 use InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Serializers\ClaimSerializer;
-use Wikibase\DataModel\Serializers\ReferenceSerializer;
-use Wikibase\DataModel\Serializers\ReferencesSerializer;
-use Wikibase\DataModel\Serializers\SnakSerializer;
-use Wikibase\DataModel\Serializers\SnaksSerializer;
 
 /**
  * @author Adam Shorland
@@ -23,10 +18,17 @@ class ClaimSetter {
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @var ClaimSerializer
 	 */
-	public function __construct( MediawikiApi $api ) {
+	private $claimSerializer;
+
+	/**
+	 * @param MediawikiApi $api
+	 * @param ClaimSerializer $claimSerializer
+	 */
+	public function __construct( MediawikiApi $api, ClaimSerializer $claimSerializer ) {
 		$this->api = $api;
+		$this->claimSerializer = $claimSerializer;
 	}
 
 	/**
@@ -44,17 +46,8 @@ class ClaimSetter {
 			throw new InvalidArgumentException( 'Can not set a claim that does not have a GUID' );
 		}
 
-		//TODO inject me
-		$snakSerializer = new SnakSerializer( new DataValueSerializer() );
-		//TODO inject me
-		$claimSerializer = new ClaimSerializer(
-			$snakSerializer,
-			new SnaksSerializer( $snakSerializer ),
-			new ReferencesSerializer( new ReferenceSerializer( $snakSerializer ) )
-		);
-
 		$params = array(
-			'claim' => $claimSerializer->serialize( $claim ),
+			'claim' => $this->claimSerializer->serialize( $claim ),
 		);
 
 		$this->api->postAction( 'wbsetclaim', $params );
