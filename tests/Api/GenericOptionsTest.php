@@ -22,14 +22,7 @@ class GenericOptionsTest extends \PHPUnit_Framework_TestCase {
 
 		$genericOptions = new GenericOptions( $options );
 
-		foreach ( $options as $option => $value ) {
-			$this->assertEquals(
-				serialize( $value ),
-				serialize( $genericOptions->getOption( $option ) ),
-				'Option should be set properly'
-			);
-		}
-
+		$this->assertEquals( $options, $genericOptions->getOptions() );
 		$this->assertFalse( $genericOptions->hasOption( 'ohi' ) );
 	}
 

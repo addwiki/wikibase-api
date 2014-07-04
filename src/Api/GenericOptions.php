@@ -7,7 +7,7 @@ use OutOfBoundsException;
 use RuntimeException;
 
 /**
- * Object holding options for a formatter.
+ * Object holding options.
  *
  * @since 0.2
  *
@@ -114,6 +114,17 @@ final class GenericOptions {
 		if ( !$this->hasOption( $option ) ) {
 			throw new RuntimeException( 'Required option"' . $option . '" is not set' );
 		}
+	}
+
+	/**
+	 * Returns the array of all options.
+	 *
+	 * @since 0.2
+	 *
+	 * @return array
+	 */
+	public function getOptions() {
+		return $this->options;
 	}
 
 }
