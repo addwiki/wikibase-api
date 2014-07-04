@@ -155,7 +155,10 @@ class WikibaseFactory {
 	 * @return ReferenceSetter
 	 */
 	public function newReferenceSetter() {
-		return new ReferenceSetter( $this->api );
+		return new ReferenceSetter(
+			$this->api,
+			$this->newDataModelSerializerFactory()->newReferenceSerializer()
+		);
 	}
 
 	/**
