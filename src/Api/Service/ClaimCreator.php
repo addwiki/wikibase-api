@@ -4,10 +4,13 @@
 namespace Wikibase\Api\Service;
 
 
+use DataValues\Serializers\DataValueSerializer;
 use Mediawiki\Api\MediawikiApi;
-use Wikibase\DataModel\Claim\Claim;
+use UnexpectedValueException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * @author Adam Shorland
@@ -20,20 +23,50 @@ class ClaimCreator {
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @var DataValueSerializer
 	 */
-	public function __construct( MediawikiApi $api ) {
+	private $dataValueSerializer;
+
+	/**
+	 * @param MediawikiApi $api
+	 * @param DataValueSerializer $dataValueSerializer
+	 */
+	public function __construct( MediawikiApi $api, DataValueSerializer $dataValueSerializer ) {
 		$this->api = $api;
+		$this->dataValueSerializer = $dataValueSerializer;
 	}
 
 	/**
 	 * @since 0.2
-	 * @param Claim $label
-	 * @param EntityId|Entity $target
+	 *
+	 * @param Snak $mainSnak
+	 * @param EntityId|Entity|string $target
+	 *
+	 * @return bool
+	 * @throws UnexpectedValueException
 	 */
-	public function create( Claim $claim, $target ) {
-		//TODO implement me
-		throw new \BadMethodCallException( 'Not yet implemented' );
+	public function create( Snak $mainSnak, $target ) {
+		if( is_string( $target ) ) {
+			$entityId = $target;
+		} elseif ( $target instanceof EntityId ) {
+			$entityId = $target->getSerialization();
+		} elseif ( $target instanceof Entity ) {
+			$entityId = $target->getId()->getSerialization();
+		} else {
+			throw new UnexpectedValueException( '$target needs to be an EntityId, Entity or string' );
+		}
+
+		$params = array(
+			'entity' => $entityId,
+			'snaktype' => $mainSnak->getType(),
+			'property' => $mainSnak->getPropertyId()->getSerialization(),
+		);
+		if( $mainSnak instanceof PropertyValueSnak ) {
+			$params['value'] = json_encode( $this->dataValueSerializer->serialize( $mainSnak->getDataValue() ) );
+		}
+
+		$this->api->postAction( 'wbcreateclaim', $params );
+		return true;
 	}
 
 } 

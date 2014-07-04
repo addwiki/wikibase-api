@@ -104,7 +104,10 @@ class WikibaseFactory {
 	 * @return ClaimCreator
 	 */
 	public function newClaimCreator() {
-		return new ClaimCreator( $this->api );
+		return new ClaimCreator(
+			$this->api,
+			$this->newDataValueSerializer()
+		);
 	}
 
 	/**
