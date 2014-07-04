@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use Mediawiki\Api\MediawikiApi;
 use Wikibase\Api\Service\AliasGroupSetter;
 use Wikibase\Api\Service\ClaimCreator;
+use Wikibase\Api\Service\ClaimGetter;
 use Wikibase\Api\Service\ClaimRemover;
 use Wikibase\Api\Service\ClaimSetter;
 use Wikibase\Api\Service\DescriptionSetter;
@@ -183,6 +184,14 @@ class WikibaseFactory {
 	 */
 	public function newSiteLinkSetter() {
 		return new SiteLinkSetter( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @return ClaimGetter
+	 */
+	public function newClaimGetter() {
+		return new ClaimGetter( $this->api );
 	}
 
 }
