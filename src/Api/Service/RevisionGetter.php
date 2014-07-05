@@ -48,16 +48,8 @@ class RevisionGetter {
 			$id = $id->getPrefixedId();
 		}
 
-		return $this->newRevisionFromResult( $this->getEntityResultById( $id ) );
-	}
-	
-	/**
-	 * @param string $id
-	 * @return array
-	 */
-	private function getEntityResultById( $id ) {
 		$result = $this->api->getAction( 'wbgetentities', array( 'ids' => $id ) );
-		return array_shift( $result['entities'] );
+		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 
 	/**
@@ -67,7 +59,7 @@ class RevisionGetter {
 	 */
 	public function getFromSiteLink( SiteLink $siteLink ) {
 		$result = $this->api->getAction( 'wbgetentities', array( 'sites' => $siteLink->getSiteId(), 'titles' => $siteLink->getPageName() ) );
-		return array_shift( $result['entities'] );
+		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 
 	/**
@@ -78,7 +70,7 @@ class RevisionGetter {
 	 */
 	public function getFromSiteAndTitle( $siteId, $title ) {
 		$result = $this->api->getAction( 'wbgetentities', array( 'sites' => $siteId, 'titles' => $title ) );
-		return array_shift( $result['entities'] );
+		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 	
 	/**
