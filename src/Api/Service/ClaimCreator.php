@@ -62,7 +62,12 @@ class ClaimCreator {
 			'property' => $mainSnak->getPropertyId()->getSerialization(),
 		);
 		if( $mainSnak instanceof PropertyValueSnak ) {
-			$params['value'] = json_encode( $this->dataValueSerializer->serialize( $mainSnak->getDataValue() ) );
+			$serializedDataValue = $this->dataValueSerializer->serialize( $mainSnak->getDataValue() );
+			if( $serializedDataValue['type'] === 'string' ) {
+				$params['value'] = $serializedDataValue['value'];
+			} else {
+				$params['value'] = json_encode( $serializedDataValue );
+			}
 		}
 
 		$this->api->postAction( 'wbcreateclaim', $params );
