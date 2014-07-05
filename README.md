@@ -35,8 +35,30 @@ $edit = new \Mediawiki\DataModel\Revision(
 );
 $saver->save( $edit );
 
-// Edit an existing Entity
+// Set a label in the language en
 $entityRevision = $getter->getFromId( 'Q87' );
 $entityRevision->getContent()->getNativeData()->setDescription( 'en', 'I am A description' );
 $saver->save( $entityRevision );
+
+// Create a new string claim on an item if a claim for the property doesnt already exist
+$revision = $services->newRevisionGetter()->getFromId( 'Q777' );
+$item = $revision->getContent()->getNativeData();
+$claims = new \Wikibase\DataModel\Claim\Claims( $item->getClaims() );
+if( $claims->getClaimsForProperty( \Wikibase\DataModel\Entity\PropertyId::newFromNumber( 1320 ) )->isEmpty() ) {
+	$services->newClaimCreator()->create(
+		new \Wikibase\DataModel\Snak\PropertyValueSnak(
+			\Wikibase\DataModel\Entity\PropertyId::newFromNumber( 1320 ),
+			new \DataValues\StringValue( 'New String Value' )
+		),
+		'Q777'
+	);
+}
+
+// Try to merge two items if possible, catch any errors
+try{
+	$services->newItemMerger()->merge( 'Q999', 'Q888' );
+}
+catch( \Mediawiki\Api\UsageException $e ) {
+	echo "Oh no! I failed to merge!";
+}
 ```
