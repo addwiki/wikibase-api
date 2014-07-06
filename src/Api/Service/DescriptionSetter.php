@@ -42,6 +42,7 @@ class DescriptionSetter {
 		$params['language'] = $description->getLanguageCode();
 		$params['value'] = $description->getText();
 
+		$params['token'] = $this->api->getToken();
 		$this->api->postAction( 'wbsetdescription', $params );
 		return true;
 	}

@@ -37,6 +37,7 @@ class SiteLinkLinker {
 			'fromtitle' => $fromSiteLink->getPageName(),
 		);
 
+		$params['token'] = $this->api->getToken();
 		$this->api->postAction( 'wblinktitles', $params );
 		return true;
 	}

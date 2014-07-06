@@ -50,6 +50,7 @@ class ClaimRemover {
 			'claim' => $guid,
 		);
 
+		$params['token'] = $this->api->getToken();
 		$this->api->postAction( 'wbremoveclaims', $params );
 		return true;
 	}

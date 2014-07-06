@@ -50,6 +50,7 @@ class ClaimSetter {
 			'claim' => $this->claimSerializer->serialize( $claim ),
 		);
 
+		$params['token'] = $this->api->getToken();
 		$this->api->postAction( 'wbsetclaim', $params );
 		return true;
 	}

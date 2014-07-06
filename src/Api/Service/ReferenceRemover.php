@@ -60,6 +60,7 @@ class ReferenceRemover {
 			'references' => $reference,
 		);
 
+		$params['token'] = $this->api->getToken();
 		$this->api->postAction( 'wbremovereferences', $params );
 		return true;
 	}

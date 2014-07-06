@@ -70,6 +70,7 @@ class ClaimCreator {
 			}
 		}
 
+		$params['token'] = $this->api->getToken();
 		$this->api->postAction( 'wbcreateclaim', $params );
 		return true;
 	}

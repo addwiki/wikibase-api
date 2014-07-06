@@ -42,6 +42,7 @@ class AliasGroupSetter {
 		$params['language'] = $aliasGroup->getLanguageCode();
 		$params['set'] = $aliasGroup->getAliases();
 
+		$params['token'] = $this->api->getToken();
 		$this->api->postAction( 'wbsetaliases', $params );
 		return true;
 	}

@@ -38,6 +38,7 @@ class ItemMerger {
 			'token' => $this->api->getToken(),
 		);
 
+		$params['token'] = $this->api->getToken();
 		$this->api->postAction( 'wbmergeitems', $params );
 		return true;
 	}

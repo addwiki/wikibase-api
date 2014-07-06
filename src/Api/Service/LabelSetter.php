@@ -42,6 +42,7 @@ class LabelSetter {
 		$params['language'] = $label->getLanguageCode();
 		$params['value'] = $label->getText();
 
+		$params['token'] = $this->api->getToken();
 		$this->api->postAction( 'wbsetlabel', $params );
 		return true;
 	}

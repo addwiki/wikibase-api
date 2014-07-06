@@ -72,6 +72,7 @@ class ReferenceSetter {
 			$params['reference'] = $targetReference;
 		}
 
+		$params['token'] = $this->api->getToken();
 		$this->api->postAction( 'wbsetreference', $params );
 		return true;
 	}
