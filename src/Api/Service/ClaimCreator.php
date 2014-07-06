@@ -64,7 +64,7 @@ class ClaimCreator {
 		if( $mainSnak instanceof PropertyValueSnak ) {
 			$serializedDataValue = $this->dataValueSerializer->serialize( $mainSnak->getDataValue() );
 			if( $serializedDataValue['type'] === 'string' ) {
-				$params['value'] = $serializedDataValue['value'];
+				$params['value'] = json_encode( $serializedDataValue['value'] );
 			} else {
 				$params['value'] = json_encode( $serializedDataValue );
 			}
