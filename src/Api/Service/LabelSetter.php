@@ -35,8 +35,10 @@ class LabelSetter {
 	 * @return bool
 	 */
 	public function set( Term $label, $target ) {
+		$this->throwExceptionsOnBadTarget( $target );
+
 		$params = $this->getTargetParamsFromTarget(
-			$this->getEntityIdFromTarget( $target )
+			$this->getEntityIdentifierFromTarget( $target )
 		);
 
 		$params['language'] = $label->getLanguageCode();
@@ -48,6 +50,22 @@ class LabelSetter {
 	}
 
 	/**
+	 * @param mixed $target
+	 *
+	 * @throws UnexpectedValueException
+	 *
+	 * @todo Fix duplicated code
+	 */
+	private function throwExceptionsOnBadTarget( $target ) {
+		if( !$target instanceof EntityId && !$target instanceof Entity && ! $target instanceof SiteLink ) {
+			throw new UnexpectedValueException( '$target needs to be an EntityId, Entity or SiteLink' );
+		}
+		if( $target instanceof Entity && is_null( $target->getId() ) ) {
+			throw new UnexpectedValueException( '$target Entity object needs to have an Id set' );
+		}
+	}
+
+	/**
 	 * @param EntityId|Entity $target
 	 *
 	 * @throws UnexpectedValueException
@@ -55,18 +73,11 @@ class LabelSetter {
 	 *
 	 * @todo Fix duplicated code
 	 */
-	private function getEntityIdFromTarget( $target ) {
-		if( $target instanceof EntityId || $target instanceof SiteLink ) {
-			return $target;
-		} elseif ( $target instanceof Entity ) {
-			$target = $target->getId();
-			if( !is_null( $target ) ) {
-				return $target;
-			} else {
-				throw new UnexpectedValueException( '$target Entity object needs to have an Id set' );
-			}
+	private function getEntityIdentifierFromTarget( $target ) {
+		if ( $target instanceof Entity ) {
+			return $target->getId();
 		} else {
-			throw new UnexpectedValueException( '$target needs to be an EntityId, Entity or SiteLink' );
+			return $target;
 		}
 	}
 
