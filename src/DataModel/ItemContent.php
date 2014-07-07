@@ -12,7 +12,7 @@ class ItemContent extends Content {
 	/**
 	 * @var Item
 	 */
-	protected $item;
+	private $item;
 
 	/**
 	 * @param Item $item

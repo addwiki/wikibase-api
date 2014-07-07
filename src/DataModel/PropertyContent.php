@@ -12,7 +12,7 @@ class PropertyContent extends Content {
 	/**
 	 * @var Property
 	 */
-	protected $property;
+	private $property;
 
 	/**
 	 * @param Property $property
