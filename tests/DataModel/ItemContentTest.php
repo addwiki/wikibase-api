@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\ItemContent;
 
 /**
- * @covers Wikibase\Api\DataModel\ItemContent
+ * @covers Wikibase\DataModel\ItemContent
  * @author Adam Shorland
  */
 class ItemContentTest extends \PHPUnit_Framework_TestCase {

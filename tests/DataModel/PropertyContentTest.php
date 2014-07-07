@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\PropertyContent;
 
 /**
- * @covers Wikibase\Api\DataModel\PropertyContent
+ * @covers Wikibase\DataModel\PropertyContent
  * @author Adam Shorland
  */
 class PropertyContentTest extends \PHPUnit_Framework_TestCase {
