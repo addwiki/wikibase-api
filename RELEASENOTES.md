@@ -1,6 +1,6 @@
 These are the release notes for the [wikibase-api](README.md).
 
-## Version 0.2 (under development)
+## Version 0.2 (2014-07-15)
 
 * Adjust for mediawiki-api 0.3
 * Adjust for mediawiki-datamodel 0.3
