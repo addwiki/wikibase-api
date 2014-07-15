@@ -10,13 +10,22 @@ On Packagist:
 
 ## Installation
 
-Use composer to install the library and all its dependencies:
+Use one of the below methods:
+
+1 - Use composer to install the library and all its dependencies using the master branch:
 
     composer require "addwiki/wikibase-api:dev-master"
 
+2 - Create a composer.json file that just defines a dependency on version 0.2 of this package, and run 'composer install' in the directory:
 
-Example Usage
-------
+    {
+        "require": {
+            "addwiki/wikibase-api": "~0.2.0"
+        }
+    }
+
+
+## Example Usage
 
 ```php
 // Load all of the things
