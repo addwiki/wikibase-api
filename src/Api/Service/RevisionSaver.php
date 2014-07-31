@@ -3,6 +3,7 @@
 namespace Wikibase\Api\Service;
 
 use DataValues\Serializers\DataValueSerializer;
+use Deserializers\Deserializer;
 use InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\DataModel\Revision;
@@ -28,10 +29,17 @@ class RevisionSaver {
 	protected $serializerFactory;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @var Deserializer
 	 */
-	public function __construct( MediawikiApi $api ) {
+	private $entityDeserializer;
+
+	/**
+	 * @param MediawikiApi $api
+	 * @param Deserializer $entityDeserializer
+	 */
+	public function __construct( MediawikiApi $api, Deserializer $entityDeserializer ) {
 		$this->api = $api;
+		$this->entityDeserializer = $entityDeserializer;
 		$this->serializerFactory =  new SerializerFactory(
 			new DataValueSerializer()
 		);
@@ -43,7 +51,7 @@ class RevisionSaver {
 	 *
 	 * @throws RuntimeException
 	 * @throws InvalidArgumentException
-	 * @returns bool
+	 * @returns Entity new version of the entity
 	 */
 	public function save( Revision $revision ) {
 		$serializer = $this->serializerFactory->newEntitySerializer();
@@ -69,6 +77,9 @@ class RevisionSaver {
 		$entityId = $entity->getId();
 		if( !is_null( $entityId ) ) {
 			$params['id'] = $entityId->getPrefixedId();
+			if( $entity->isEmpty() ) {
+				$params['clear'] = 'true';
+			}
 		} else {
 			$params['new'] = $entity->getType();
 		}
@@ -85,8 +96,8 @@ class RevisionSaver {
 			$params['summary'] = $summary;
 		}
 
-		$this->api->postAction( 'wbeditentity', $params );
-		return true;
+		$result = $this->api->postAction( 'wbeditentity', $params );
+		return $this->entityDeserializer->deserialize( $result['entity'] );
 	}
 
 } 

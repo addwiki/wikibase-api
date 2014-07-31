@@ -44,7 +44,7 @@ class SiteLinkSetter {
 		$params['linktitle'] = $siteLink->getPageName();
 
 		$params['token'] = $this->api->getToken();
-		$this->api->postAction( 'wblinktitles', $params );
+		$this->api->postAction( 'wbsetsitelink', $params );
 		return true;
 	}
 

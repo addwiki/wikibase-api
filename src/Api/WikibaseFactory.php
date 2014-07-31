@@ -47,7 +47,10 @@ class WikibaseFactory {
 	 * @return RevisionSaver
 	 */
 	public function newRevisionSaver() {
-		return new RevisionSaver( $this->api );
+		return new RevisionSaver(
+			$this->api,
+			$this->newDataModelDeserializerFactory()->newEntityDeserializer()
+		);
 	}
 
 	/**

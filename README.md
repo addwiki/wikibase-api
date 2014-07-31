@@ -27,14 +27,22 @@ Use one of the below methods:
 
 ## Example Usage
 
+Below you will find some smore examples using various parts of the code.
+
+Please also take a look at our integration tests that might be able to help you!
+
 ```php
 // Load all of the things
 require_once( __DIR__ . "/vendor/autoload.php" );
 
-// Set stuff up and login
+// Use the mediawiki api and Login
 $api = new \Mediawiki\Api\MediawikiApi( "http://localhost/w/api.php" );
 $api->login( new \Mediawiki\Api\ApiUser( 'username', 'password' ) );
+
+// Create our Factory, All services should be used through this!
 $services = new \Wikibase\Api\WikibaseFactory( $api );
+
+// Get 2 specific services
 $getter = $services->newRevisionGetter();
 $saver = $services->newRevisionSaver();
 
@@ -44,12 +52,12 @@ $edit = new \Mediawiki\DataModel\Revision(
 );
 $saver->save( $edit );
 
-// Set a label in the language en
+// Set a label in the language en on the item Q87
 $entityRevision = $getter->getFromId( 'Q87' );
 $entityRevision->getContent()->getNativeData()->setDescription( 'en', 'I am A description' );
 $saver->save( $entityRevision );
 
-// Create a new string claim on an item if a claim for the property doesnt already exist
+// Create a new string claim on item Q777 if a claim for the property doesn't already exist
 $revision = $services->newRevisionGetter()->getFromId( 'Q777' );
 $item = $revision->getContent()->getNativeData();
 $claims = new \Wikibase\DataModel\Claim\Claims( $item->getClaims() );
@@ -63,7 +71,7 @@ if( $claims->getClaimsForProperty( \Wikibase\DataModel\Entity\PropertyId::newFro
 	);
 }
 
-// Try to merge two items if possible, catch any errors
+// Try to merge Q999 and Q888 if possible, catch any errors
 try{
 	$services->newItemMerger()->merge( 'Q999', 'Q888' );
 }

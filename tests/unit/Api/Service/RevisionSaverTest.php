@@ -16,8 +16,15 @@ class RevisionSaverTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
+	public function getMockDeserializer() {
+		$mock = $this->getMockBuilder( '\Deserializers\Deserializer' )
+			->disableOriginalConstructor()
+			->getMock();
+		return $mock;
+	}
+
 	public function testValidConstructionWorks() {
-		new RevisionSaver( $this->getMockApi() );
+		new RevisionSaver( $this->getMockApi(), $this->getMockDeserializer() );
 		$this->assertTrue( true );
 	}
 
