@@ -35,20 +35,32 @@ Please also take a look at our integration tests that might be able to help you!
 // Load all of the things
 require_once( __DIR__ . "/vendor/autoload.php" );
 
+use DataValues\StringValue;
+use Mediawiki\Api\ApiUser;
+use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\UsageException;
+use MediaWiki\DataModel\Revision;
+use Wikibase\Api\WikibaseFactory;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\ItemContent;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+
 // Use the mediawiki api and Login
-$api = new \Mediawiki\Api\MediawikiApi( "http://localhost/w/api.php" );
-$api->login( new \Mediawiki\Api\ApiUser( 'username', 'password' ) );
+$api = new MediawikiApi( "http://localhost/w/api.php" );
+$api->login( new ApiUser( 'username', 'password' ) );
 
 // Create our Factory, All services should be used through this!
-$services = new \Wikibase\Api\WikibaseFactory( $api );
+$services = new WikibaseFactory( $api );
 
 // Get 2 specific services
 $getter = $services->newRevisionGetter();
 $saver = $services->newRevisionSaver();
 
 // Create a new Entity
-$edit = new \Mediawiki\DataModel\Revision(
-	new \Wikibase\DataModel\ItemContent( Wikibase\DataModel\Entity\Item::newEmpty() )
+$edit = new Revision(
+	new ItemContent( Item::newEmpty() )
 );
 $saver->save( $edit );
 
@@ -60,12 +72,12 @@ $saver->save( $entityRevision );
 // Create a new string claim on item Q777 if a claim for the property doesn't already exist
 $revision = $services->newRevisionGetter()->getFromId( 'Q777' );
 $item = $revision->getContent()->getNativeData();
-$claims = new \Wikibase\DataModel\Claim\Claims( $item->getClaims() );
-if( $claims->getClaimsForProperty( \Wikibase\DataModel\Entity\PropertyId::newFromNumber( 1320 ) )->isEmpty() ) {
+$claims = new Claims( $item->getClaims() );
+if( $claims->getClaimsForProperty( PropertyId::newFromNumber( 1320 ) )->isEmpty() ) {
 	$services->newClaimCreator()->create(
-		new \Wikibase\DataModel\Snak\PropertyValueSnak(
-			\Wikibase\DataModel\Entity\PropertyId::newFromNumber( 1320 ),
-			new \DataValues\StringValue( 'New String Value' )
+		new PropertyValueSnak(
+			PropertyId::newFromNumber( 1320 ),
+			new StringValue( 'New String Value' )
 		),
 		'Q777'
 	);
@@ -75,7 +87,7 @@ if( $claims->getClaimsForProperty( \Wikibase\DataModel\Entity\PropertyId::newFro
 try{
 	$services->newItemMerger()->merge( 'Q999', 'Q888' );
 }
-catch( \Mediawiki\Api\UsageException $e ) {
+catch( UsageException $e ) {
 	echo "Oh no! I failed to merge!";
 }
 ```
