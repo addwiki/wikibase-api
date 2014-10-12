@@ -16,8 +16,8 @@ These are the release notes for the [wikibase-api](README.md).
 ####Libs
 
 We now require the following:
-* "wikibase/data-model-serialization": "~1.0.1"
-* "wikibase/data-model": "~0.8.2"
+* "wikibase/data-model-serialization": "~1.1"
+* "wikibase/data-model": "~1.0"
 * "data-values/geo": "~0.2.0"
 * "data-values/data-types": "~0.4.0",
 
