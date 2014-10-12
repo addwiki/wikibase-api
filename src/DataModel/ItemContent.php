@@ -27,7 +27,7 @@ class ItemContent extends Content {
 	 * @return string
 	 */
 	public function getHash() {
-		return sha1( serialize( $this->item->toArray() ) );
+		return sha1( serialize( $this->item ) );
 	}
 
 	/**
