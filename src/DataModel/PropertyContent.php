@@ -27,7 +27,7 @@ class PropertyContent extends Content {
 	 * @return string
 	 */
 	public function getHash() {
-		return sha1( serialize( $this->property->toArray() ) );
+		return sha1( serialize( $this->property ) );
 	}
 
 	/**
