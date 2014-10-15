@@ -24,6 +24,9 @@ Use one of the below methods:
         }
     }
 
+The tests can be run as follows:
+
+    phpunit -c tests/unit/
 
 ## Example Usage
 
