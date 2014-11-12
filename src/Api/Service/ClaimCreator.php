@@ -7,8 +7,9 @@ namespace Wikibase\Api\Service;
 use DataValues\Serializers\DataValueSerializer;
 use Mediawiki\Api\MediawikiApi;
 use UnexpectedValueException;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
@@ -40,7 +41,7 @@ class ClaimCreator {
 	 * @since 0.2
 	 *
 	 * @param Snak $mainSnak
-	 * @param EntityId|Entity|string $target
+	 * @param EntityId|Item|Property|string $target
 	 *
 	 * @return bool
 	 * @throws UnexpectedValueException
@@ -50,7 +51,7 @@ class ClaimCreator {
 			$entityId = $target;
 		} elseif ( $target instanceof EntityId ) {
 			$entityId = $target->getSerialization();
-		} elseif ( $target instanceof Entity ) {
+		} elseif ( $target instanceof Item || $target instanceof Property ) {
 			$entityId = $target->getId()->getSerialization();
 		} else {
 			throw new UnexpectedValueException( '$target needs to be an EntityId, Entity or string' );

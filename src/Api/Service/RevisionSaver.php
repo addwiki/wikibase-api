@@ -8,9 +8,10 @@ use InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\DataModel\Revision;
 use RuntimeException;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\ItemContent;
 use Wikibase\DataModel\PropertyContent;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\SerializerFactory;
 
 /**
@@ -51,7 +52,7 @@ class RevisionSaver {
 	 *
 	 * @throws RuntimeException
 	 * @throws InvalidArgumentException
-	 * @returns Entity new version of the entity
+	 * @returns Item|Property new version of the entity
 	 */
 	public function save( Revision $revision ) {
 		$serializer = $this->serializerFactory->newEntitySerializer();
@@ -60,7 +61,7 @@ class RevisionSaver {
 			throw new RuntimeException( 'Can not save revisions with the given content model' );
 		}
 
-		/** @var Entity $entity */
+		/** @var Item|Property $entity */
 		$entity = $revision->getContent()->getNativeData();
 		$serialized = $serializer->serialize( $entity );
 
@@ -76,7 +77,7 @@ class RevisionSaver {
 
 		$entityId = $entity->getId();
 		if( !is_null( $entityId ) ) {
-			$params['id'] = $entityId->getPrefixedId();
+			$params['id'] = $entityId->getSerialization();
 			if( $entity->isEmpty() ) {
 				$params['clear'] = 'true';
 			}

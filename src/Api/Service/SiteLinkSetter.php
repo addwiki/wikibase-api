@@ -4,8 +4,9 @@ namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
 use UnexpectedValueException;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -29,7 +30,7 @@ class SiteLinkSetter {
 	 * @since 0.2
 	 *
 	 * @param SiteLink $siteLink
-	 * @param EntityId|Entity|SiteLink $target
+	 * @param EntityId|Item|Property|SiteLink $target
 	 *
 	 * @return bool
 	 */
@@ -56,16 +57,16 @@ class SiteLinkSetter {
 	 * @todo Fix duplicated code
 	 */
 	private function throwExceptionsOnBadTarget( $target ) {
-		if( !$target instanceof EntityId && !$target instanceof Entity && ! $target instanceof SiteLink ) {
-			throw new UnexpectedValueException( '$target needs to be an EntityId, Entity or SiteLink' );
+		if( !$target instanceof EntityId && !$target instanceof Item && !$target instanceof Property && ! $target instanceof SiteLink ) {
+			throw new UnexpectedValueException( '$target needs to be an EntityId, Item, Property or SiteLink' );
 		}
-		if( $target instanceof Entity && is_null( $target->getId() ) ) {
+		if( ( $target instanceof Item || $target instanceof Property ) && is_null( $target->getId() ) ) {
 			throw new UnexpectedValueException( '$target Entity object needs to have an Id set' );
 		}
 	}
 
 	/**
-	 * @param EntityId|Entity $target
+	 * @param EntityId|Item|Property $target
 	 *
 	 * @throws UnexpectedValueException
 	 * @return EntityId|SiteLink
@@ -73,7 +74,7 @@ class SiteLinkSetter {
 	 * @todo Fix duplicated code
 	 */
 	private function getEntityIdentifierFromTarget( $target ) {
-		if ( $target instanceof Entity ) {
+		if ( $target instanceof Item || $target instanceof Property ) {
 			return $target->getId();
 		} else {
 			return $target;

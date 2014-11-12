@@ -9,7 +9,6 @@ use Mediawiki\Api\MediawikiApi;
 use Mediawiki\DataModel\Revision;
 use Mediawiki\DataModel\Revisions;
 use RuntimeException;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -123,7 +122,7 @@ class RevisionsGetter {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param Item|Property $entity
 	 *
 	 * @throws RuntimeException
 	 * @return ItemContent|PropertyContent
