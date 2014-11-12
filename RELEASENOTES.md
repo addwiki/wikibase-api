@@ -2,6 +2,8 @@ These are the release notes for the [wikibase-api](README.md).
 
 ## Version 0.4 (in development)
 
+* Added RevisionsGetter services for getting multiple revisions in as few requests as possible.
+
 ## Version 0.3 (2014-09-15)
 
 ####Fixes

@@ -17,6 +17,7 @@ use Wikibase\Api\Service\ReferenceRemover;
 use Wikibase\Api\Service\ReferenceSetter;
 use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\Api\Service\RevisionSaver;
+use Wikibase\Api\Service\RevisionsGetter;
 use Wikibase\Api\Service\SiteLinkLinker;
 use Wikibase\Api\Service\SiteLinkSetter;
 use Wikibase\Api\Service\ValueFormatter;
@@ -59,6 +60,17 @@ class WikibaseFactory {
 	 */
 	public function newRevisionGetter() {
 		return new RevisionGetter(
+			$this->api,
+			$this->newDataModelDeserializerFactory()->newEntityDeserializer()
+		);
+	}
+
+	/**
+	 * @since 0.4
+	 * @return RevisionsGetter
+	 */
+	public function newRevisionsGetter() {
+		return new RevisionsGetter(
 			$this->api,
 			$this->newDataModelDeserializerFactory()->newEntityDeserializer()
 		);

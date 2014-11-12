@@ -76,6 +76,7 @@ class RevisionGetter {
 	/**
 	 * @param array $entityResult
 	 * @returns Revision
+	 * @todo this could be factored into a different class?
 	 */
 	private function newRevisionFromResult( array $entityResult ) {
 		if( array_key_exists( 'missing', $entityResult ) ) {
@@ -96,6 +97,7 @@ class RevisionGetter {
 	 *
 	 * @throws RuntimeException
 	 * @return ItemContent|PropertyContent
+	 * @todo this could be factored into a different class?
 	 */
 	private function getContentFromEntity( $entity ) {
 		switch ( $entity->getType() ) {
