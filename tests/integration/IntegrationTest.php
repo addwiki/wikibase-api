@@ -48,7 +48,7 @@ class IntegrationTest extends IntegrationTestBase {
 	 */
 	public function testGetNewlyCreatedItem() {
 		// Make sure the RevisionGetter will also return the same Item as expected
-		$gotItem = $this->factory->newRevisionGetter()->getFromId( self::$itemId )->getContent()->getNativeData();
+		$gotItem = $this->factory->newRevisionGetter()->getFromId( self::$itemId )->getContent()->getData();
 		$this->assertTrue( self::$localItem->equals( $gotItem ) );
 	}
 

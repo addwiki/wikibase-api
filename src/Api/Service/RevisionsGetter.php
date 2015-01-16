@@ -6,6 +6,7 @@ use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
 use Guzzle\Common\Exception\InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\DataModel\PageIdentifier;
 use Mediawiki\DataModel\Revision;
 use Mediawiki\DataModel\Revisions;
 use RuntimeException;
@@ -111,7 +112,7 @@ class RevisionsGetter {
 			}
 			$revisions->addRevision( new Revision(
 				$this->getContentFromEntity( $this->entityDeserializer->deserialize( $entityResult ) ),
-				$entityResult['pageid'],
+				new PageIdentifier( null, $entityResult['pageid'] ),
 				$entityResult['lastrevid'],
 				null,
 				null,

@@ -70,12 +70,12 @@ $saver->save( $edit );
 
 // Set a label in the language en on the item Q87
 $entityRevision = $getter->getFromId( 'Q87' );
-$entityRevision->getContent()->getNativeData()->setDescription( 'en', 'I am A description' );
+$entityRevision->getContent()->getData()->setDescription( 'en', 'I am A description' );
 $saver->save( $entityRevision );
 
 // Create a new string claim on item Q777 if a claim for the property doesn't already exist
 $revision = $services->newRevisionGetter()->getFromId( 'Q777' );
-$item = $revision->getContent()->getNativeData();
+$item = $revision->getContent()->getData();
 $claims = new Claims( $item->getClaims() );
 if( $claims->getClaimsForProperty( PropertyId::newFromNumber( 1320 ) )->isEmpty() ) {
 	$services->newClaimCreator()->create(

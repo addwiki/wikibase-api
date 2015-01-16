@@ -4,6 +4,9 @@ These are the release notes for the [wikibase-api](README.md).
 
 * Added BadgeIdsGetter service
 * Requires "data-values/data-values": "~1.0.0" from "~0.1.0"
+* NoLonger Require addwiki/mediawiki-api-base
+* Requires "addwiki/mediawiki-api-base": "~0.2.0"
+* Requires "addwiki/mediawiki-datamodel": "~0.5.0"
 
 ## Version 0.4 (2014-12-14)
 

@@ -18,7 +18,7 @@ class PropertyContentTest extends \PHPUnit_Framework_TestCase {
 	public function testValidConstruction() {
 		$property = Property::newFromType( 'string' );
 		$content = new PropertyContent( $property );
-		$this->assertEquals( $property, $content->getNativeData() );
+		$this->assertEquals( $property, $content->getData() );
 		$this->assertInternalType( 'string', $content->getHash() );
 	}
 

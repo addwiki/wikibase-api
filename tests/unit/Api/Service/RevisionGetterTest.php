@@ -3,7 +3,6 @@
 namespace Wikibase\Api\Test;
 
 use Wikibase\Api\Service\RevisionGetter;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -69,8 +68,8 @@ class RevisionGetterTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertInstanceOf( 'Mediawiki\DataModel\Revision', $result );
 		$this->assertInstanceOf( 'Wikibase\DataModel\ItemContent', $result->getContent() );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $result->getContent()->getNativeData() );
-		$this->assertEquals( 111, $result->getPageId() );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $result->getContent()->getData() );
+		$this->assertEquals( 111, $result->getPageIdentifier()->getId() );
 		$this->assertEquals( 'TIMESTAMP', $result->getTimestamp() );
 	}
 

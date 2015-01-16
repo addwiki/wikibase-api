@@ -4,6 +4,7 @@ namespace Wikibase\Api\Service;
 
 use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\DataModel\PageIdentifier;
 use Mediawiki\DataModel\Revision;
 use RuntimeException;
 use Wikibase\DataModel\ItemContent;
@@ -83,7 +84,7 @@ class RevisionGetter {
 		}
 		return new Revision(
 			$this->getContentFromEntity( $this->entityDeserializer->deserialize( $entityResult ) ),
-			$entityResult['pageid'],
+			new PageIdentifier( null, intval( $entityResult['pageid'] ) ),
 			$entityResult['lastrevid'],
 			null,
 			null,

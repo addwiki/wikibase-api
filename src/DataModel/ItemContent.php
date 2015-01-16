@@ -31,10 +31,10 @@ class ItemContent extends Content {
 	}
 
 	/**
-	 * @see Content::getNativeData
+	 * @see Content::getData
 	 * @return Item
 	 */
-	public function getNativeData() {
+	public function getData() {
 		return $this->item;
 	}
 }

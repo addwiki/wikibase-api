@@ -62,7 +62,7 @@ class RevisionSaver {
 		}
 
 		/** @var Item|Property $entity */
-		$entity = $revision->getContent()->getNativeData();
+		$entity = $revision->getContent()->getData();
 		$serialized = $serializer->serialize( $entity );
 
 		$params = array(

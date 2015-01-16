@@ -31,10 +31,10 @@ class PropertyContent extends Content {
 	}
 
 	/**
-	 * @see Content::getNativeData
+	 * @see Content::getData
 	 * @return Property
 	 */
-	public function getNativeData() {
+	public function getData() {
 		return $this->property;
 	}
 }
