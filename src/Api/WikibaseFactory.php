@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Mediawiki\Api\MediawikiApi;
 use Wikibase\Api\Service\AliasGroupSetter;
+use Wikibase\Api\Service\BadgeIdsGetter;
 use Wikibase\Api\Service\ClaimCreator;
 use Wikibase\Api\Service\ClaimGetter;
 use Wikibase\Api\Service\ClaimRemover;
@@ -204,6 +205,14 @@ class WikibaseFactory {
 			$this->api,
 			$this->newDataModelDeserializerFactory()->newClaimDeserializer()
 		);
+	}
+
+	/**
+	 * @since 0.5
+	 * @return BadgeIdsGetter
+	 */
+	public function newBadgeIdsGetter() {
+		return new BadgeIdsGetter( $this->api );
 	}
 
 	private function newDataModelDeserializerFactory() {

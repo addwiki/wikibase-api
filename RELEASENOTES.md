@@ -1,5 +1,9 @@
 These are the release notes for the [wikibase-api](README.md).
 
+## Version 0.5 (development)
+
+* Added BadgeIdsGetter service
+
 ## Version 0.4 (2014-12-14)
 
 * Added RevisionsGetter services for getting multiple revisions in as few requests as possible.
