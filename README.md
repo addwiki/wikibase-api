@@ -39,18 +39,6 @@ Please also take a look at our integration tests that might be able to help you!
 // Load all of the things
 require_once( __DIR__ . "/vendor/autoload.php" );
 
-use DataValues\StringValue;
-use Mediawiki\Api\ApiUser;
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\UsageException;
-use MediaWiki\DataModel\Revision;
-use Wikibase\Api\WikibaseFactory;
-use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\ItemContent;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-
 // Use the mediawiki api and Login
 $api = new MediawikiApi( "http://localhost/w/api.php" );
 $api->login( new ApiUser( 'username', 'password' ) );
