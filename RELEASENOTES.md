@@ -3,6 +3,7 @@ These are the release notes for the [wikibase-api](README.md).
 ## Version 0.5 (development)
 
 * Added BadgeIdsGetter service
+* Requires "data-values/data-values": "~1.0.0" from "~0.1.0"
 
 ## Version 0.4 (2014-12-14)
 
