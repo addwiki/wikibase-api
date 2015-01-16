@@ -3,6 +3,7 @@
 namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -38,7 +39,7 @@ class SiteLinkLinker {
 		);
 
 		$params['token'] = $this->api->getToken();
-		$this->api->postAction( 'wblinktitles', $params );
+		$this->api->postRequest( new SimpleRequest( 'wblinktitles', $params ) );
 		return true;
 	}
 

@@ -3,6 +3,7 @@
 namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -46,7 +47,7 @@ class AliasGroupSetter {
 		$params['set'] = $aliasGroup->getAliases();
 
 		$params['token'] = $this->api->getToken();
-		$this->api->postAction( 'wbsetaliases', $params );
+		$this->api->postRequest( new SimpleRequest( 'wbsetaliases', $params ) );
 		return true;
 	}
 

@@ -3,6 +3,7 @@
 namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use UnexpectedValueException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuid;
@@ -61,7 +62,7 @@ class ReferenceRemover {
 		);
 
 		$params['token'] = $this->api->getToken();
-		$this->api->postAction( 'wbremovereferences', $params );
+		$this->api->postRequest( new SimpleRequest( 'wbremovereferences', $params ) );
 		return true;
 	}
 

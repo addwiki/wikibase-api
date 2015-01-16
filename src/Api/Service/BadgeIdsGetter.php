@@ -4,6 +4,7 @@
 namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -29,7 +30,7 @@ class BadgeIdsGetter {
 	 * @return ItemId[]
 	 */
 	public function get() {
-		$result = $this->api->getAction( 'wbavailablebadges' );
+		$result = $this->api->getRequest( new SimpleRequest( 'wbavailablebadges' ) );
 		$ids = array();
 		foreach( $result['badges'] as $badgeIdString ) {
 			$ids[] = new ItemId( $badgeIdString );

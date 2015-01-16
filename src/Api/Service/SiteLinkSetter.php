@@ -3,6 +3,7 @@
 namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -45,7 +46,7 @@ class SiteLinkSetter {
 		$params['linktitle'] = $siteLink->getPageName();
 
 		$params['token'] = $this->api->getToken();
-		$this->api->postAction( 'wbsetsitelink', $params );
+		$this->api->postRequest( new SimpleRequest( 'wbsetsitelink', $params ) );
 		return true;
 	}
 

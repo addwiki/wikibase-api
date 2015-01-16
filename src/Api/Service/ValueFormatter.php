@@ -5,6 +5,7 @@ namespace Wikibase\Api\Service;
 use DataValues\DataValue;
 use DataValues\Serializers\DataValueSerializer;
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use Wikibase\Api\GenericOptions;
 
 /**
@@ -51,7 +52,7 @@ class ValueFormatter {
 			'options' => json_encode( $options->getOptions() ),
 		);
 
-		$result = $this->api->getAction( 'wbformatvalue', $params );
+		$result = $this->api->getRequest( new SimpleRequest( 'wbformatvalue', $params ) );
 		return $result['result'];
 	}
 

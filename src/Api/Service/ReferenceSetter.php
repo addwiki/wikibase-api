@@ -3,6 +3,7 @@
 namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use UnexpectedValueException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuid;
@@ -73,7 +74,7 @@ class ReferenceSetter {
 		}
 
 		$params['token'] = $this->api->getToken();
-		$this->api->postAction( 'wbsetreference', $params );
+		$this->api->postRequest( new SimpleRequest( 'wbsetreference', $params ) );
 		return true;
 	}
 

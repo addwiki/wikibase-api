@@ -6,6 +6,7 @@ use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
 use Guzzle\Common\Exception\InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use Mediawiki\DataModel\PageIdentifier;
 use Mediawiki\DataModel\Revision;
 use Mediawiki\DataModel\Revisions;
@@ -84,14 +85,14 @@ class RevisionsGetter {
 					$gotRevisionsFromIds = true;
 				}
 				$params['titles'] = implode( '|', $siteLinkStrings );
-				$result = $this->api->getAction( 'wbgetentities', $params );
+				$result = $this->api->getRequest( new SimpleRequest( 'wbgetentities', $params ) );
 				$resultRevisions = $this->newRevisionsFromResult( $result['entities'] );
 				$revisions->addRevisions( $resultRevisions );
 
 			}
 		} else {
 			$params = array( 'ids' => implode( '|', $entityIdStrings ) );
-			$result = $this->api->getAction( 'wbgetentities', $params );
+			$result = $this->api->getRequest( new SimpleRequest( 'wbgetentities', $params ) );
 			$resultRevisions = $this->newRevisionsFromResult( $result['entities'] );
 			$revisions->addRevisions( $resultRevisions );
 		}

@@ -6,6 +6,7 @@ use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
 use InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use Mediawiki\DataModel\Revision;
 use RuntimeException;
 use Wikibase\DataModel\Entity\Item;
@@ -97,7 +98,7 @@ class RevisionSaver {
 			$params['summary'] = $summary;
 		}
 
-		$result = $this->api->postAction( 'wbeditentity', $params );
+		$result = $this->api->postRequest( new SimpleRequest( 'wbeditentity', $params ) );
 		return $this->entityDeserializer->deserialize( $result['entity'] );
 	}
 

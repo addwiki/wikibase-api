@@ -4,6 +4,7 @@ namespace Wikibase\Api\Service;
 
 use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use Mediawiki\DataModel\PageIdentifier;
 use Mediawiki\DataModel\Revision;
 use RuntimeException;
@@ -48,7 +49,7 @@ class RevisionGetter {
 			$id = $id->getPrefixedId();
 		}
 
-		$result = $this->api->getAction( 'wbgetentities', array( 'ids' => $id ) );
+		$result = $this->api->getRequest( new SimpleRequest( 'wbgetentities', array( 'ids' => $id ) ) );
 		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 
@@ -58,7 +59,10 @@ class RevisionGetter {
 	 * @returns Revision
 	 */
 	public function getFromSiteLink( SiteLink $siteLink ) {
-		$result = $this->api->getAction( 'wbgetentities', array( 'sites' => $siteLink->getSiteId(), 'titles' => $siteLink->getPageName() ) );
+		$result = $this->api->getRequest( new SimpleRequest(
+			'wbgetentities',
+			array( 'sites' => $siteLink->getSiteId(), 'titles' => $siteLink->getPageName() )
+		) );
 		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 
@@ -69,7 +73,10 @@ class RevisionGetter {
 	 * @returns Revision
 	 */
 	public function getFromSiteAndTitle( $siteId, $title ) {
-		$result = $this->api->getAction( 'wbgetentities', array( 'sites' => $siteId, 'titles' => $title ) );
+		$result = $this->api->getRequest( new SimpleRequest(
+			'wbgetentities',
+			array( 'sites' => $siteId, 'titles' => $title )
+		) );
 		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 	

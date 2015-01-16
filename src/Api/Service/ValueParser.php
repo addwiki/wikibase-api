@@ -5,6 +5,7 @@ namespace Wikibase\Api\Service;
 use DataValues\DataValue;
 use DataValues\Deserializers\DataValueDeserializer;
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 
 /**
  * @author Adam Shorland
@@ -42,7 +43,10 @@ class ValueParser {
 	 * @returns DataValue
 	 */
 	public function parse( $value, $parser ) {
-		$result = $this->api->getAction( 'wbparsevalue', array( 'parser' => $parser, 'values' => $value ) );
+		$result = $this->api->getRequest( new SimpleRequest(
+			'wbparsevalue',
+			array( 'parser' => $parser, 'values' => $value )
+		) );
 		return $this->dataValueDeserializer->deserialize( $result['results'][0] );
 	}
 

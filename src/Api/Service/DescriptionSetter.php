@@ -3,6 +3,7 @@
 namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -46,7 +47,7 @@ class DescriptionSetter {
 		$params['value'] = $description->getText();
 
 		$params['token'] = $this->api->getToken();
-		$this->api->postAction( 'wbsetdescription', $params );
+		$this->api->postRequest( new SimpleRequest( 'wbsetdescription', $params ) );
 		return true;
 	}
 

@@ -4,6 +4,7 @@
 namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Deserializers\ClaimDeserializer;
 
@@ -41,7 +42,7 @@ class ClaimGetter {
 			'claim' => $guid,
 		);
 
-		$result = $this->api->getAction( 'wbgetclaims', $params );
+		$result = $this->api->getRequest( new SimpleRequest( 'wbgetclaims', $params ) );
 
 		$claimSerialization = array_shift( array_shift( $result['claims'] ) );
 

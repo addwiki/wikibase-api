@@ -6,6 +6,7 @@ namespace Wikibase\Api\Service;
 
 use DataValues\Serializers\DataValueSerializer;
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -72,7 +73,7 @@ class ClaimCreator {
 		}
 
 		$params['token'] = $this->api->getToken();
-		$this->api->postAction( 'wbcreateclaim', $params );
+		$this->api->postRequest( new SimpleRequest( 'wbcreateclaim', $params ) );
 		return true;
 	}
 

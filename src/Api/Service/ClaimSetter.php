@@ -4,6 +4,7 @@ namespace Wikibase\Api\Service;
 
 use InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Serializers\ClaimSerializer;
 
@@ -51,7 +52,7 @@ class ClaimSetter {
 		);
 
 		$params['token'] = $this->api->getToken();
-		$this->api->postAction( 'wbsetclaim', $params );
+		$this->api->postRequest( new SimpleRequest( 'wbsetclaim', $params ) );
 		return true;
 	}
 

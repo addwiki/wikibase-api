@@ -4,6 +4,7 @@ namespace Wikibase\Api\Service;
 
 use InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\SimpleRequest;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -39,7 +40,7 @@ class ItemMerger {
 		);
 
 		$params['token'] = $this->api->getToken();
-		$this->api->postAction( 'wbmergeitems', $params );
+		$this->api->postRequest( new SimpleRequest( 'wbmergeitems', $params ) );
 		return true;
 	}
 

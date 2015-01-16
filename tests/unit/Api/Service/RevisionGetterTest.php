@@ -2,6 +2,7 @@
 
 namespace Wikibase\Api\Test;
 
+use Mediawiki\Api\SimpleRequest;
 use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -43,10 +44,12 @@ class RevisionGetterTest extends \PHPUnit_Framework_TestCase {
 	public function testGetFromId( $id ) {
 		$api = $this->getMockApi();
 		$api->expects( $this->once() )
-			->method( 'getAction' )
+			->method( 'getRequest' )
 			->with(
-				$this->equalTo( 'wbgetentities' ),
-				$this->equalTo( array( 'ids' => 'Q1' ) )
+				$this->equalTo( new SimpleRequest(
+					'wbgetentities',
+					array( 'ids' => 'Q1' )
+				) )
 			)
 			->will( $this->returnValue( array( 'entities' => array( 'Q123' => array(
 				'pageid' => '111',
