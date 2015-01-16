@@ -14,6 +14,7 @@ use Wikibase\Api\Service\ClaimSetter;
 use Wikibase\Api\Service\DescriptionSetter;
 use Wikibase\Api\Service\ItemMerger;
 use Wikibase\Api\Service\LabelSetter;
+use Wikibase\Api\Service\RedirectCreator;
 use Wikibase\Api\Service\ReferenceRemover;
 use Wikibase\Api\Service\ReferenceSetter;
 use Wikibase\Api\Service\RevisionGetter;
@@ -213,6 +214,14 @@ class WikibaseFactory {
 	 */
 	public function newBadgeIdsGetter() {
 		return new BadgeIdsGetter( $this->api );
+	}
+
+	/**
+	 * @since 0.5
+	 * @return RedirectCreator
+	 */
+	public function newRedirectCreator() {
+		return new RedirectCreator( $this->api );
 	}
 
 	private function newDataModelDeserializerFactory() {

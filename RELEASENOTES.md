@@ -3,6 +3,7 @@ These are the release notes for the [wikibase-api](README.md).
 ## Version 0.5 (development)
 
 * Added BadgeIdsGetter service
+* Added RedirectCreator service
 * Requires "data-values/data-values": "~1.0.0" from "~0.1.0"
 * NoLonger Require addwiki/mediawiki-api-base
 * Requires "addwiki/mediawiki-api-base": "~0.2.0"
