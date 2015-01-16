@@ -4,6 +4,7 @@
 namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Deserializers\ClaimDeserializer;
 
 /**
@@ -33,7 +34,7 @@ class ClaimGetter {
 	/**
 	 * @param string $guid
 	 *
-	 * @return bool
+	 * @return Claim
 	 */
 	public function getFromGuid( $guid ) {
 		$params = array(
