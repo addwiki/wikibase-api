@@ -5,29 +5,18 @@ namespace Wikibase\DataModel;
 use Mediawiki\DataModel\Content;
 use Wikibase\DataModel\Entity\Property;
 
+/**
+ * @author Adam Shorland
+ */
 class PropertyContent extends Content {
 
 	const MODEL = 'wikibase-property';
 
 	/**
-	 * @var Property
+	 * @param Property $item
 	 */
-	private $property;
-
-	/**
-	 * @param Property $property
-	 */
-	public function __construct( Property $property ) {
-		$this->property = $property;
-		parent::__construct( self::MODEL );
-	}
-
-	/**
-	 * Returns a sha1 hash of the content
-	 * @return string
-	 */
-	public function getHash() {
-		return sha1( serialize( $this->property ) );
+	public function __construct( Property $item ) {
+		parent::__construct( $item, self::MODEL );
 	}
 
 	/**
@@ -35,6 +24,7 @@ class PropertyContent extends Content {
 	 * @return Property
 	 */
 	public function getData() {
-		return $this->property;
+		return parent::getData();
 	}
+
 }
