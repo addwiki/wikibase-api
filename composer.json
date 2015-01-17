@@ -10,7 +10,6 @@
 		}
 	],
 	"require": {
-		"php": ">=5.3.0",
 		"addwiki/mediawiki-api-base": "dev-master as 0.3",
 		"addwiki/mediawiki-datamodel": "dev-master as 0.6",
 		"wikibase/data-model-serialization": "~1.1",
