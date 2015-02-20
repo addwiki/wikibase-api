@@ -2,9 +2,8 @@
 
 namespace Wikibase\Api\Service;
 
-use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
-use Guzzle\Common\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 use Mediawiki\DataModel\PageIdentifier;
@@ -16,7 +15,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\ItemContent;
 use Wikibase\DataModel\PropertyContent;
-use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -30,11 +28,6 @@ class RevisionsGetter {
 	protected $api;
 
 	/**
-	 * @var SerializerFactory
-	 */
-	protected $serializerFactory;
-
-	/**
 	 * @var Deserializer
 	 */
 	private $entityDeserializer;
@@ -46,9 +39,6 @@ class RevisionsGetter {
 	public function __construct( MediawikiApi $api, Deserializer $entityDeserializer ) {
 		$this->api = $api;
 		$this->entityDeserializer = $entityDeserializer;
-		$this->serializerFactory =  new SerializerFactory(
-			new DataValueSerializer()
-		);
 	}
 
 	/**
