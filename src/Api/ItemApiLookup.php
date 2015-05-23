@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemLookup;
 use Wikibase\DataModel\Entity\ItemNotFoundException;
 
 /**
- * @author Thomas Pellissier-Tanon
+ * @author Thomas Pellissier Tanon
  */
 class ItemApiLookup implements ItemLookup {
 
