@@ -2,6 +2,7 @@ These are the release notes for the [wikibase-api](README.md).
 
 ## Version 0.5 (development)
 
+* RevisionsGetter::getRevisions can now accept serialized EntityId strings
 * Added BadgeIdsGetter service
 * Added RedirectCreator service
 * Requires "data-values/data-values": "~1.0.0" from "~0.1.0"

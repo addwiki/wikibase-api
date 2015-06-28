@@ -44,7 +44,10 @@ class RevisionsGetter {
 	/**
 	 * Get revisions for the entities identified using as few requests as possible.
 	 *
-	 * @param array $identifyingInfoArray Can include the following (EntityId,SiteLink)
+	 * @param array $identifyingInfoArray Can include the following:
+	 *     EntityId EntityId objects
+	 *     SiteLink SiteLink objects
+	 *     string Serialized entity ids (these are not validated before passing to the api)
 	 *
 	 * @since 0.4
 	 *
@@ -59,6 +62,8 @@ class RevisionsGetter {
 				$entityIdStrings[] = $someInfo->getSerialization();
 			} elseif ( $someInfo instanceof SiteLink ) {
 				$siteLinksStringMapping[ $someInfo->getSiteId() ][] = $someInfo->getPageName();
+			} elseif( is_string( $someInfo ) ) {
+				$entityIdStrings[] = $someInfo;
 			} else {
 				throw new InvalidArgumentException( 'Unexpected $identifyingInfoArray in RevisionsGetter::getRevisions' );
 			}
