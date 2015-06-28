@@ -5,9 +5,9 @@ namespace Wikibase\Api\Service;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 use UnexpectedValueException;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\ClaimGuid;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
  * @author Adam Shorland
@@ -30,7 +30,7 @@ class ReferenceRemover {
 	 * @since 0.2
 	 *
 	 * @param Reference|string $reference Reference object or hash
-	 * @param Claim|ClaimGuid|string $target Claim object or GUID
+	 * @param Statement|StatementGuid|string $target Statement object or GUID
 	 *
 	 * @throws UnexpectedValueException
 	 * @return bool
@@ -44,20 +44,20 @@ class ReferenceRemover {
 		}
 
 		if( is_string( $target ) ) {
-			$claimGuid = $target;
-		} else if ( $target instanceof ClaimGuid ) {
-			$claimGuid = $target->getSerialization();
-		} else if ( $target instanceof Claim ) {
-			$claimGuid = $target->getGuid();
+			$guid = $target;
+		} else if ( $target instanceof StatementGuid ) {
+			$guid = $target->getSerialization();
+		} else if ( $target instanceof Statement ) {
+			$guid = $target->getGuid();
 		} else {
-			throw new UnexpectedValueException( 'Could not get claim guid from $target' );
+			throw new UnexpectedValueException( 'Could not get statement guid from $target' );
 		}
-		if( !is_string( $claimGuid ) ) {
-			throw new UnexpectedValueException( 'Unexpected claim guid got from $target' );
+		if( !is_string( $guid ) ) {
+			throw new UnexpectedValueException( 'Unexpected statement guid got from $target' );
 		}
 
 		$params = array(
-			'statement' => $claimGuid,
+			'statement' => $guid,
 			'references' => $reference,
 		);
 

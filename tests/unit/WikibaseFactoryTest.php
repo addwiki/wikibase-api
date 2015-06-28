@@ -24,10 +24,14 @@ class WikibaseFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function provideMethodsAndClasses() {
 		return array(
 			array( 'newAliasGroupSetter','\Wikibase\Api\Service\AliasGroupSetter' ),
-			array( 'newClaimCreator','\Wikibase\Api\Service\ClaimCreator' ),
-			array( 'newClaimGetter','\Wikibase\Api\Service\ClaimGetter' ),
-			array( 'newClaimRemover','\Wikibase\Api\Service\ClaimRemover' ),
-			array( 'newClaimSetter','\Wikibase\Api\Service\ClaimSetter' ),
+			array( 'newClaimCreator','\Wikibase\Api\Service\StatementCreator' ),
+			array( 'newClaimGetter','\Wikibase\Api\Service\StatementGetter' ),
+			array( 'newClaimRemover','\Wikibase\Api\Service\StatementRemover' ),
+			array( 'newClaimSetter','\Wikibase\Api\Service\StatementSetter' ),
+			array( 'newStatementCreator','\Wikibase\Api\Service\StatementCreator' ),
+			array( 'newStatementGetter','\Wikibase\Api\Service\StatementGetter' ),
+			array( 'newStatementRemover','\Wikibase\Api\Service\StatementRemover' ),
+			array( 'newStatementSetter','\Wikibase\Api\Service\StatementSetter' ),
 			array( 'newDescriptionSetter','\Wikibase\Api\Service\DescriptionSetter' ),
 			array( 'newItemMerger','\Wikibase\Api\Service\ItemMerger' ),
 			array( 'newLabelSetter','\Wikibase\Api\Service\LabelSetter' ),

@@ -5,10 +5,10 @@ namespace Wikibase\Api\Service;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 use UnexpectedValueException;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\ClaimGuid;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
  * @author Adam Shorland
@@ -38,24 +38,24 @@ class ReferenceSetter {
 	 * @since 0.2
 	 *
 	 * @param Reference $reference new reference value
-	 * @param Claim|ClaimGuid|string $claim Claim object or GUID which has the reference
+	 * @param Statement|StatementGuid|string $statement Statement object or GUID which has the reference
 	 * @param Reference|string $targetReference target (old) reference of hash
 	 *
 	 * @return bool
 	 * @throws UnexpectedValueException
 	 */
-	public function set( Reference $reference, $claim, $targetReference = null ) {
-		if( is_string( $claim ) ) {
-			$guid = $claim;
-		} else if ( $claim instanceof ClaimGuid ) {
-			$guid = $claim->getSerialization();
-		} else if ( $claim instanceof Claim ) {
-			$guid = $claim->getGuid();
+	public function set( Reference $reference, $statement, $targetReference = null ) {
+		if( is_string( $statement ) ) {
+			$guid = $statement;
+		} else if ( $statement instanceof StatementGuid ) {
+			$guid = $statement->getSerialization();
+		} else if ( $statement instanceof Statement ) {
+			$guid = $statement->getGuid();
 		} else {
-			throw new UnexpectedValueException( 'Could not get claim guid from $target' );
+			throw new UnexpectedValueException( 'Could not get statement guid from $target' );
 		}
 		if( !is_string( $guid ) ) {
-			throw new UnexpectedValueException( 'Unexpected claim guid got from $target' );
+			throw new UnexpectedValueException( 'Unexpected statement guid got from $target' );
 		}
 
 		$params = array(

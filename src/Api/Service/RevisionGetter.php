@@ -46,7 +46,7 @@ class RevisionGetter {
 	 */
 	public function getFromId( $id ) {
 		if( $id instanceof EntityId ) {
-			$id = $id->getPrefixedId();
+			$id = $id->getSerialization();
 		}
 
 		$result = $this->api->getRequest( new SimpleRequest( 'wbgetentities', array( 'ids' => $id ) ) );

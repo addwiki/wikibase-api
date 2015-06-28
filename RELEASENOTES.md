@@ -2,12 +2,31 @@ These are the release notes for the [wikibase-api](README.md).
 
 ## Version 0.5 (development)
 
+####Additions
+
 * RevisionsGetter::getRevisions can now accept serialized EntityId strings
 * Added BadgeIdsGetter service
 * Added RedirectCreator service
-* Requires "data-values/data-values": "~1.0.0" from "~0.1.0"
+
+####Deprecations
+
+* Renamed ClaimGetter to StatementGetter, leaving a b/c deprecated alias
+* Renamed ClaimSetter to StatementSetter, leaving a b/c deprecated alias
+* Renamed ClaimRemover to StatementRemover, leaving a b/c deprecated alias
+* Renamed ClaimCreator to StatementCreator, leaving a b/c deprecated alias
+* Renamed WikibaseRepo::newClaimGetter to WikibaseRepo::newStatementGetter, leaving a b/c deprecated alias
+* Renamed WikibaseRepo::newClaimSetter to WikibaseRepo::newStatementSetter, leaving a b/c deprecated alias
+* Renamed WikibaseRepo::newClaimCreator to WikibaseRepo::newStatementCreator, leaving a b/c deprecated alias
+* Renamed WikibaseRepo::newClaimRemover to WikibaseRepo::newStatementRemover, leaving a b/c deprecated alias
+
+####Libs
+
 * NoLonger Require addwiki/mediawiki-api
-* Requires "addwiki/mediawiki-api-base": "~0.2.0"
+* Requires "wikibase/data-model": "~3.0"
+* Requires "data-values/data-values": "~1.0.0" from "~0.1.0"
+* Requires "data-values/time": "~0.8.0" from "~0.7.0"
+* Requires "data-values/number": "~0.5.0" from "~0.4.0"
+* Requires "addwiki/mediawiki-api-base": "~0.3.0"
 * Requires "addwiki/mediawiki-datamodel": "~0.5.0"
 
 ## Version 0.4 (2014-12-14)

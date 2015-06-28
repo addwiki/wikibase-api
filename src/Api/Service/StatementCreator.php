@@ -15,9 +15,11 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
+ * @since 0.5
+ *
  * @author Adam Shorland
  */
-class ClaimCreator {
+class StatementCreator {
 
 	/**
 	 * @var MediawikiApi

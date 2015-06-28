@@ -8,9 +8,13 @@ use Mediawiki\Api\MediawikiApi;
 use Wikibase\Api\Service\AliasGroupSetter;
 use Wikibase\Api\Service\BadgeIdsGetter;
 use Wikibase\Api\Service\ClaimCreator;
-use Wikibase\Api\Service\ClaimGetter;
 use Wikibase\Api\Service\ClaimRemover;
+use Wikibase\Api\Service\StatementCreator;
+use Wikibase\Api\Service\ClaimGetter;
 use Wikibase\Api\Service\ClaimSetter;
+use Wikibase\Api\Service\StatementGetter;
+use Wikibase\Api\Service\StatementRemover;
+use Wikibase\Api\Service\StatementSetter;
 use Wikibase\Api\Service\DescriptionSetter;
 use Wikibase\Api\Service\ItemMerger;
 use Wikibase\Api\Service\LabelSetter;
@@ -118,36 +122,6 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.2
-	 * @return ClaimCreator
-	 */
-	public function newClaimCreator() {
-		return new ClaimCreator(
-			$this->api,
-			$this->newDataValueSerializer()
-		);
-	}
-
-	/**
-	 * @since 0.2
-	 * @return ClaimRemover
-	 */
-	public function newClaimRemover() {
-		return new ClaimRemover( $this->api );
-	}
-
-	/**
-	 * @since 0.2
-	 * @return ClaimSetter
-	 */
-	public function newClaimSetter() {
-		return new ClaimSetter(
-			$this->api,
-			$this->newDataModelSerializerFactory()->newClaimSerializer()
-		);
-	}
-
-	/**
-	 * @since 0.2
 	 * @return DescriptionSetter
 	 */
 	public function newDescriptionSetter() {
@@ -198,17 +172,6 @@ class WikibaseFactory {
 	}
 
 	/**
-	 * @since 0.2
-	 * @return ClaimGetter
-	 */
-	public function newClaimGetter() {
-		return new ClaimGetter(
-			$this->api,
-			$this->newDataModelDeserializerFactory()->newClaimDeserializer()
-		);
-	}
-
-	/**
 	 * @since 0.5
 	 * @return BadgeIdsGetter
 	 */
@@ -250,6 +213,83 @@ class WikibaseFactory {
 
 	private function newDataModelSerializerFactory() {
 		return new SerializerFactory( new DataValueSerializer() );
+	}
+
+	/**
+	 * @since 0.5
+	 * @return StatementGetter
+	 */
+	public function newStatementGetter() {
+		return new StatementGetter(
+			$this->api,
+			$this->newDataModelDeserializerFactory()->newStatementDeserializer()
+		);
+	}
+
+	/**
+	 * @since 0.3
+	 * @deprecated since 0.5, use newStatementGetter
+	 * @return ClaimGetter
+	 */
+	public function newClaimGetter() {
+		return $this->newStatementGetter();
+	}
+
+	/**
+	 * @since 0.5
+	 * @return StatementSetter
+	 */
+	public function newStatementSetter() {
+		return new StatementSetter(
+			$this->api,
+			$this->newDataModelSerializerFactory()->newStatementSerializer()
+		);
+	}
+
+	/**
+	 * @since 0.2
+	 * @deprecated since 0.5, use newStatementSetter
+	 * @return ClaimSetter
+	 */
+	public function newClaimSetter() {
+		return $this->newStatementSetter();
+	}
+
+	/**
+	 * @since 0.5
+	 * @return StatementCreator
+	 */
+	public function newStatementCreator() {
+		return new StatementCreator(
+			$this->api,
+			$this->newDataValueSerializer()
+		);
+	}
+
+	/**
+	 * @since 0.2
+	 * @deprecated since 0.5, use newStatementCreator
+	 * @return ClaimCreator
+	 */
+	public function newClaimCreator() {
+		return $this->newStatementCreator();
+	}
+
+	/**
+	 * @since 0.5
+	 * @return StatementRemover
+	 */
+	public function newStatementRemover() {
+		return new StatementRemover( $this->api );
+	}
+
+	/**
+	 * @since 0.2
+	 * @deprecated since 0.5, use newStatementRemover
+	 * @return ClaimRemover
+	 */
+	public function newClaimRemover() {
+		return $this->newStatementRemover();
 	}
 
 }
