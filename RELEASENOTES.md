@@ -1,6 +1,6 @@
 These are the release notes for the [wikibase-api](README.md).
 
-## Version 0.5 (development)
+## Version 0.5 (2015-06-29)
 
 ####Additions
 
