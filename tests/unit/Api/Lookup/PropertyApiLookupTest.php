@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Api\Test;
+namespace Wikibase\Api\Lookup\Test;
 
 use Mediawiki\DataModel\Revision;
-use Wikibase\Api\PropertyApiLookup;
+use Wikibase\Api\Lookup\PropertyApiLookup;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\PropertyContent;

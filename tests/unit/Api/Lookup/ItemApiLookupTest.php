@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Api\Test;
+namespace Wikibase\Api\Lookup\Test;
 
 use Mediawiki\DataModel\Revision;
-use Wikibase\Api\ItemApiLookup;
+use Wikibase\Api\Lookup\ItemApiLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\ItemContent;

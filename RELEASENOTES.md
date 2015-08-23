@@ -19,10 +19,16 @@ These are the release notes for the [wikibase-api](README.md).
 * Renamed WikibaseRepo::newClaimCreator to WikibaseRepo::newStatementCreator, leaving a b/c deprecated alias
 * Renamed WikibaseRepo::newClaimRemover to WikibaseRepo::newStatementRemover, leaving a b/c deprecated alias
 
+### Breaks
+
+* Moved ItemApiLookup to Lookup namespace
+* Moved PropertyApiLookup to Lookup namespace
+
 ####Libs
 
 * NoLonger Require addwiki/mediawiki-api
-* Requires "wikibase/data-model": "~3.0"
+* Requires "wikibase/data-model": "~4.0"
+* Requires "wikibase/data-model-services": "~1.0"
 * Requires "data-values/data-values": "~1.0.0" from "~0.1.0"
 * Requires "data-values/time": "~0.8.0" from "~0.7.0"
 * Requires "data-values/number": "~0.5.0" from "~0.4.0"
@@ -33,8 +39,7 @@ These are the release notes for the [wikibase-api](README.md).
 
 * Added RevisionsGetter services for getting multiple revisions in as few requests as possible.
 * Stop type hinting against deprecated Entity per https://lists.wikimedia.org/pipermail/wikidata-tech/2014-June/000489.html
-* Requires "wikibase/data-model": "~4.0"
-* Requires "wikibase/data-model-services": "~1.0"
+* Requires "wikibase/data-model": "~3.0"
 
 ## Version 0.3 (2014-09-15)
 

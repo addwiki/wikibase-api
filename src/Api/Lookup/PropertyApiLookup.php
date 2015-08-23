@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Api;
+namespace Wikibase\Api\Lookup;
 
 use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\DataModel\Entity\PropertyId;
