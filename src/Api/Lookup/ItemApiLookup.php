@@ -2,8 +2,8 @@
 
 namespace Wikibase\Api\Lookup;
 
-use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
 use Wikibase\DataModel\Services\Lookup\ItemNotFoundException;
 
@@ -13,27 +13,27 @@ use Wikibase\DataModel\Services\Lookup\ItemNotFoundException;
 class ItemApiLookup implements ItemLookup {
 
 	/**
-	 * @var RevisionGetter
+	 * @var EntityLookup
 	 */
-	private $revisionGetter;
+	private $entityLookup;
 
 	/**
-	 * @param RevisionGetter $revisionGetter
+	 * @param EntityLookup $entityLookup
 	 */
-	public function __construct( RevisionGetter $revisionGetter ) {
-		$this->revisionGetter = $revisionGetter;
+	public function __construct( EntityLookup $entityLookup ) {
+		$this->entityLookup = $entityLookup;
 	}
 
 	/**
 	 * @see ItemLookup::getItemForId
 	 */
 	public function getItemForId( ItemId $itemId ) {
-		$revision = $this->revisionGetter->getFromId( $itemId );
+		$entity = $this->entityLookup->getEntity( $itemId );
 
-		if( !$revision ) {
+		if( $entity === null ) {
 			throw new ItemNotFoundException( $itemId );
 		}
 
-		return $revision->getContent()->getData();
+		return $entity;
 	}
 }

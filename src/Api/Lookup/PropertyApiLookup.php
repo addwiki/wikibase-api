@@ -2,8 +2,8 @@
 
 namespace Wikibase\Api\Lookup;
 
-use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
 
@@ -13,27 +13,27 @@ use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
 class PropertyApiLookup implements PropertyLookup {
 
 	/**
-	 * @var RevisionGetter
+	 * @var EntityLookup
 	 */
-	private $revisionGetter;
+	private $entityLookup;
 
 	/**
-	 * @param RevisionGetter $revisionGetter
+	 * @param EntityLookup $entityLookup
 	 */
-	public function __construct( RevisionGetter $revisionGetter ) {
-		$this->revisionGetter = $revisionGetter;
+	public function __construct( EntityLookup $entityLookup ) {
+		$this->entityLookup = $entityLookup;
 	}
 
 	/**
-	 * @see PropertyLookup::getPropertyForId
+	 * @see ItemLookup::getPropertyForId
 	 */
-	public function getPropertyForId( PropertyId $itemId ) {
-		$revision = $this->revisionGetter->getFromId( $itemId );
+	public function getPropertyForId( PropertyId $propertyId ) {
+		$entity = $this->entityLookup->getEntity( $propertyId );
 
-		if( !$revision ) {
-			throw new PropertyNotFoundException( $itemId );
+		if( $entity === null ) {
+			throw new PropertyNotFoundException( $propertyId );
 		}
 
-		return $revision->getContent()->getData();
+		return $entity;
 	}
 }
