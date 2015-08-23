@@ -10,7 +10,7 @@
 		}
 	],
 	"require": {
-		"addwiki/mediawiki-api-base": "~1.0|~0.3",
+		"addwiki/mediawiki-api-base": "~1.0",
 		"addwiki/mediawiki-datamodel": "~0.5",
 		"wikibase/data-model-serialization": "~1.1",
 		"wikibase/data-model-services": "~1.0",

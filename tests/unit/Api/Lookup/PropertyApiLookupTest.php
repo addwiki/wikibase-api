@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\PropertyContent;
 
 /**
- * @covers Wikibase\Api\PropertyApiLookup
+ * @covers Wikibase\Api\Lookup\PropertyApiLookup
  */
 class PropertyApiLookupTest extends \PHPUnit_Framework_TestCase {
 

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\ItemContent;
 
 /**
- * @covers Wikibase\Api\ItemApiLookup
+ * @covers Wikibase\Api\Lookup\ItemApiLookup
  */
 class ItemApiLookupTest extends \PHPUnit_Framework_TestCase {
 
