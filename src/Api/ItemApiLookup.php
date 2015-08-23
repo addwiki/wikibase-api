@@ -4,8 +4,8 @@ namespace Wikibase\Api;
 
 use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemLookup;
-use Wikibase\DataModel\Entity\ItemNotFoundException;
+use Wikibase\DataModel\Services\Lookup\ItemLookup;
+use Wikibase\DataModel\Services\Lookup\ItemNotFoundException;
 
 /**
  * @author Thomas Pellissier Tanon

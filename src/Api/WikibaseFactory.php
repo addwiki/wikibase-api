@@ -29,8 +29,8 @@ use Wikibase\Api\Service\SiteLinkSetter;
 use Wikibase\Api\Service\ValueFormatter;
 use Wikibase\Api\Service\ValueParser;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 
 /**
  * @author Jeroen De Dauw

@@ -33,6 +33,8 @@ These are the release notes for the [wikibase-api](README.md).
 
 * Added RevisionsGetter services for getting multiple revisions in as few requests as possible.
 * Stop type hinting against deprecated Entity per https://lists.wikimedia.org/pipermail/wikidata-tech/2014-June/000489.html
+* Requires "wikibase/data-model": "~4.0"
+* Requires "wikibase/data-model-services": "~1.0"
 
 ## Version 0.3 (2014-09-15)
 

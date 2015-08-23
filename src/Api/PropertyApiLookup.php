@@ -4,8 +4,8 @@ namespace Wikibase\Api;
 
 use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\PropertyLookup;
-use Wikibase\DataModel\Entity\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
 
 /**
  * @author Thomas Pellissier Tanon
