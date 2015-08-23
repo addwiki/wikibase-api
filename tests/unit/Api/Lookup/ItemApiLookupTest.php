@@ -2,11 +2,9 @@
 
 namespace Wikibase\Api\Lookup\Test;
 
-use Mediawiki\DataModel\Revision;
 use Wikibase\Api\Lookup\ItemApiLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\ItemContent;
 
 /**
  * @covers Wikibase\Api\Lookup\ItemApiLookup
@@ -14,15 +12,15 @@ use Wikibase\DataModel\ItemContent;
 class ItemApiLookupTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetItemForId() {
-		$revisionGetterMock = $this->getMockBuilder( '\Wikibase\Api\Service\RevisionGetter' )
+		$lookupMock = $this->getMockBuilder( '\Wikibase\DataModel\Services\Lookup\EntityLookup' )
 			->disableOriginalConstructor()
 			->getMock();
-		$revisionGetterMock->expects( $this->once() )
-			->method( 'getFromId' )
+		$lookupMock->expects( $this->once() )
+			->method( 'getEntity' )
 			->with( $this->equalTo( new ItemId( 'Q42' ) ) )
-			->will( $this->returnValue( new Revision( new ItemContent( new Item( new ItemId( 'Q42' ) ) ) ) ) );
+			->will( $this->returnValue( new Item( new ItemId( 'Q42' ) ) ) );
 
-		$itemApiLookup = new ItemApiLookup( $revisionGetterMock );
+		$itemApiLookup = new ItemApiLookup( $lookupMock );
 		$this->assertEquals(
 			new Item( new ItemId( 'Q42' ) ),
 			$itemApiLookup->getItemForId( new ItemId( 'Q42' ) )
@@ -30,15 +28,15 @@ class ItemApiLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetItemForIdWithException() {
-		$revisionGetterMock = $this->getMockBuilder( '\Wikibase\Api\Service\RevisionGetter' )
+		$lookupMock = $this->getMockBuilder( '\Wikibase\DataModel\Services\Lookup\EntityLookup' )
 			->disableOriginalConstructor()
 			->getMock();
-		$revisionGetterMock->expects( $this->once() )
-			->method( 'getFromId' )
+		$lookupMock->expects( $this->once() )
+			->method( 'getEntity' )
 			->with( $this->equalTo( new ItemId( 'Q42' ) ) )
-			->will( $this->returnValue( false ) );
+			->will( $this->returnValue( null ) );
 
-		$itemApiLookup = new ItemApiLookup( $revisionGetterMock );
+		$itemApiLookup = new ItemApiLookup( $lookupMock );
 
 		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\ItemNotFoundException' );
 		$itemApiLookup->getItemForId( new ItemId( 'Q42' ) );
