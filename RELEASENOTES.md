@@ -32,6 +32,7 @@ These are the release notes for the [wikibase-api](README.md).
 * Requires "data-values/data-values": "~1.0.0" from "~0.1.0"
 * Requires "data-values/time": "~0.8.0" from "~0.7.0"
 * Requires "data-values/number": "~0.5.0" from "~0.4.0"
+* Requires "data-values/common": "~0.3.0" from "~0.2.0"
 * Requires "addwiki/mediawiki-api-base": "~0.3.0"
 * Requires "addwiki/mediawiki-datamodel": "~0.5.0"
 
