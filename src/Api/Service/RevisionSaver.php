@@ -2,18 +2,17 @@
 
 namespace Wikibase\Api\Service;
 
-use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
 use InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 use Mediawiki\DataModel\Revision;
 use RuntimeException;
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\ItemContent;
 use Wikibase\DataModel\PropertyContent;
-use Wikibase\DataModel\SerializerFactory;
 
 /**
  * @author Adam Shorland
@@ -26,25 +25,23 @@ class RevisionSaver {
 	protected $api;
 
 	/**
-	 * @var SerializerFactory
-	 */
-	protected $serializerFactory;
-
-	/**
 	 * @var Deserializer
 	 */
 	private $entityDeserializer;
 
 	/**
+	 * @var Serializer
+	 */
+	private $entitySerializer;
+
+	/**
 	 * @param MediawikiApi $api
 	 * @param Deserializer $entityDeserializer
 	 */
-	public function __construct( MediawikiApi $api, Deserializer $entityDeserializer ) {
+	public function __construct( MediawikiApi $api, Deserializer $entityDeserializer, Serializer $entitySerializer ) {
 		$this->api = $api;
 		$this->entityDeserializer = $entityDeserializer;
-		$this->serializerFactory =  new SerializerFactory(
-			new DataValueSerializer()
-		);
+		$this->entitySerializer = $entitySerializer;
 	}
 
 	/**
@@ -56,15 +53,13 @@ class RevisionSaver {
 	 * @returns Item|Property new version of the entity
 	 */
 	public function save( Revision $revision ) {
-		$serializer = $this->serializerFactory->newEntitySerializer();
-
 		if( !in_array( $revision->getContent()->getModel(), array( PropertyContent::MODEL, ItemContent::MODEL ) ) ) {
 			throw new RuntimeException( 'Can not save revisions with the given content model' );
 		}
 
 		/** @var Item|Property $entity */
 		$entity = $revision->getContent()->getData();
-		$serialized = $serializer->serialize( $entity );
+		$serialized = $this->entitySerializer->serialize( $entity );
 
 		$params = array(
 			'data' => json_encode( $serialized ),

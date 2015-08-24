@@ -3,7 +3,7 @@
 namespace Wikibase\Api\Service;
 
 use DataValues\DataValue;
-use DataValues\Deserializers\DataValueDeserializer;
+use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 
@@ -19,15 +19,15 @@ class ValueParser {
 	private $api;
 
 	/**
-	 * @var DataValueDeserializer
+	 * @var Deserializer
 	 */
 	private $dataValueDeserializer;
 
 	/**
 	 * @param MediawikiApi $api
-	 * @param DataValueDeserializer $dataValueDeserializer
+	 * @param Deserializer $dataValueDeserializer
 	 */
-	public function __construct( MediawikiApi $api, DataValueDeserializer $dataValueDeserializer ) {
+	public function __construct( MediawikiApi $api, Deserializer $dataValueDeserializer ) {
 		$this->api = $api;
 		$this->dataValueDeserializer = $dataValueDeserializer;
 	}

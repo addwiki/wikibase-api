@@ -3,7 +3,7 @@
 namespace Wikibase\Api\Service;
 
 use DataValues\DataValue;
-use DataValues\Serializers\DataValueSerializer;
+use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 use Wikibase\Api\GenericOptions;
@@ -19,15 +19,15 @@ class ValueFormatter {
 	private $api;
 
 	/**
-	 * @var DataValueSerializer
+	 * @var Deserializer
 	 */
 	private $dataValueSerializer;
 
 	/**
 	 * @param MediawikiApi $api
-	 * @param DataValueSerializer $dataValueSerializer
+	 * @param Deserializer $dataValueSerializer
 	 */
-	public function __construct( MediawikiApi $api, DataValueSerializer $dataValueSerializer ) {
+	public function __construct( MediawikiApi $api, Deserializer $dataValueSerializer ) {
 		$this->api = $api;
 		$this->dataValueSerializer = $dataValueSerializer;
 	}

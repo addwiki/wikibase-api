@@ -2,9 +2,9 @@
 
 namespace Wikibase\Api;
 
-use DataValues\Deserializers\DataValueDeserializer;
-use DataValues\Serializers\DataValueSerializer;
+use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
+use Serializers\Serializer;
 use Wikibase\Api\Service\AliasGroupSetter;
 use Wikibase\Api\Service\BadgeIdsGetter;
 use Wikibase\Api\Service\ClaimCreator;
@@ -32,9 +32,6 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 
-/**
- * @author Jeroen De Dauw
- */
 class WikibaseFactory {
 
 	/**
@@ -43,10 +40,19 @@ class WikibaseFactory {
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @var Deserializer
 	 */
-	public function __construct( MediawikiApi $api ) {
+	private $dataValueDeserializer;
+
+	/**
+	 * @var Serializer
+	 */
+	private $dataValueSerializer;
+
+	public function __construct( MediawikiApi $api, Deserializer $dvDeserializer, Serializer $dvSerializer ) {
 		$this->api = $api;
+		$this->dataValueDeserializer = $dvDeserializer;
+		$this->dataValueSerializer = $dvSerializer;
 	}
 
 	/**
@@ -56,7 +62,8 @@ class WikibaseFactory {
 	public function newRevisionSaver() {
 		return new RevisionSaver(
 			$this->api,
-			$this->newDataModelDeserializerFactory()->newEntityDeserializer()
+			$this->newDataModelDeserializerFactory()->newEntityDeserializer(),
+			$this->newDataModelSerializerFactory()->newEntitySerializer()
 		);
 	}
 
@@ -89,7 +96,7 @@ class WikibaseFactory {
 	public function newValueParser() {
 		return new ValueParser(
 			$this->api,
-			$this->newDataValueDeserializer()
+			$this->dataValueDeserializer
 		);
 	}
 
@@ -100,7 +107,7 @@ class WikibaseFactory {
 	public function newValueFormatter() {
 		return new ValueFormatter(
 			$this->api,
-			$this->newDataValueSerializer()
+			$this->dataValueDeserializer
 		);
 	}
 
@@ -189,30 +196,13 @@ class WikibaseFactory {
 
 	private function newDataModelDeserializerFactory() {
 		return new DeserializerFactory(
-			$this->newDataValueDeserializer(),
+			$this->dataValueDeserializer,
 			new BasicEntityIdParser()
 		);
 	}
 
-	private function newDataValueDeserializer() {
-		return new DataValueDeserializer( array(
-				'number' => 'DataValues\NumberValue',
-				'string' => 'DataValues\StringValue',
-				'globecoordinate' => 'DataValues\GlobeCoordinateValue',
-				'monolingualtext' => 'DataValues\MonolingualTextValue',
-				'multilingualtext' => 'DataValues\MultilingualTextValue',
-				'quantity' => 'DataValues\QuantityValue',
-				'time' => 'DataValues\TimeValue',
-				'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue', )
-		);
-	}
-
-	private function newDataValueSerializer() {
-		return new DataValueSerializer();
-	}
-
 	private function newDataModelSerializerFactory() {
-		return new SerializerFactory( new DataValueSerializer() );
+		return new SerializerFactory( $this->dataValueSerializer );
 	}
 
 	/**
@@ -262,7 +252,7 @@ class WikibaseFactory {
 	public function newStatementCreator() {
 		return new StatementCreator(
 			$this->api,
-			$this->newDataValueSerializer()
+			$this->dataValueDeserializer
 		);
 	}
 
