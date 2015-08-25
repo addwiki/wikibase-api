@@ -9,18 +9,6 @@ use Wikibase\Api\WikibaseFactory;
  */
 class WikibaseFactoryTest extends \PHPUnit_Framework_TestCase {
 
-	private function getMockApi() {
-		$mock = $this->getMockBuilder( '\Mediawiki\Api\MediawikiApi' )
-			->disableOriginalConstructor()
-			->getMock();
-		return $mock;
-	}
-
-	public function testValidConstructionWorks() {
-		new WikibaseFactory( $this->getMockApi() );
-		$this->assertTrue( true );
-	}
-
 	public function provideMethodsAndClasses() {
 		return array(
 			array( 'newAliasGroupSetter','\Wikibase\Api\Service\AliasGroupSetter' ),
@@ -50,11 +38,21 @@ class WikibaseFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideMethodsAndClasses
 	 */
 	public function testNewFactoryObject( $method, $class ) {
-		$factory = new WikibaseFactory( $this->getMockApi() );
+		$dvSerializer = $this->getMock( 'Serializers\Serializer' );
+		$dvDeserializer = $this->getMock( 'Deserializers\Deserializer' );
+
+		$factory = new WikibaseFactory( $this->getMockApi(), $dvDeserializer, $dvSerializer );
 
 		$this->assertTrue( method_exists( $factory, $method ) );
 		$object = $factory->$method();
 		$this->assertInstanceOf( $class, $object );
+	}
+
+	private function getMockApi() {
+		$mock = $this->getMockBuilder( '\Mediawiki\Api\MediawikiApi' )
+			->disableOriginalConstructor()
+			->getMock();
+		return $mock;
 	}
 
 } 
