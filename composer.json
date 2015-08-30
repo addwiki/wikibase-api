@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"addwiki/mediawiki-api-base": "~1.0",
-		"addwiki/mediawiki-datamodel": "~0.5",
+		"addwiki/mediawiki-datamodel": "~0.5|~0.6@dev",
 		"serialization/serialization": "~3.2",
 		"wikibase/data-model": "~4.0",
 		"wikibase/data-model-services": "~1.0",
@@ -32,6 +32,11 @@
 		],
 		"psr-4": {
 			"Wikibase\\": "src/"
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "0.6.x-dev"
 		}
 	}
 }
