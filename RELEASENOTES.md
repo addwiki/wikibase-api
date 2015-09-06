@@ -1,6 +1,8 @@
 These are the release notes for the [wikibase-api](README.md).
 
-## Version
+## Version 0.5.1
+
+* RevisionSaver now always sets the 'clear' param. Meaning elements can be removed from an entity.
 
 ## Version 0.5 (2015-06-29)
 
