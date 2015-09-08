@@ -61,7 +61,7 @@ class WikibaseFactory {
 	 */
 	public function newRevisionSaver() {
 		return new RevisionSaver(
-			$this->api,
+			new WikibaseApi( $this->api ),
 			$this->newDataModelDeserializerFactory()->newEntityDeserializer(),
 			$this->newDataModelSerializerFactory()->newEntitySerializer()
 		);
@@ -116,7 +116,7 @@ class WikibaseFactory {
 	 * @return ItemMerger
 	 */
 	public function newItemMerger() {
-		return new ItemMerger( $this->api );
+		return new ItemMerger( new WikibaseApi( $this->api ) );
 	}
 
 	/**
@@ -132,7 +132,7 @@ class WikibaseFactory {
 	 * @return DescriptionSetter
 	 */
 	public function newDescriptionSetter() {
-		return new DescriptionSetter( $this->api );
+		return new DescriptionSetter( new WikibaseApi( $this->api ) );
 	}
 
 	/**
@@ -140,7 +140,7 @@ class WikibaseFactory {
 	 * @return LabelSetter
 	 */
 	public function newLabelSetter() {
-		return new LabelSetter( $this->api );
+		return new LabelSetter( new WikibaseApi( $this->api ) );
 	}
 
 	/**
@@ -148,7 +148,7 @@ class WikibaseFactory {
 	 * @return ReferenceRemover
 	 */
 	public function newReferenceRemover() {
-		return new ReferenceRemover( $this->api );
+		return new ReferenceRemover( new WikibaseApi( $this->api ) );
 	}
 
 	/**
@@ -157,7 +157,7 @@ class WikibaseFactory {
 	 */
 	public function newReferenceSetter() {
 		return new ReferenceSetter(
-			$this->api,
+			new WikibaseApi( $this->api ),
 			$this->newDataModelSerializerFactory()->newReferenceSerializer()
 		);
 	}
@@ -167,7 +167,7 @@ class WikibaseFactory {
 	 * @return SiteLinkLinker
 	 */
 	public function newSiteLinkLinker() {
-		return new SiteLinkLinker( $this->api );
+		return new SiteLinkLinker( new WikibaseApi( $this->api ) );
 	}
 
 	/**
@@ -175,7 +175,7 @@ class WikibaseFactory {
 	 * @return SiteLinkSetter
 	 */
 	public function newSiteLinkSetter() {
-		return new SiteLinkSetter( $this->api );
+		return new SiteLinkSetter( new WikibaseApi( $this->api ) );
 	}
 
 	/**
@@ -191,7 +191,7 @@ class WikibaseFactory {
 	 * @return RedirectCreator
 	 */
 	public function newRedirectCreator() {
-		return new RedirectCreator( $this->api );
+		return new RedirectCreator( new WikibaseApi( $this->api ) );
 	}
 
 	private function newDataModelDeserializerFactory() {
@@ -231,7 +231,7 @@ class WikibaseFactory {
 	 */
 	public function newStatementSetter() {
 		return new StatementSetter(
-			$this->api,
+			new WikibaseApi( $this->api ),
 			$this->newDataModelSerializerFactory()->newStatementSerializer()
 		);
 	}
@@ -251,7 +251,7 @@ class WikibaseFactory {
 	 */
 	public function newStatementCreator() {
 		return new StatementCreator(
-			$this->api,
+			new WikibaseApi( $this->api ),
 			$this->dataValueDeserializer
 		);
 	}
@@ -270,7 +270,7 @@ class WikibaseFactory {
 	 * @return StatementRemover
 	 */
 	public function newStatementRemover() {
-		return new StatementRemover( $this->api );
+		return new StatementRemover( new WikibaseApi( $this->api ) );
 	}
 
 	/**
