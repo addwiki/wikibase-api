@@ -24,7 +24,7 @@ class AliasGroupSetter {
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param WikibaseApi $api
 	 */
 	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;

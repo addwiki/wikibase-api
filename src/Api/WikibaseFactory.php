@@ -124,7 +124,7 @@ class WikibaseFactory {
 	 * @return AliasGroupSetter
 	 */
 	public function newAliasGroupSetter() {
-		return new AliasGroupSetter( $this->api );
+		return new AliasGroupSetter( new WikibaseApi( $this->api ) );
 	}
 
 	/**
