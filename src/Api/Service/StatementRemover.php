@@ -4,7 +4,9 @@ namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
+use Mediawiki\DataModel\EditInfo;
 use UnexpectedValueException;
+use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 
@@ -16,14 +18,14 @@ use Wikibase\DataModel\Statement\StatementGuid;
 class StatementRemover {
 
 	/**
-	 * @var MediawikiApi
+	 * @var WikibaseApi
 	 */
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param WikibaseApi $api
 	 */
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;
 	}
 
@@ -31,11 +33,12 @@ class StatementRemover {
 	 * @since 0.2
 	 *
 	 * @param Statement|StatementGuid|string $statement Statement object or GUID
+	 * @param EditInfo|null $editInfo
 	 *
 	 * @return bool
 	 * @throws UnexpectedValueException
 	 */
-	public function remove( $statement ) {
+	public function remove( $statement, EditInfo $editInfo = null ) {
 		if( is_string( $statement ) ) {
 			$guid = $statement;
 		} else if ( $statement instanceof StatementGuid ) {
@@ -53,8 +56,7 @@ class StatementRemover {
 			'claim' => $guid,
 		);
 
-		$params['token'] = $this->api->getToken();
-		$this->api->postRequest( new SimpleRequest( 'wbremoveclaims', $params ) );
+		$this->api->postRequest( 'wbremoveclaims', $params, $editInfo );
 		return true;
 	}
 

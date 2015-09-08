@@ -4,7 +4,9 @@ namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
+use Mediawiki\DataModel\EditInfo;
 use UnexpectedValueException;
+use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -16,14 +18,14 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkSetter {
 
 	/**
-	 * @var MediawikiApi
+	 * @var WikibaseApi
 	 */
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param WikibaseApi $api
 	 */
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;
 	}
 
@@ -32,10 +34,11 @@ class SiteLinkSetter {
 	 *
 	 * @param SiteLink $siteLink
 	 * @param EntityId|Item|Property|SiteLink $target
+	 * @param EditInfo|null $editInfo
 	 *
 	 * @return bool
 	 */
-	public function set( SiteLink $siteLink, $target ) {
+	public function set( SiteLink $siteLink, $target, EditInfo $editInfo = null ) {
 		$this->throwExceptionsOnBadTarget( $target );
 
 		$params = $this->getTargetParamsFromTarget(
@@ -45,8 +48,7 @@ class SiteLinkSetter {
 		$params['linksite'] = $siteLink->getSiteId();
 		$params['linktitle'] = $siteLink->getPageName();
 
-		$params['token'] = $this->api->getToken();
-		$this->api->postRequest( new SimpleRequest( 'wbsetsitelink', $params ) );
+		$this->api->postRequest( 'wbsetsitelink', $params, $editInfo );
 		return true;
 	}
 

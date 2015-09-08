@@ -6,9 +6,11 @@ use Deserializers\Deserializer;
 use InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
+use Mediawiki\DataModel\EditInfo;
 use Mediawiki\DataModel\Revision;
 use RuntimeException;
 use Serializers\Serializer;
+use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\ItemContent;
@@ -20,7 +22,7 @@ use Wikibase\DataModel\PropertyContent;
 class RevisionSaver {
 
 	/**
-	 * @var MediawikiApi
+	 * @var WikibaseApi
 	 */
 	protected $api;
 
@@ -35,10 +37,10 @@ class RevisionSaver {
 	private $entitySerializer;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param WikibaseApi $api
 	 * @param Deserializer $entityDeserializer
 	 */
-	public function __construct( MediawikiApi $api, Deserializer $entityDeserializer, Serializer $entitySerializer ) {
+	public function __construct( WikibaseApi $api, Deserializer $entityDeserializer, Serializer $entitySerializer ) {
 		$this->api = $api;
 		$this->entityDeserializer = $entityDeserializer;
 		$this->entitySerializer = $entitySerializer;
@@ -47,12 +49,13 @@ class RevisionSaver {
 	/**
 	 * @since 0.1
 	 * @param Revision $revision
+	 * @param EditInfo|null $editInfo
 	 *
 	 * @throws RuntimeException
 	 * @throws InvalidArgumentException
 	 * @returns Item|Property new version of the entity
 	 */
-	public function save( Revision $revision ) {
+	public function save( Revision $revision, EditInfo $editInfo = null ) {
 		if( !in_array( $revision->getContent()->getModel(), array( PropertyContent::MODEL, ItemContent::MODEL ) ) ) {
 			throw new RuntimeException( 'Can not save revisions with the given content model' );
 		}
@@ -62,8 +65,7 @@ class RevisionSaver {
 		$serialized = $this->entitySerializer->serialize( $entity );
 
 		$params = array(
-			'data' => json_encode( $serialized ),
-			'token' => $this->api->getToken()
+			'data' => json_encode( $serialized )
 		);
 
 		$revId = $revision->getId();
@@ -97,7 +99,7 @@ class RevisionSaver {
 			$params['summary'] = $summary;
 		}
 
-		$result = $this->api->postRequest( new SimpleRequest( 'wbeditentity', $params ) );
+		$result = $this->api->postRequest( 'wbeditentity', $params, $editInfo );
 		return $this->entityDeserializer->deserialize( $result['entity'] );
 	}
 

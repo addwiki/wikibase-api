@@ -4,7 +4,9 @@ namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
+use Mediawiki\DataModel\EditInfo;
 use UnexpectedValueException;
+use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
@@ -15,14 +17,14 @@ use Wikibase\DataModel\Statement\StatementGuid;
 class ReferenceRemover {
 
 	/**
-	 * @var MediawikiApi
+	 * @var WikibaseApi
 	 */
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param WikibaseApi $api
 	 */
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;
 	}
 
@@ -31,11 +33,12 @@ class ReferenceRemover {
 	 *
 	 * @param Reference|string $reference Reference object or hash
 	 * @param Statement|StatementGuid|string $target Statement object or GUID
+	 * @param EditInfo|null $editInfo
 	 *
 	 * @throws UnexpectedValueException
 	 * @return bool
 	 */
-	public function set( $reference, $target ) {
+	public function set( $reference, $target, EditInfo $editInfo = null ) {
 		if( $reference instanceof Reference ) {
 			$reference = $reference->getHash();
 		}
@@ -61,8 +64,7 @@ class ReferenceRemover {
 			'references' => $reference,
 		);
 
-		$params['token'] = $this->api->getToken();
-		$this->api->postRequest( new SimpleRequest( 'wbremovereferences', $params ) );
+		$this->api->postRequest( 'wbremovereferences', $params, $editInfo );
 		return true;
 	}
 

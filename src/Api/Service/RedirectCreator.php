@@ -4,6 +4,8 @@ namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
+use Mediawiki\DataModel\EditInfo;
+use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -12,32 +14,31 @@ use Wikibase\DataModel\Entity\EntityId;
 class RedirectCreator {
 
 	/**
-	 * @var MediawikiApi
+	 * @var WikibaseApi
 	 */
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param WikibaseApi $api
 	 */
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;
 	}
 
 	/**
 	 * @param EntityId $from
 	 * @param EntityId $to
+	 * @param EditInfo|null $editInfo
 	 *
 	 * @return bool
 	 */
-	public function create( EntityId $from, EntityId $to ) {
-		$this->api->postRequest( new SimpleRequest(
-			'wbcreateredirect',
-			array(
-				'token' => $this->api->getToken(),
-				'from' => $from->__toString(),
-				'to' => $to->__toString(),
-			)
-		) );
+	public function create( EntityId $from, EntityId $to, EditInfo $editInfo = null ) {
+		$params = array(
+			'from' => $from->__toString(),
+			'to' => $to->__toString(),
+		);
+
+		$this->api->postRequest( 'wbcreateredirect', $params, $editInfo );
 		return true;
 	}
 

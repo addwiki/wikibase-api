@@ -4,6 +4,8 @@ namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
+use Mediawiki\DataModel\EditInfo;
+use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -12,14 +14,14 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkLinker {
 
 	/**
-	 * @var MediawikiApi
+	 * @var WikibaseApi
 	 */
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param WikibaseApi $api
 	 */
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;
 	}
 
@@ -27,10 +29,11 @@ class SiteLinkLinker {
 	 * @since 0.2
 	 * @param SiteLink $toSiteLink
 	 * @param SiteLink $fromSiteLink
+	 * @param EditInfo|null $editInfo
 	 *
 	 * @returns bool
 	 */
-	public function link ( SiteLink $toSiteLink, SiteLink $fromSiteLink ) {
+	public function link ( SiteLink $toSiteLink, SiteLink $fromSiteLink, EditInfo $editInfo = null ) {
 		$params = array(
 			'tosite' => $toSiteLink->getSiteId(),
 			'totitle' => $toSiteLink->getPageName(),
@@ -38,8 +41,7 @@ class SiteLinkLinker {
 			'fromtitle' => $fromSiteLink->getPageName(),
 		);
 
-		$params['token'] = $this->api->getToken();
-		$this->api->postRequest( new SimpleRequest( 'wblinktitles', $params ) );
+		$this->api->postRequest( 'wblinktitles', $params, $editInfo );
 		return true;
 	}
 

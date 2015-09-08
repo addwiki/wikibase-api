@@ -4,7 +4,9 @@ namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
+use Mediawiki\DataModel\EditInfo;
 use UnexpectedValueException;
+use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Statement\Statement;
@@ -16,7 +18,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 class ReferenceSetter {
 
 	/**
-	 * @var MediawikiApi
+	 * @var WikibaseApi
 	 */
 	private $api;
 
@@ -26,10 +28,10 @@ class ReferenceSetter {
 	private $referenceSerializer;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param WikibaseApi $api
 	 * @param ReferenceSerializer $referenceSerializer
 	 */
-	public function __construct( MediawikiApi $api, ReferenceSerializer $referenceSerializer ) {
+	public function __construct( WikibaseApi $api, ReferenceSerializer $referenceSerializer ) {
 		$this->api = $api;
 		$this->referenceSerializer = $referenceSerializer;
 	}
@@ -40,11 +42,12 @@ class ReferenceSetter {
 	 * @param Reference $reference new reference value
 	 * @param Statement|StatementGuid|string $statement Statement object or GUID which has the reference
 	 * @param Reference|string $targetReference target (old) reference of hash
+	 * @param EditInfo|null $editInfo
 	 *
 	 * @return bool
 	 * @throws UnexpectedValueException
 	 */
-	public function set( Reference $reference, $statement, $targetReference = null ) {
+	public function set( Reference $reference, $statement, $targetReference = null, EditInfo $editInfo = null ) {
 		if( is_string( $statement ) ) {
 			$guid = $statement;
 		} else if ( $statement instanceof StatementGuid ) {
@@ -73,8 +76,7 @@ class ReferenceSetter {
 			$params['reference'] = $targetReference;
 		}
 
-		$params['token'] = $this->api->getToken();
-		$this->api->postRequest( new SimpleRequest( 'wbsetreference', $params ) );
+		$this->api->postRequest( 'wbsetreference', $params, $editInfo );
 		return true;
 	}
 
