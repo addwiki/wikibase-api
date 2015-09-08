@@ -3,11 +3,9 @@
 namespace Wikibase\Api\Service;
 
 use InvalidArgumentException;
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\SimpleRequest;
 use Mediawiki\DataModel\EditInfo;
+use Serializers\Serializer;
 use Wikibase\Api\WikibaseApi;
-use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
@@ -23,15 +21,15 @@ class StatementSetter {
 	private $api;
 
 	/**
-	 * @var StatementSerializer
+	 * @var Serializer
 	 */
 	private $statementSerializer;
 
 	/**
 	 * @param WikibaseApi $api
-	 * @param StatementSerializer $statementSerializer
+	 * @param Serializer $statementSerializer
 	 */
-	public function __construct( WikibaseApi $api, StatementSerializer $statementSerializer ) {
+	public function __construct( WikibaseApi $api, Serializer $statementSerializer ) {
 		$this->api = $api;
 		$this->statementSerializer = $statementSerializer;
 	}

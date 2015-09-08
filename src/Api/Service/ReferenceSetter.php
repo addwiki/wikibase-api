@@ -5,6 +5,7 @@ namespace Wikibase\Api\Service;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 use Mediawiki\DataModel\EditInfo;
+use Serializers\Serializer;
 use UnexpectedValueException;
 use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Reference;
@@ -23,15 +24,15 @@ class ReferenceSetter {
 	private $api;
 
 	/**
-	 * @var ReferenceSerializer
+	 * @var Serializer
 	 */
 	private $referenceSerializer;
 
 	/**
 	 * @param WikibaseApi $api
-	 * @param ReferenceSerializer $referenceSerializer
+	 * @param Serializer $referenceSerializer
 	 */
-	public function __construct( WikibaseApi $api, ReferenceSerializer $referenceSerializer ) {
+	public function __construct( WikibaseApi $api, Serializer $referenceSerializer ) {
 		$this->api = $api;
 		$this->referenceSerializer = $referenceSerializer;
 	}
