@@ -44,6 +44,7 @@ class SiteLinkSetter {
 
 		$params['linksite'] = $siteLink->getSiteId();
 		$params['linktitle'] = $siteLink->getPageName();
+		$params['badges'] = implode( '|', $siteLink->getBadges() );
 
 		$params['token'] = $this->api->getToken();
 		$this->api->postRequest( new SimpleRequest( 'wbsetsitelink', $params ) );
