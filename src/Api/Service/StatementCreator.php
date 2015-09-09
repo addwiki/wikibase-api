@@ -7,7 +7,9 @@ namespace Wikibase\Api\Service;
 use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
+use Mediawiki\DataModel\EditInfo;
 use UnexpectedValueException;
+use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -22,7 +24,7 @@ use Wikibase\DataModel\Snak\Snak;
 class StatementCreator {
 
 	/**
-	 * @var MediawikiApi
+	 * @var WikibaseApi
 	 */
 	private $api;
 
@@ -32,10 +34,10 @@ class StatementCreator {
 	private $dataValueSerializer;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param WikibaseApi $api
 	 * @param Deserializer $dataValueSerializer
 	 */
-	public function __construct( MediawikiApi $api, Deserializer $dataValueSerializer ) {
+	public function __construct( WikibaseApi $api, Deserializer $dataValueSerializer ) {
 		$this->api = $api;
 		$this->dataValueSerializer = $dataValueSerializer;
 	}
@@ -45,11 +47,12 @@ class StatementCreator {
 	 *
 	 * @param Snak $mainSnak
 	 * @param EntityId|Item|Property|string $target
+	 * @param EditInfo|null $editInfo
 	 *
 	 * @return bool
 	 * @throws UnexpectedValueException
 	 */
-	public function create( Snak $mainSnak, $target ) {
+	public function create( Snak $mainSnak, $target, EditInfo $editInfo = null ) {
 		if( is_string( $target ) ) {
 			$entityId = $target;
 		} elseif ( $target instanceof EntityId ) {
@@ -74,8 +77,7 @@ class StatementCreator {
 			}
 		}
 
-		$params['token'] = $this->api->getToken();
-		$this->api->postRequest( new SimpleRequest( 'wbcreateclaim', $params ) );
+		$this->api->postRequest( 'wbcreateclaim', $params, $editInfo );
 		return true;
 	}
 

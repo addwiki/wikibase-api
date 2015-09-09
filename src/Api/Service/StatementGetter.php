@@ -2,9 +2,9 @@
 
 namespace Wikibase\Api\Service;
 
+use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
-use Wikibase\DataModel\Deserializers\StatementDeserializer;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
@@ -20,15 +20,15 @@ class StatementGetter {
 	private $api;
 
 	/**
-	 * @var StatementDeserializer
+	 * @var Deserializer
 	 */
 	private $statementDeserializer;
 
 	/**
 	 * @param MediawikiApi $api
-	 * @param StatementDeserializer $statementDeserializer
+	 * @param Deserializer $statementDeserializer
 	 */
-	public function __construct( MediawikiApi $api, StatementDeserializer $statementDeserializer ) {
+	public function __construct( MediawikiApi $api, Deserializer $statementDeserializer ) {
 		$this->api = $api;
 		$this->statementDeserializer = $statementDeserializer;
 	}

@@ -3,9 +3,9 @@
 namespace Wikibase\Api\Service;
 
 use InvalidArgumentException;
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\SimpleRequest;
-use Wikibase\DataModel\Serializers\StatementSerializer;
+use Mediawiki\DataModel\EditInfo;
+use Serializers\Serializer;
+use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
@@ -16,20 +16,20 @@ use Wikibase\DataModel\Statement\Statement;
 class StatementSetter {
 
 	/**
-	 * @var MediawikiApi
+	 * @var WikibaseApi
 	 */
 	private $api;
 
 	/**
-	 * @var StatementSerializer
+	 * @var Serializer
 	 */
 	private $statementSerializer;
 
 	/**
-	 * @param MediawikiApi $api
-	 * @param StatementSerializer $statementSerializer
+	 * @param WikibaseApi $api
+	 * @param Serializer $statementSerializer
 	 */
-	public function __construct( MediawikiApi $api, StatementSerializer $statementSerializer ) {
+	public function __construct( WikibaseApi $api, Serializer $statementSerializer ) {
 		$this->api = $api;
 		$this->statementSerializer = $statementSerializer;
 	}
@@ -38,13 +38,14 @@ class StatementSetter {
 	 * @since 0.5
 	 *
 	 * @param Statement $statement
+	 * @param EditInfo|null $editInfo
 	 *
 	 * @throws InvalidArgumentException
 	 * @return bool
 	 *
 	 * @todo allow setting of indexes
 	 */
-	public function set( Statement $statement ) {
+	public function set( Statement $statement, EditInfo $editInfo = null ) {
 		if( $statement->getGuid() === null ) {
 			throw new InvalidArgumentException( 'Can not set a statement that does not have a GUID' );
 		}
@@ -53,8 +54,7 @@ class StatementSetter {
 			'claim' => $this->statementSerializer->serialize( $statement ),
 		);
 
-		$params['token'] = $this->api->getToken();
-		$this->api->postRequest( new SimpleRequest( 'wbsetclaim', $params ) );
+		$this->api->postRequest( 'wbsetclaim', $params, $editInfo );
 		return true;
 	}
 
