@@ -1,8 +1,9 @@
 These are the release notes for the [wikibase-api](README.md).
 
-## Version 0.5.1
+## Version 0.5.1 (2015-09-09)
 
 * RevisionSaver now always sets the 'clear' param. Meaning elements can be removed from an entity.
+* Added support for passing an `EditInfo` to all edit services.
 
 ## Version 0.5 (2015-06-29)
 
