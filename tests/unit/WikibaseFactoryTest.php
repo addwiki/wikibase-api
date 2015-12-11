@@ -12,10 +12,6 @@ class WikibaseFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function provideMethodsAndClasses() {
 		return array(
 			array( 'newAliasGroupSetter','\Wikibase\Api\Service\AliasGroupSetter' ),
-			array( 'newClaimCreator','\Wikibase\Api\Service\StatementCreator' ),
-			array( 'newClaimGetter','\Wikibase\Api\Service\StatementGetter' ),
-			array( 'newClaimRemover','\Wikibase\Api\Service\StatementRemover' ),
-			array( 'newClaimSetter','\Wikibase\Api\Service\StatementSetter' ),
 			array( 'newStatementCreator','\Wikibase\Api\Service\StatementCreator' ),
 			array( 'newStatementGetter','\Wikibase\Api\Service\StatementGetter' ),
 			array( 'newStatementRemover','\Wikibase\Api\Service\StatementRemover' ),
