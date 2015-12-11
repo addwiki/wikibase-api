@@ -40,7 +40,7 @@ class PropertyApiLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$propertyApiLookup = new PropertyApiLookup( $lookupMock );
 
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\PropertyNotFoundException' );
-		$propertyApiLookup->getPropertyForId( new PropertyId( 'P42' ) );
+		$result = $propertyApiLookup->getPropertyForId( new PropertyId( 'P42' ) );
+		$this->assertEquals( null, $result );
 	}
 }

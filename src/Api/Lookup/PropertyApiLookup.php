@@ -5,10 +5,10 @@ namespace Wikibase\Api\Lookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
 
 /**
  * @author Thomas Pellissier Tanon
+ * @author Addshore
  */
 class PropertyApiLookup implements PropertyLookup {
 
@@ -29,10 +29,6 @@ class PropertyApiLookup implements PropertyLookup {
 	 */
 	public function getPropertyForId( PropertyId $propertyId ) {
 		$entity = $this->entityLookup->getEntity( $propertyId );
-
-		if( $entity === null ) {
-			throw new PropertyNotFoundException( $propertyId );
-		}
 
 		return $entity;
 	}

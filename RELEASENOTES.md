@@ -1,5 +1,9 @@
 These are the release notes for the [wikibase-api](README.md).
 
+## Version 0.6
+* Requires "wikibase/data-model-services": "~3.0"
+* Requires "wikibase/data-model": "~4.2"
+
 ## Version 0.5.1
 
 * RevisionSaver now always sets the 'clear' param. Meaning elements can be removed from an entity.

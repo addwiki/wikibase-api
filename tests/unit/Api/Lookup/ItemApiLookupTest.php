@@ -38,7 +38,7 @@ class ItemApiLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$itemApiLookup = new ItemApiLookup( $lookupMock );
 
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\ItemNotFoundException' );
-		$itemApiLookup->getItemForId( new ItemId( 'Q42' ) );
+		$result = $itemApiLookup->getItemForId( new ItemId( 'Q42' ) );
+		$this->assertEquals( null, $result );
 	}
 }

@@ -5,10 +5,10 @@ namespace Wikibase\Api\Lookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
-use Wikibase\DataModel\Services\Lookup\ItemNotFoundException;
 
 /**
  * @author Thomas Pellissier Tanon
+ * @author Addshore
  */
 class ItemApiLookup implements ItemLookup {
 
@@ -29,10 +29,6 @@ class ItemApiLookup implements ItemLookup {
 	 */
 	public function getItemForId( ItemId $itemId ) {
 		$entity = $this->entityLookup->getEntity( $itemId );
-
-		if( $entity === null ) {
-			throw new ItemNotFoundException( $itemId );
-		}
 
 		return $entity;
 	}

@@ -30,7 +30,7 @@ use Wikibase\Api\Service\ValueFormatter;
 use Wikibase\Api\Service\ValueParser;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 class WikibaseFactory {
 
