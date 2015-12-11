@@ -225,15 +225,6 @@ class WikibaseFactory {
 	}
 
 	/**
-	 * @since 0.3
-	 * @deprecated since 0.5, use newStatementGetter
-	 * @return ClaimGetter
-	 */
-	public function newClaimGetter() {
-		return $this->newStatementGetter();
-	}
-
-	/**
 	 * @since 0.5
 	 * @return StatementSetter
 	 */
@@ -242,15 +233,6 @@ class WikibaseFactory {
 			$this->newWikibaseApi(),
 			$this->newDataModelSerializerFactory()->newStatementSerializer()
 		);
-	}
-
-	/**
-	 * @since 0.2
-	 * @deprecated since 0.5, use newStatementSetter
-	 * @return ClaimSetter
-	 */
-	public function newClaimSetter() {
-		return $this->newStatementSetter();
 	}
 
 	/**
@@ -265,29 +247,11 @@ class WikibaseFactory {
 	}
 
 	/**
-	 * @since 0.2
-	 * @deprecated since 0.5, use newStatementCreator
-	 * @return ClaimCreator
-	 */
-	public function newClaimCreator() {
-		return $this->newStatementCreator();
-	}
-
-	/**
 	 * @since 0.5
 	 * @return StatementRemover
 	 */
 	public function newStatementRemover() {
 		return new StatementRemover( $this->newWikibaseApi() );
-	}
-
-	/**
-	 * @since 0.2
-	 * @deprecated since 0.5, use newStatementRemover
-	 * @return ClaimRemover
-	 */
-	public function newClaimRemover() {
-		return $this->newStatementRemover();
 	}
 
 	/**
