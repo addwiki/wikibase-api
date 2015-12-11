@@ -23,7 +23,7 @@ Use one of the below methods:
 
     {
         "require": {
-            "addwiki/wikibase-api": "~0.2.0"
+            "addwiki/wikibase-api": "~0.6.0"
         }
     }
 
@@ -63,12 +63,12 @@ $entityRevision = $getter->getFromId( 'Q87' );
 $entityRevision->getContent()->getData()->setDescription( 'en', 'I am A description' );
 $saver->save( $entityRevision );
 
-// Create a new string claim on item Q777 if a claim for the property doesn't already exist
+// Create a new string statement on item Q777 if a statement for the property doesn't already exist
 $revision = $services->newRevisionGetter()->getFromId( 'Q777' );
 $item = $revision->getContent()->getData();
-$claims = new Claims( $item->getClaims() );
-if( $claims->getClaimsForProperty( PropertyId::newFromNumber( 1320 ) )->isEmpty() ) {
-	$services->newClaimCreator()->create(
+$statementList = $item->getStatements();
+if( $statementList->getByPropertyId( PropertyId::newFromNumber( 1320 ) )->isEmpty() ) {
+	$services->newStatementCreator()->create(
 		new PropertyValueSnak(
 			PropertyId::newFromNumber( 1320 ),
 			new StringValue( 'New String Value' )

@@ -1,13 +1,11 @@
 These are the release notes for the [wikibase-api](README.md).
 
-## Version 0.6
+## Version 0.6 (2015-12-11)
+
 * Requires "wikibase/data-model-services": "~3.0"
 * Requires "wikibase/data-model-serialization": "~2.0"
 * Requires "wikibase/data-model": "~4.2"
 * All deprecated Claim class and method aliases have been removed
-
-## Version 0.5.1
-
 * RevisionSaver now always sets the 'clear' param. Meaning elements can be removed from an entity.
 
 ## Version 0.5 (2015-06-29)
