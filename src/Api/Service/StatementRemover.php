@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
- * @since 0.5
+ * @access private
  *
  * @author Adam Shorland
  */

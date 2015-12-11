@@ -17,7 +17,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
- * @since 0.5
+ * @access private
  *
  * @author Adam Shorland
  */

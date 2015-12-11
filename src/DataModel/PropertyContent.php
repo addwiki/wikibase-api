@@ -6,6 +6,8 @@ use Mediawiki\DataModel\Content;
 use Wikibase\DataModel\Entity\Property;
 
 /**
+ * @access private
+ *
  * @author Adam Shorland
  */
 class PropertyContent extends Content {
@@ -13,10 +15,10 @@ class PropertyContent extends Content {
 	const MODEL = 'wikibase-property';
 
 	/**
-	 * @param Property $item
+	 * @param Property $property
 	 */
-	public function __construct( Property $item ) {
-		parent::__construct( $item, self::MODEL );
+	public function __construct( Property $property ) {
+		parent::__construct( $property, self::MODEL );
 	}
 
 	/**

@@ -6,6 +6,9 @@ use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 
+/**
+ * @access private
+ */
 class EntityApiLookup implements EntityLookup {
 
 	/**

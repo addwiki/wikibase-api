@@ -9,6 +9,8 @@ use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\SiteLink;
 
 /**
+ * @access private
+ *
  * @author Adam Shorland
  */
 class SiteLinkLinker {

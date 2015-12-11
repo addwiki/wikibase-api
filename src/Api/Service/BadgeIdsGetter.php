@@ -8,7 +8,8 @@ use Mediawiki\Api\SimpleRequest;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @since 0.5
+ * @access private
+ *
  * @author Adam Shorland
  */
 class BadgeIdsGetter {

@@ -16,6 +16,8 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SiteLink;
 
 /**
+ * @access private
+ *
  * @author Adam Shorland
  */
 class RevisionGetter {

@@ -32,6 +32,9 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
+/**
+ * @access public
+ */
 class WikibaseFactory {
 
 	/**
@@ -49,6 +52,11 @@ class WikibaseFactory {
 	 */
 	private $dataValueSerializer;
 
+	/**
+	 * @param MediawikiApi $api
+	 * @param Deserializer $dvDeserializer
+	 * @param Serializer $dvSerializer
+	 */
 	public function __construct( MediawikiApi $api, Deserializer $dvDeserializer, Serializer $dvSerializer ) {
 		$this->api = $api;
 		$this->dataValueDeserializer = $dvDeserializer;

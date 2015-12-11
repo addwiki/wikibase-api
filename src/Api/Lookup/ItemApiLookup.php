@@ -7,6 +7,8 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
 
 /**
+ * @access private
+ *
  * @author Thomas Pellissier Tanon
  * @author Addshore
  */

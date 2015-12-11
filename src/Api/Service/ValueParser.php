@@ -8,6 +8,8 @@ use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 
 /**
+ * @access private
+ *
  * @author Adam Shorland
  * @author Thomas Arrow
  */

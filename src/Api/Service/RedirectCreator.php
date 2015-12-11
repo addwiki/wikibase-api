@@ -9,6 +9,8 @@ use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
+ * @access private
+ *
  * @author Adam Shorland
  */
 class RedirectCreator {

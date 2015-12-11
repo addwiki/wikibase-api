@@ -5,6 +5,9 @@ namespace Wikibase\Api\Lookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 
+/**
+ * @access private
+ */
 class EntityRedirectApiLookup implements EntityRedirectLookup {
 
 	/**

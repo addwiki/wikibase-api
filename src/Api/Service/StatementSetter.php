@@ -9,7 +9,7 @@ use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @since 0.5
+ * @access private
  *
  * @author Adam Shorland
  */

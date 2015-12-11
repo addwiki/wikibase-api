@@ -7,6 +7,8 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 
 /**
+ * @access private
+ *
  * @author Thomas Pellissier Tanon
  * @author Addshore
  */

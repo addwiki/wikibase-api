@@ -14,6 +14,8 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\Term;
 
 /**
+ * @access private
+ *
  * @author Adam Shorland
  */
 class DescriptionSetter {

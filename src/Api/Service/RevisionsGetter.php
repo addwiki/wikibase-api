@@ -18,6 +18,8 @@ use Wikibase\DataModel\PropertyContent;
 use Wikibase\DataModel\SiteLink;
 
 /**
+ * @access private
+ *
  * @author Adam Shorland
  */
 class RevisionsGetter {

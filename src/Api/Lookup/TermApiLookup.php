@@ -9,6 +9,9 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 
+/**
+ * @access private
+ */
 class TermApiLookup implements TermLookup {
 
 	/**

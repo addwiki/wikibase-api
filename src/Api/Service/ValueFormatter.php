@@ -9,6 +9,8 @@ use Mediawiki\Api\SimpleRequest;
 use Wikibase\Api\GenericOptions;
 
 /**
+ * @access private
+ *
  * @author Adam Shorland
  */
 class ValueFormatter {

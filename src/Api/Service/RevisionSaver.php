@@ -17,6 +17,8 @@ use Wikibase\DataModel\ItemContent;
 use Wikibase\DataModel\PropertyContent;
 
 /**
+ * @access private
+ *
  * @author Adam Shorland
  */
 class RevisionSaver {
