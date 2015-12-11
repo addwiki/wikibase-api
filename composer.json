@@ -27,9 +27,6 @@
 		"data-values/serialization": "~1.0"
 	},
 	"autoload": {
-		"files" : [
-			"WikibaseApi.php"
-		],
 		"psr-4": {
 			"Wikibase\\": "src/"
 		}
