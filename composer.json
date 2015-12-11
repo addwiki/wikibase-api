@@ -15,7 +15,7 @@
 		"serialization/serialization": "~3.2",
 		"wikibase/data-model": "~4.2",
 		"wikibase/data-model-services": "~3.0",
-		"wikibase/data-model-serialization": "~1.1"
+		"wikibase/data-model-serialization": "~2.0"
 	},
 	"require-dev": {
 		"data-values/data-values": "~1.0.0",

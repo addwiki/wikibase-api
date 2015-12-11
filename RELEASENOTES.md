@@ -2,7 +2,9 @@ These are the release notes for the [wikibase-api](README.md).
 
 ## Version 0.6
 * Requires "wikibase/data-model-services": "~3.0"
+* Requires "wikibase/data-model-serialization": "~2.0"
 * Requires "wikibase/data-model": "~4.2"
+* All deprecated Claim class and method aliases have been removed
 
 ## Version 0.5.1
 
