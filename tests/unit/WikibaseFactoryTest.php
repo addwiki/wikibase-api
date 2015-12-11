@@ -2,6 +2,8 @@
 
 namespace Wikibase\Api\Test;
 
+use Deserializers\Deserializer;
+use Serializers\Serializer;
 use Wikibase\Api\WikibaseFactory;
 
 /**
@@ -34,7 +36,9 @@ class WikibaseFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideMethodsAndClasses
 	 */
 	public function testNewFactoryObject( $method, $class ) {
+		/** @var Serializer $dvSerializer */
 		$dvSerializer = $this->getMock( 'Serializers\Serializer' );
+		/** @var Deserializer $dvDeserializer */
 		$dvDeserializer = $this->getMock( 'Deserializers\Deserializer' );
 
 		$factory = new WikibaseFactory( $this->getMockApi(), $dvDeserializer, $dvSerializer );
