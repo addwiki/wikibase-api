@@ -5,6 +5,8 @@ namespace Wikibase\Api\Service;
 use InvalidArgumentException;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
+use Mediawiki\DataModel\EditInfo;
+use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -14,14 +16,14 @@ use Wikibase\DataModel\Entity\ItemId;
 class ItemMerger {
 
 	/**
-	 * @var MediawikiApi
+	 * @var WikibaseApi
 	 */
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param WikibaseApi $api
 	 */
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;
 	}
 
@@ -29,18 +31,17 @@ class ItemMerger {
 	 * @since 0.2
 	 * @param Item|ItemId|string $from
 	 * @param Item|ItemId|string $to
+	 * @param EditInfo|null $editInfo
 	 *
 	 * @returns bool
 	 */
-	public function merge( $from, $to ) {
+	public function merge( $from, $to, EditInfo $editInfo = null ) {
 		$params = array(
 			'fromid' => $this->getIdFromInput( $from ),
-			'toid' => $this->getIdFromInput( $to ),
-			'token' => $this->api->getToken(),
+			'toid' => $this->getIdFromInput( $to )
 		);
 
-		$params['token'] = $this->api->getToken();
-		$this->api->postRequest( new SimpleRequest( 'wbmergeitems', $params ) );
+		$this->api->postRequest( 'wbmergeitems', $params, $editInfo );
 		return true;
 	}
 

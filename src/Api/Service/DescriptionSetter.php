@@ -4,7 +4,9 @@ namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
+use Mediawiki\DataModel\EditInfo;
 use UnexpectedValueException;
+use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -17,14 +19,14 @@ use Wikibase\DataModel\Term\Term;
 class DescriptionSetter {
 
 	/**
-	 * @var MediawikiApi
+	 * @var WikibaseApi
 	 */
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param WikibaseApi $api
 	 */
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;
 	}
 
@@ -33,10 +35,11 @@ class DescriptionSetter {
 	 *
 	 * @param Term $description
 	 * @param EntityId|Item|Property|SiteLink $target
+	 * @param EditInfo|null $editInfo
 	 *
 	 * @return bool
 	 */
-	public function set( Term $description, $target ) {
+	public function set( Term $description, $target, EditInfo $editInfo = null ) {
 		$this->throwExceptionsOnBadTarget( $target );
 
 		$params = $this->getTargetParamsFromTarget(
@@ -46,8 +49,7 @@ class DescriptionSetter {
 		$params['language'] = $description->getLanguageCode();
 		$params['value'] = $description->getText();
 
-		$params['token'] = $this->api->getToken();
-		$this->api->postRequest( new SimpleRequest( 'wbsetdescription', $params ) );
+		$this->api->postRequest( 'wbsetdescription', $params, $editInfo );
 		return true;
 	}
 

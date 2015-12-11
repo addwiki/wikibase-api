@@ -9,6 +9,8 @@ On Packagist:
 [![Latest Stable Version](https://poser.pugx.org/addwiki/wikibase-api/version.png)](https://packagist.org/packages/addwiki/wikibase-api)
 [![Download count](https://poser.pugx.org/addwiki/wikibase-api/d/total.png)](https://packagist.org/packages/addwiki/wikibase-api)
 
+Issue tracker: https://phabricator.wikimedia.org/project/profile/1490/
+
 ## Installation
 
 Use one of the below methods:
