@@ -238,7 +238,7 @@ class WikibaseFactory {
 	public function newStatementCreator() {
 		return new StatementCreator(
 			$this->newWikibaseApi(),
-			$this->dataValueDeserializer
+			$this->dataValueSerializer
 		);
 	}
 

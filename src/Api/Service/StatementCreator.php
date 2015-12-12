@@ -1,13 +1,10 @@
 <?php
 
-
 namespace Wikibase\Api\Service;
 
-
 use Deserializers\Deserializer;
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\SimpleRequest;
 use Mediawiki\DataModel\EditInfo;
+use Serializers\Serializer;
 use UnexpectedValueException;
 use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Entity\EntityId;
@@ -35,9 +32,9 @@ class StatementCreator {
 
 	/**
 	 * @param WikibaseApi $api
-	 * @param Deserializer $dataValueSerializer
+	 * @param Serializer $dataValueSerializer
 	 */
-	public function __construct( WikibaseApi $api, Deserializer $dataValueSerializer ) {
+	public function __construct( WikibaseApi $api, Serializer $dataValueSerializer ) {
 		$this->api = $api;
 		$this->dataValueSerializer = $dataValueSerializer;
 	}
@@ -49,7 +46,7 @@ class StatementCreator {
 	 * @param EntityId|Item|Property|string $target
 	 * @param EditInfo|null $editInfo
 	 *
-	 * @return bool
+	 * @return string the GUID of the claim
 	 * @throws UnexpectedValueException
 	 */
 	public function create( Snak $mainSnak, $target, EditInfo $editInfo = null ) {
@@ -70,15 +67,11 @@ class StatementCreator {
 		);
 		if( $mainSnak instanceof PropertyValueSnak ) {
 			$serializedDataValue = $this->dataValueSerializer->serialize( $mainSnak->getDataValue() );
-			if( $serializedDataValue['type'] === 'string' ) {
-				$params['value'] = json_encode( $serializedDataValue['value'] );
-			} else {
-				$params['value'] = json_encode( $serializedDataValue );
-			}
+			$params['value'] = json_encode( $serializedDataValue['value'] );
 		}
 
-		$this->api->postRequest( 'wbcreateclaim', $params, $editInfo );
-		return true;
+		$result = $this->api->postRequest( 'wbcreateclaim', $params, $editInfo );
+		return $result['claims']['id'];
 	}
 
 } 
