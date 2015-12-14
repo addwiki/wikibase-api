@@ -64,9 +64,12 @@ class ReferenceSetter {
 			throw new UnexpectedValueException( 'Unexpected statement guid got from $target' );
 		}
 
+		$referenceSerialization = $this->referenceSerializer->serialize( $reference );
+
 		$params = array(
 			'statement' => $guid,
-			'snaks' => $this->referenceSerializer->serialize( $reference )
+			'snaks' => json_encode( $referenceSerialization['snaks'] ),
+			'snaks-order' => json_encode( $referenceSerialization['snaks-order'] ),
 		);
 
 		if( !is_null( $targetReference ) ) {
