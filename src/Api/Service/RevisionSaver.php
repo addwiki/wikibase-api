@@ -89,7 +89,11 @@ class RevisionSaver {
 			$params['new'] = $entity->getType();
 		}
 
-		$editInfo = $revision->getEditInfo();
+		// If no editInfo is explicitly passed call back to the one in the revision?
+		if( $editInfo === null ) {
+			$editInfo = $revision->getEditInfo();
+		}
+
 		if( $editInfo->getBot() ) {
 			$params['bot'] = true;
 		}
