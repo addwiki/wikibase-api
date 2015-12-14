@@ -1,5 +1,12 @@
 These are the release notes for the [wikibase-api](README.md).
 
+## Version 0.7
+
+* Added newEntityLookup method to WikibaseFactory
+* Added newItemLookup method to WikibaseFactory
+* Added newPropertyLookup method to WikibaseFactory
+* Added newTermLookup method to WikibaseFactory
+
 ## Version 0.6 (2015-12-11)
 
 * Requires "wikibase/data-model-services": "~3.0"

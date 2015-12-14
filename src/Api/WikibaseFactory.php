@@ -5,6 +5,11 @@ namespace Wikibase\Api;
 use Deserializers\Deserializer;
 use Mediawiki\Api\MediawikiApi;
 use Serializers\Serializer;
+use Wikibase\Api\Lookup\EntityApiLookup;
+use Wikibase\Api\Lookup\EntityRedirectApiLookup;
+use Wikibase\Api\Lookup\ItemApiLookup;
+use Wikibase\Api\Lookup\PropertyApiLookup;
+use Wikibase\Api\Lookup\TermApiLookup;
 use Wikibase\Api\Service\AliasGroupSetter;
 use Wikibase\Api\Service\BadgeIdsGetter;
 use Wikibase\Api\Service\StatementCreator;
@@ -27,6 +32,10 @@ use Wikibase\Api\Service\ValueParser;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\ItemLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 
 /**
  * @access public
@@ -255,6 +264,38 @@ class WikibaseFactory {
 	 */
 	private function newWikibaseApi() {
 		return new WikibaseApi( $this->api );
+	}
+
+	/**
+	 * @since 0.7
+	 * @return EntityLookup
+	 */
+	public function newEntityLookup() {
+		return new EntityApiLookup( $this->newRevisionGetter() );
+	}
+
+	/**
+	 * @since 0.7
+	 * @return ItemLookup
+	 */
+	public function newItemLookup() {
+		return new ItemApiLookup( $this->newEntityLookup() );
+	}
+
+	/**
+	 * @since 0.7
+	 * @return PropertyLookup
+	 */
+	public function newPropertyLookup() {
+		return new PropertyApiLookup( $this->newEntityLookup() );
+	}
+
+	/**
+	 * @since 0.7
+	 * @return TermLookup
+	 */
+	public function newTermLookup() {
+		return new TermApiLookup( $this->newEntityLookup() );
 	}
 
 }
