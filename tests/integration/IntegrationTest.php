@@ -32,7 +32,7 @@ class IntegrationTest extends PHPUnit_Framework_TestCase {
 
 	public static function setUpBeforeClass() {
 		parent::setUpBeforeClass();
-		self::$localItem = Item::newEmpty();
+		self::$localItem = new Item();
 		self::$localItem->getFingerprint()->getLabels()->setTextForLanguage( 'en', 'TestItem - ' . strval( time() ) );
 		self::$localItem->getFingerprint()->getDescriptions()->setTextForLanguage( 'en', 'TestDescription - ' . microtime() );
 	}
@@ -117,7 +117,7 @@ class IntegrationTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testEmptyItem() {
 		$factory = $factory = TestEnvironment::newDefault()->getFactory();
-		self::$localItem = Item::newEmpty();
+		self::$localItem = new Item();
 		self::$localItem->setId( self::$itemId );
 		$newItem = $factory->newRevisionSaver()->save( new Revision( new ItemContent( self::$localItem ) ) );
 		$this->assertTrue( self::$localItem->equals( $newItem ) );

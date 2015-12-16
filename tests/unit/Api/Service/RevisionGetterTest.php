@@ -64,7 +64,7 @@ class RevisionGetterTest extends \PHPUnit_Framework_TestCase {
 						'lastrevid' => '222',
 						'modified' => 'TIMESTAMP'
 			) ) )
-			->will( $this->returnValue( Item::newEmpty() ) );
+			->will( $this->returnValue( new Item() ) );
 
 		$service = new RevisionGetter( $api, $deserializer );
 		$result = $service->getFromId( $id );

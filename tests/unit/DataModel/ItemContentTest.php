@@ -16,7 +16,7 @@ class ItemContentTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testValidConstruction() {
-		$item = Item::newEmpty();
+		$item = new Item();
 		$content = new ItemContent( $item );
 		$this->assertEquals( $item, $content->getData() );
 		$this->assertInternalType( 'string', $content->getHash() );
