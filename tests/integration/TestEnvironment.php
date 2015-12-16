@@ -7,20 +7,27 @@ use DataValues\Serializers\DataValueSerializer;
 use Mediawiki\Api\MediawikiApi;
 use Wikibase\Api\WikibaseFactory;
 
-class IntegrationTestBase extends \PHPUnit_Framework_TestCase {
+/**
+ * @author Addshore
+ */
+class TestEnvironment {
 
-	/**
-	 * @var WikibaseFactory
-	 */
-	protected $factory;
+	public static function newDefault() {
+		return new self();
+	}
 
-	protected function setUp() {
-		parent::setUp();
+	private $factory;
+
+	public function __construct() {
 		$this->factory = new WikibaseFactory(
 			new MediawikiApi( 'http://localhost/w/api.php' ),
 			$this->newDataValueDeserializer(),
 			new DataValueSerializer()
 		);
+	}
+
+	public function getFactory() {
+		return $this->factory;
 	}
 
 	private function newDataValueDeserializer() {
@@ -39,14 +46,4 @@ class IntegrationTestBase extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	// Needed to stop phpunit complaining
-	public function testFactory() {
-		$this->assertInstanceOf( 'Wikibase\Api\WikibaseFactory', $this->factory );
-	}
-
-	protected function tearDown() {
-		parent::tearDown();
-		unset( $this->factory );
-	}
-
-} 
+}

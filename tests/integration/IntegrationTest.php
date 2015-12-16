@@ -5,6 +5,7 @@ namespace Wikibase\Api\Test;
 
 use Mediawiki\Api\UsageException;
 use Mediawiki\DataModel\Revision;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\ItemContent;
@@ -17,7 +18,7 @@ use Wikibase\DataModel\Term\Term;
  * This test requires a wiki installed at localhost that can be edited by anon users
  * This test also requires the sites table to be populated using populateSitesTable.php
  */
-class IntegrationTest extends IntegrationTestBase {
+class IntegrationTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var ItemId
@@ -37,7 +38,8 @@ class IntegrationTest extends IntegrationTestBase {
 	}
 
 	public function testCreateItem() {
-		$newItem = $this->factory->newRevisionSaver()->save( new Revision( new ItemContent( self::$localItem ) ) );
+		$factory = $factory = TestEnvironment::newDefault()->getFactory();
+		$newItem = $factory->newRevisionSaver()->save( new Revision( new ItemContent( self::$localItem ) ) );
 		self::$itemId = $newItem->getId(); // Save our ID for later use
 		self::$localItem->setId( self::$itemId );
 		$this->assertTrue( self::$localItem->equals( $newItem ) );
@@ -47,8 +49,9 @@ class IntegrationTest extends IntegrationTestBase {
 	 * @depends testCreateItem
 	 */
 	public function testGetNewlyCreatedItem() {
+		$factory = $factory = TestEnvironment::newDefault()->getFactory();
 		// Make sure the RevisionGetter will also return the same Item as expected
-		$gotItem = $this->factory->newRevisionGetter()->getFromId( self::$itemId )->getContent()->getData();
+		$gotItem = $factory->newRevisionGetter()->getFromId( self::$itemId )->getContent()->getData();
 		$this->assertTrue( self::$localItem->equals( $gotItem ) );
 	}
 
@@ -56,8 +59,9 @@ class IntegrationTest extends IntegrationTestBase {
 	 * @depends testCreateItem
 	 */
 	public function testSetLabel() {
+		$factory = $factory = TestEnvironment::newDefault()->getFactory();
 		$labelDe = new Term( 'de', 'Foo' . microtime() );
-		$r = $this->factory->newLabelSetter()->set( $labelDe , self::$itemId );
+		$r = $factory->newLabelSetter()->set( $labelDe , self::$itemId );
 		$this->assertTrue( $r );
 		self::$localItem->getFingerprint()->getLabels()->setTerm( $labelDe );
 	}
@@ -66,8 +70,9 @@ class IntegrationTest extends IntegrationTestBase {
 	 * @depends testCreateItem
 	 */
 	public function testSetDescription() {
+		$factory = $factory = TestEnvironment::newDefault()->getFactory();
 		$descDe = new Term( 'de', 'FooBarDesc' . microtime() );
-		$r = $this->factory->newDescriptionSetter()->set( $descDe, self::$itemId );
+		$r = $factory->newDescriptionSetter()->set( $descDe, self::$itemId );
 		$this->assertTrue( $r );
 		self::$localItem->getFingerprint()->getDescriptions()->setTerm( $descDe );
 	}
@@ -76,9 +81,10 @@ class IntegrationTest extends IntegrationTestBase {
 	 * @depends testCreateItem
 	 */
 	public function testSetAliases() {
+		$factory = $factory = TestEnvironment::newDefault()->getFactory();
 		try{
 			$aliasFr = new AliasGroup( 'fr', array( 'aa', 'bb' ) );
-			$r = $this->factory->newAliasGroupSetter()->set( $aliasFr, self::$itemId );
+			$r = $factory->newAliasGroupSetter()->set( $aliasFr, self::$itemId );
 			$this->assertTrue( $r );
 			self::$localItem->getFingerprint()->getAliasGroups()->setGroup( $aliasFr );
 			$this->markTestIncomplete( 'This is no longer a bug!' );
@@ -93,8 +99,9 @@ class IntegrationTest extends IntegrationTestBase {
 	 * @depends testCreateItem
 	 */
 	public function testSetSitelink() {
+		$factory = $factory = TestEnvironment::newDefault()->getFactory();
 		$enwikiLondon = new SiteLink( 'enwiki', 'London' );
-		$r = $this->factory->newSiteLinkSetter()->set( $enwikiLondon, self::$itemId );
+		$r = $factory->newSiteLinkSetter()->set( $enwikiLondon, self::$itemId );
 		$this->assertTrue( $r );
 		self::$localItem->getSiteLinkList()->addSiteLink( $enwikiLondon );
 	}
@@ -104,9 +111,10 @@ class IntegrationTest extends IntegrationTestBase {
 	 * @depends testSetSitelink
 	 */
 	public function testLinkSitelinks() {
+		$factory = $factory = TestEnvironment::newDefault()->getFactory();
 		$enwikiLondon = new SiteLink( 'enwiki', 'London' );
 		$dewikiBerlin = new Sitelink( 'dewiki', 'Berlin' );
-		$r = $this->factory->newSiteLinkLinker()->link( $enwikiLondon, $dewikiBerlin );
+		$r = $factory->newSiteLinkLinker()->link( $enwikiLondon, $dewikiBerlin );
 		$this->assertTrue( $r );
 		self::$localItem->getSiteLinkList()->addSiteLink( $dewikiBerlin );
 	}
@@ -115,9 +123,10 @@ class IntegrationTest extends IntegrationTestBase {
 	 * @depends testCreateItem
 	 */
 	public function testEmptyItem() {
+		$factory = $factory = TestEnvironment::newDefault()->getFactory();
 		self::$localItem = Item::newEmpty();
 		self::$localItem->setId( self::$itemId );
-		$newItem = $this->factory->newRevisionSaver()->save( new Revision( new ItemContent( self::$localItem ) ) );
+		$newItem = $factory->newRevisionSaver()->save( new Revision( new ItemContent( self::$localItem ) ) );
 		$this->assertTrue( self::$localItem->equals( $newItem ) );
 	}
 
