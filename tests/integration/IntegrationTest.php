@@ -82,17 +82,10 @@ class IntegrationTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testSetAliases() {
 		$factory = $factory = TestEnvironment::newDefault()->getFactory();
-		try{
-			$aliasFr = new AliasGroup( 'fr', array( 'aa', 'bb' ) );
-			$r = $factory->newAliasGroupSetter()->set( $aliasFr, self::$itemId );
-			$this->assertTrue( $r );
-			self::$localItem->getFingerprint()->getAliasGroups()->setGroup( $aliasFr );
-			$this->markTestIncomplete( 'This is no longer a bug!' );
-		}
-		catch( UsageException $e ) {
-			// Wikibase bug
-			$this->markTestSkipped( 'Wikibase bug: ' . $e->getMessage() );
-		}
+		$aliasFr = new AliasGroup( 'fr', array( 'aa', 'bb' ) );
+		$r = $factory->newAliasGroupSetter()->set( $aliasFr, self::$itemId );
+		$this->assertTrue( $r );
+		self::$localItem->getFingerprint()->getAliasGroups()->setGroup( $aliasFr );
 	}
 
 	/**
