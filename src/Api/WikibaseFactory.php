@@ -12,6 +12,7 @@ use Wikibase\Api\Lookup\PropertyApiLookup;
 use Wikibase\Api\Lookup\TermApiLookup;
 use Wikibase\Api\Service\AliasGroupSetter;
 use Wikibase\Api\Service\BadgeIdsGetter;
+use Wikibase\Api\Service\EntityDocumentSaver;
 use Wikibase\Api\Service\StatementCreator;
 use Wikibase\Api\Service\StatementGetter;
 use Wikibase\Api\Service\StatementRemover;
@@ -296,6 +297,14 @@ class WikibaseFactory {
 	 */
 	public function newTermLookup() {
 		return new TermApiLookup( $this->newEntityLookup() );
+	}
+
+	/**
+	 * @since 0.7
+	 * @return EntityDocumentSaver
+	 */
+	public function newEntityDocumentSaver() {
+		return new EntityDocumentSaver( $this->newRevisionSaver() );
 	}
 
 }

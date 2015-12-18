@@ -6,6 +6,7 @@ These are the release notes for the [wikibase-api](README.md).
 * Added newItemLookup method to WikibaseFactory
 * Added newPropertyLookup method to WikibaseFactory
 * Added newTermLookup method to WikibaseFactory
+* Added newEntityDocumentSaver method to WikibaseFactory
 
 ## Version 0.6 (2015-12-11)
 

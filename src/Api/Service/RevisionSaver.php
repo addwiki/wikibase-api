@@ -11,6 +11,7 @@ use Mediawiki\DataModel\Revision;
 use RuntimeException;
 use Serializers\Serializer;
 use Wikibase\Api\WikibaseApi;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\ItemContent;
@@ -58,8 +59,8 @@ class RevisionSaver {
 	 * @returns Item|Property new version of the entity
 	 */
 	public function save( Revision $revision, EditInfo $editInfo = null ) {
-		if( !in_array( $revision->getContent()->getModel(), array( PropertyContent::MODEL, ItemContent::MODEL ) ) ) {
-			throw new RuntimeException( 'Can not save revisions with the given content model' );
+		if( !$revision->getContent()->getData() instanceof EntityDocument ) {
+			throw new RuntimeException( 'Can only save Content of EntityDocuments' );
 		}
 
 		/** @var Item|Property $entity */
@@ -83,7 +84,7 @@ class RevisionSaver {
 			$params['clear'] = 'true';
 			// Add more detail to the default "Cleared an entity" summary
 			// Note: this is later overridden if a summary is provided in the EditInfo
-			$params['summary'] = 'Edited an ' . $entity->getType();
+			$params['summary'] = 'Edited a ' . $entity->getType();
 
 		} else {
 			$params['new'] = $entity->getType();
