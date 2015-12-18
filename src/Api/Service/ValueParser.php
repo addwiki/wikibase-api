@@ -4,6 +4,7 @@ namespace Wikibase\Api\Service;
 
 use DataValues\DataValue;
 use Deserializers\Deserializer;
+use GuzzleHttp\Promise\Promise;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 
@@ -40,16 +41,33 @@ class ValueParser {
 	 * @param string $value
 	 * @param string $parser Id of the ValueParser to use
 	 *
-	 * @internal param string $value
-	 *
 	 * @returns DataValue
 	 */
 	public function parse( $value, $parser ) {
-		$result = $this->api->getRequest( new SimpleRequest(
-			'wbparsevalue',
-			array( 'parser' => $parser, 'values' => $value )
-		) );
-		return $this->dataValueDeserializer->deserialize( $result['results'][0] );
+		return $this->parseAsync( $value, $parser )->wait();
 	}
 
-} 
+	/**
+	 * @since 0.7
+	 *
+	 * @param string $value
+	 * @param string $parser Id of the ValueParser to use
+	 *
+	 * @returns Promise of a DataValue object
+	 */
+	public function parseAsync( $value, $parser ) {
+		$promise = $this->api->getRequestAsync(
+			new SimpleRequest(
+				'wbparsevalue',
+				array( 'parser' => $parser, 'values' => $value )
+			)
+		);
+
+		return $promise->then(
+			function ( $result ) {
+				return $this->dataValueDeserializer->deserialize( $result['results'][0] );
+			}
+		);
+	}
+
+}
