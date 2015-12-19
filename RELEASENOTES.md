@@ -8,6 +8,7 @@ These are the release notes for the [wikibase-api](README.md).
 * Added newTermLookup method to WikibaseFactory
 * Added newEntityDocumentSaver method to WikibaseFactory
 * Added ValueParser::parseAsync
+* Implemented EntityRedirectLookup::getRedirectForEntityId
 
 ## Version 0.6 (2015-12-11)
 
