@@ -4,8 +4,6 @@ namespace Wikibase\Api\Service;
 
 use Deserializers\Deserializer;
 use InvalidArgumentException;
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\SimpleRequest;
 use Mediawiki\DataModel\EditInfo;
 use Mediawiki\DataModel\Revision;
 use RuntimeException;
@@ -14,8 +12,6 @@ use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\ItemContent;
-use Wikibase\DataModel\PropertyContent;
 
 /**
  * @access private

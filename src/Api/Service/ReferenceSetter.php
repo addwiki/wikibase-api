@@ -2,14 +2,11 @@
 
 namespace Wikibase\Api\Service;
 
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\SimpleRequest;
 use Mediawiki\DataModel\EditInfo;
 use Serializers\Serializer;
 use UnexpectedValueException;
 use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 

@@ -3,8 +3,6 @@
 namespace Wikibase\Api\Service;
 
 use InvalidArgumentException;
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\SimpleRequest;
 use Mediawiki\DataModel\EditInfo;
 use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Entity\Item;
