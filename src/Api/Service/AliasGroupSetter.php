@@ -14,7 +14,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 /**
  * @access private
  *
- * @author Adam Shorland
+ * @author Addshore
  */
 class AliasGroupSetter {
 

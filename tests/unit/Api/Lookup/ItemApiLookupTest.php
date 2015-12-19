@@ -2,16 +2,21 @@
 
 namespace Wikibase\Api\Lookup\Test;
 
+use PHPUnit_Framework_MockObject_MockObject;
 use Wikibase\Api\Lookup\ItemApiLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 
 /**
+ * @author Addshore
+ *
  * @covers Wikibase\Api\Lookup\ItemApiLookup
  */
 class ItemApiLookupTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetItemForId() {
+		/** @var EntityLookup|PHPUnit_Framework_MockObject_MockObject $lookupMock */
 		$lookupMock = $this->getMockBuilder( '\Wikibase\DataModel\Services\Lookup\EntityLookup' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -28,6 +33,7 @@ class ItemApiLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetItemForIdWithException() {
+		/** @var EntityLookup|PHPUnit_Framework_MockObject_MockObject $lookupMock */
 		$lookupMock = $this->getMockBuilder( '\Wikibase\DataModel\Services\Lookup\EntityLookup' )
 			->disableOriginalConstructor()
 			->getMock();

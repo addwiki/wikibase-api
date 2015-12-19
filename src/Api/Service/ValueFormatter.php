@@ -11,7 +11,7 @@ use Wikibase\Api\GenericOptions;
 /**
  * @access private
  *
- * @author Adam Shorland
+ * @author Addshore
  */
 class ValueFormatter {
 

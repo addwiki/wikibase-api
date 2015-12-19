@@ -7,7 +7,7 @@ use Wikibase\DataModel\ItemContent;
 
 /**
  * @covers Wikibase\DataModel\ItemContent
- * @author Adam Shorland
+ * @author Addshore
  */
 class ItemContentTest extends \PHPUnit_Framework_TestCase {
 

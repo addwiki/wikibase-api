@@ -11,10 +11,11 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Term;
 
-
 /**
  * This test requires a wiki installed at localhost that can be edited by anon users
  * This test also requires the sites table to be populated using populateSitesTable.php
+ *
+ * @author Addshore
  */
 class IntegrationTest extends PHPUnit_Framework_TestCase {
 

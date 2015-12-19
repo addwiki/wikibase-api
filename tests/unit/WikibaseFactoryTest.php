@@ -7,6 +7,8 @@ use Serializers\Serializer;
 use Wikibase\Api\WikibaseFactory;
 
 /**
+ * @author Addshore
+ *
  * @covers Wikibase\Api\WikibaseFactory
  */
 class WikibaseFactoryTest extends \PHPUnit_Framework_TestCase {

@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak\Snak;
 /**
  * @access private
  *
- * @author Adam Shorland
+ * @author Addshore
  */
 class StatementCreator {
 

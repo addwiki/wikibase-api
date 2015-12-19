@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 /**
  * @access private
  *
- * @author Adam Shorland
+ * @author Addshore
  */
 class ReferenceSetter {
 

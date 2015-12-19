@@ -38,6 +38,8 @@ use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 
 /**
+ * @author Addshore
+ *
  * @access public
  */
 class WikibaseFactory {
@@ -120,7 +122,7 @@ class WikibaseFactory {
 	public function newValueFormatter() {
 		return new ValueFormatter(
 			$this->api,
-			$this->dataValueDeserializer
+			$this->dataValueSerializer
 		);
 	}
 

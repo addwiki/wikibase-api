@@ -10,6 +10,8 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 
 /**
+ * @author Addshore
+ *
  * @access private
  */
 class EntityRedirectApiLookup implements EntityRedirectLookup {

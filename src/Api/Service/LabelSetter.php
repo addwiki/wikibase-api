@@ -14,7 +14,7 @@ use Wikibase\DataModel\Term\Term;
 /**
  * @access private
  *
- * @author Adam Shorland
+ * @author Addshore
  */
 class LabelSetter {
 

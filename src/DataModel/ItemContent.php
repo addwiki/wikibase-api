@@ -6,7 +6,7 @@ use Mediawiki\DataModel\Content;
 use Wikibase\DataModel\Entity\Item;
 
 /**
- * @author Adam Shorland
+ * @author Addshore
  */
 class ItemContent extends Content {
 

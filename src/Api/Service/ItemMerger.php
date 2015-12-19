@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @access private
  *
- * @author Adam Shorland
+ * @author Addshore
  */
 class ItemMerger {
 

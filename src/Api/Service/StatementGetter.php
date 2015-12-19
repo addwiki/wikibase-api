@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * @access private
  *
- * @author Adam Shorland
+ * @author Addshore
  */
 class StatementGetter {
 

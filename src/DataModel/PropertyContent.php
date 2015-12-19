@@ -6,7 +6,7 @@ use Mediawiki\DataModel\Content;
 use Wikibase\DataModel\Entity\Property;
 
 /**
- * @author Adam Shorland
+ * @author Addshore
  */
 class PropertyContent extends Content {
 

@@ -11,6 +11,8 @@ use Wikibase\DataModel\Term\LabelsProvider;
 
 /**
  * @access private
+ * 
+ * @author Addshore
  */
 class TermApiLookup implements TermLookup {
 

@@ -9,7 +9,7 @@ use Wikibase\DataModel\SiteLink;
 /**
  * @access private
  *
- * @author Adam Shorland
+ * @author Addshore
  */
 class SiteLinkLinker {
 

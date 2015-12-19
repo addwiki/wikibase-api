@@ -7,7 +7,7 @@ use Wikibase\DataModel\PropertyContent;
 
 /**
  * @covers Wikibase\DataModel\PropertyContent
- * @author Adam Shorland
+ * @author Addshore
  */
 class PropertyContentTest extends \PHPUnit_Framework_TestCase {
 

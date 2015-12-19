@@ -9,7 +9,7 @@ use Wikibase\Api\GenericOptions;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class GenericOptionsTest extends \PHPUnit_Framework_TestCase {
 
