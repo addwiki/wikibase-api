@@ -2,6 +2,8 @@
 
 namespace Wikibase\Api\Test;
 
+use Deserializers\Deserializer;
+use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\DataModel\Entity\Item;
@@ -12,6 +14,9 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class RevisionGetterTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return \PHPUnit_Framework_MockObject_MockObject|MediawikiApi
+	 */
 	private function getMockApi() {
 		$mock = $this->getMockBuilder( '\Mediawiki\Api\MediawikiApi' )
 			->disableOriginalConstructor()
@@ -19,6 +24,9 @@ class RevisionGetterTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
+	/**
+	 * @return \PHPUnit_Framework_MockObject_MockObject|Deserializer
+	 */
 	public function getMockDeserializer() {
 		$mock = $this->getMockBuilder( '\Deserializers\Deserializer' )
 			->disableOriginalConstructor()

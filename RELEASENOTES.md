@@ -9,6 +9,7 @@ These are the release notes for the [wikibase-api](README.md).
 * Added newEntityDocumentSaver method to WikibaseFactory
 * Added ValueParser::parseAsync
 * Implemented EntityRedirectLookup::getRedirectForEntityId
+* ValueParser methods can now parse multiple values simultaneously
 
 ## Version 0.6 (2015-12-11)
 

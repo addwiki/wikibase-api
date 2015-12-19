@@ -7,6 +7,7 @@ use Deserializers\Deserializer;
 use GuzzleHttp\Promise\Promise;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
+use RuntimeException;
 
 /**
  * @access private
@@ -38,34 +39,51 @@ class ValueParser {
 	/**
 	 * @since 0.2
 	 *
-	 * @param string $value
+	 * @param string|string[] $inputValues one or more
 	 * @param string $parser Id of the ValueParser to use
 	 *
-	 * @returns DataValue
+	 * @returns DataValue|DataValue[] if array parsed object has same array key as value
 	 */
-	public function parse( $value, $parser ) {
-		return $this->parseAsync( $value, $parser )->wait();
+	public function parse( $inputValues, $parser ) {
+		return $this->parseAsync( $inputValues, $parser )->wait();
 	}
 
 	/**
 	 * @since 0.7
 	 *
-	 * @param string $value
+	 * @param string|string[] $inputValues one or more
 	 * @param string $parser Id of the ValueParser to use
 	 *
-	 * @returns Promise of a DataValue object
+	 * @returns Promise of a DataValue object or array of DataValue objects with same keys as values
 	 */
-	public function parseAsync( $value, $parser ) {
+	public function parseAsync( $inputValues, $parser ) {
 		$promise = $this->api->getRequestAsync(
 			new SimpleRequest(
 				'wbparsevalue',
-				array( 'parser' => $parser, 'values' => $value )
+				array(
+					'parser' => $parser,
+					'values' => implode( '|', $inputValues ),
+				)
 			)
 		);
 
 		return $promise->then(
-			function ( $result ) {
-				return $this->dataValueDeserializer->deserialize( $result['results'][0] );
+			function ( $result ) use ( $inputValues ) {
+				if ( is_array( $inputValues ) ) {
+					$indexedResults = array();
+					foreach ( $result['results'] as $resultElement ) {
+						if ( in_array( $resultElement['raw'], $inputValues ) ) {
+							$indexedResults[array_search( $resultElement['raw'], $inputValues )] =
+								$this->dataValueDeserializer->deserialize( $resultElement );
+						} else {
+							throw new RuntimeException( "Failed to match parse results with input data" );
+						}
+					}
+
+					return $indexedResults;
+				} else {
+					return $this->dataValueDeserializer->deserialize( $result['results'][0] );
+				}
 			}
 		);
 	}
