@@ -55,10 +55,10 @@ class ReferenceSetter {
 		} else if ( $statement instanceof Statement ) {
 			$guid = $statement->getGuid();
 		} else {
-			throw new UnexpectedValueException( 'Could not get statement guid from $target' );
+			throw new UnexpectedValueException( 'Could not get statement guid from $statement' );
 		}
 		if( !is_string( $guid ) ) {
-			throw new UnexpectedValueException( 'Unexpected statement guid got from $target' );
+			throw new UnexpectedValueException( 'Unexpected statement guid got from $statement' );
 		}
 
 		$referenceSerialization = $this->referenceSerializer->serialize( $reference );
