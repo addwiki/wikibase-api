@@ -71,7 +71,7 @@ class StatementCreator {
 		}
 
 		$result = $this->api->postRequest( 'wbcreateclaim', $params, $editInfo );
-		return $result['claims']['id'];
+		return $result['claim']['id'];
 	}
 
 } 
