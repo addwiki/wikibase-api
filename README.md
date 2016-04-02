@@ -38,6 +38,16 @@ Below you will find some smore examples using various parts of the code.
 Please also take a look at our integration tests that might be able to help you!
 
 ```php
+use Mediawiki\Api\MediawikiApi;
+use Mediawiki\Api\ApiUser;
+use Wikibase\Api\WikibaseFactory;
+use Mediawiki\DataModel\Revision;
+use Wikibase\DataModel\ItemContent;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Entity\PropertyId;
+use DataValues\StringValue;
+use UsageException;
+
 // Load all of the things
 require_once( __DIR__ . "/vendor/autoload.php" );
 
