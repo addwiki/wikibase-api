@@ -33,7 +33,7 @@ The tests can be run as follows:
 
 ## Example Usage
 
-Below you will find some smore examples using various parts of the code.
+Below you will find some more examples using various parts of the code.
 
 Please also take a look at our integration tests that might be able to help you!
 
@@ -55,8 +55,19 @@ require_once( __DIR__ . "/vendor/autoload.php" );
 $api = new MediawikiApi( "http://localhost/w/api.php" );
 $api->login( new ApiUser( 'username', 'password' ) );
 
+//
+
 // Create our Factory, All services should be used through this!
-$services = new WikibaseFactory( $api );
+// If the wikibase you are accessing uses more or different datavalues they must be added here.
+$dataValueClasses = array(
+	'unknown' => 'DataValues\UnknownValue',
+	'string' => 'DataValues\StringValue',
+);
+$services = new WikibaseFactory(
+	$api,
+	new DataValues\Deserializers\DataValueDeserializer( $dataValueClasses ),
+	new DataValues\Serializers\DataValueSerializer()
+);
 
 // Get 2 specific services
 $getter = $services->newRevisionGetter();
