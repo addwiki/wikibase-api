@@ -1,6 +1,6 @@
 These are the release notes for the [wikibase-api](README.md).
 
-## Version 0.7
+## Version 0.7 (2016-07-04)
 
 * Added newEntityLookup method to WikibaseFactory
 * Added newItemLookup method to WikibaseFactory
@@ -10,6 +10,9 @@ These are the release notes for the [wikibase-api](README.md).
 * Added ValueParser::parseAsync
 * Implemented EntityRedirectLookup::getRedirectForEntityId
 * ValueParser methods can now parse multiple values simultaneously
+* RevisionSaver fallsback to EditInfo of Revision if no EditInfo is explicitly passed in
+* Fixes to StatementCreator
+* Fixes to ReferenceSetter
 
 ## Version 0.6 (2015-12-11)
 
