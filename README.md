@@ -23,7 +23,7 @@ Use one of the below methods:
 
     {
         "require": {
-            "addwiki/wikibase-api": "~0.6.0"
+            "addwiki/wikibase-api": "~0.7.0"
         }
     }
 
