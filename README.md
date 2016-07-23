@@ -46,7 +46,7 @@ use Wikibase\DataModel\ItemContent;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Entity\PropertyId;
 use DataValues\StringValue;
-use UsageException;
+use Mediawiki\Api\UsageException;
 
 // Load all of the things
 require_once( __DIR__ . "/vendor/autoload.php" );
