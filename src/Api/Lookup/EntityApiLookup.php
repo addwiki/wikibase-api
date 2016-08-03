@@ -14,6 +14,11 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 class EntityApiLookup implements EntityLookup {
 
 	/**
+	 * @var RevisionGetter
+	 */
+	private $revisionGetter;
+
+	/**
 	 * @param RevisionGetter $revisionGetter
 	 */
 	public function __construct( RevisionGetter $revisionGetter ) {
