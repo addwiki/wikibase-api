@@ -1,5 +1,9 @@
 These are the release notes for the [wikibase-api](README.md).
 
+## Version 0.8
+
+* Allows more versions of wikibase/data-model ~4.2|~5.0|~6.0
+
 ## Version 0.7 (2016-07-04)
 
 * Added newEntityLookup method to WikibaseFactory
