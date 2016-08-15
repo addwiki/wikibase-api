@@ -19,7 +19,7 @@ Use one of the below methods:
 
     composer require "addwiki/wikibase-api:dev-master"
 
-2 - Create a composer.json file that just defines a dependency on version 0.2 of this package, and run 'composer install' in the directory:
+2 - Create a composer.json file that just defines a dependency on version 0.7 of this package, and run 'composer install' in the directory:
 
     {
         "require": {
