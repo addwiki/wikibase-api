@@ -33,76 +33,140 @@ The tests can be run as follows:
 
 ## Example Usage
 
-Below you will find some more examples using various parts of the code.
+The library provides users with a large collection of Services.
+These services should be retrieved from the WikibaseFactory class.
 
-Please also take a look at our integration tests that might be able to help you!
+Below you will find some more examples using various services.
+Each example follows on from the previous example (so as not to repeat the first steps).
+Note: this library uses namespaces so please remember to add the relevant [use clauses](http://php.net/manual/en/language.namespaces.importing.php).
+
+#### Load & General Setup
 
 ```php
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\ApiUser;
-use Wikibase\Api\WikibaseFactory;
-use Mediawiki\DataModel\Revision;
-use Wikibase\DataModel\ItemContent;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Entity\PropertyId;
-use DataValues\StringValue;
-use Mediawiki\Api\UsageException;
+require_once( __DIR__ . '/vendor/autoload.php' );
 
-// Load all of the things
-require_once( __DIR__ . "/vendor/autoload.php" );
-
-// Use the mediawiki api and Login
-$api = new MediawikiApi( "http://localhost/w/api.php" );
+$api = new MediawikiApi( 'http://localhost/w/api.php' );
 $api->login( new ApiUser( 'username', 'password' ) );
 
-//
-
 // Create our Factory, All services should be used through this!
-// If the wikibase you are accessing uses more or different datavalues they must be added here.
+// You will need to add more or different datavalues here.
+// In the future Wikidata / Wikibase defaults will be provided in seperate a library.
 $dataValueClasses = array(
-	'unknown' => 'DataValues\UnknownValue',
-	'string' => 'DataValues\StringValue',
+    'unknown' => 'DataValues\UnknownValue',
+    'string' => 'DataValues\StringValue',
+    'boolean' => 'DataValues\BooleanValue',
+    'number' => 'DataValues\NumberValue',
+    'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
+    'monolingualtext' => 'DataValues\MonolingualTextValue',
+    'multilingualtext' => 'DataValues\MultilingualTextValue',
+    'quantity' => 'DataValues\QuantityValue',
+    'time' => 'DataValues\TimeValue',
+    'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
 );
-$services = new WikibaseFactory(
-	$api,
-	new DataValues\Deserializers\DataValueDeserializer( $dataValueClasses ),
-	new DataValues\Serializers\DataValueSerializer()
+$wbFactory = new WikibaseFactory(
+    $api,
+    new DataValues\Deserializers\DataValueDeserializer( $dataValueClasses ),
+    new DataValues\Serializers\DataValueSerializer()
 );
+```
 
-// Get 2 specific services
-$getter = $services->newRevisionGetter();
-$saver = $services->newRevisionSaver();
+#### Create an empty entity
 
-// Create a new Entity
+Create a new empty item.
+
+```php
+$saver = $wbFactory->newRevisionSaver();
+
 $edit = new Revision(
-	new ItemContent( Item::newEmpty() )
+    new ItemContent( Item::newEmpty() )
 );
 $saver->save( $edit );
+```
 
-// Set a label in the language en on the item Q87
+#### Set a label
+
+Set an english label on the item Q87 assuming it exists.
+
+```php
+$getter = $wbFactory->newRevisionGetter();
+
 $entityRevision = $getter->getFromId( 'Q87' );
 $entityRevision->getContent()->getData()->setDescription( 'en', 'I am A description' );
 $saver->save( $entityRevision );
+```
 
-// Create a new string statement on item Q777 if a statement for the property doesn't already exist
-$revision = $services->newRevisionGetter()->getFromId( 'Q777' );
+#### Create a new statement
+
+Create a new string statement on item Q777 if a statement for the property doesn't already exist.
+
+```php
+$statementCreator = $wbFactory->newStatementCreator();
+$revision = $getter->getFromId( 'Q777' );
 $item = $revision->getContent()->getData();
 $statementList = $item->getStatements();
 if( $statementList->getByPropertyId( PropertyId::newFromNumber( 1320 ) )->isEmpty() ) {
-	$services->newStatementCreator()->create(
-		new PropertyValueSnak(
-			PropertyId::newFromNumber( 1320 ),
-			new StringValue( 'New String Value' )
-		),
-		'Q777'
-	);
+    $statementCreator->create(
+        new PropertyValueSnak(
+            PropertyId::newFromNumber( 1320 ),
+            new StringValue( 'New String Value' )
+        ),
+        'Q777'
+    );
 }
+$saver->save( $revision );
+```
 
-// Try to merge Q999 and Q888 if possible, catch any errors
+#### Remove a statement using a GUID
+
+Remove the statement with the given claim (if it exists)
+
+```php
+$statementRemover = $wbFactory->newStatementRemover();
+
+$statementRemover->remove( 'Q123$f12bd80f-415a-c37e-9e18-234b9e19eece' );
+```
+
+#### Add a reference to a statement
+
+```php
+$statementSetter = $wbFactory->newStatementSetter();
+$revision = $getter->getFromId( 'Q9956' );
+$item = $revision->getContent()->getData();
+$statementList = $item->getStatements();
+$referenceSnaks = array(
+    new PropertyValueSnak( new PropertyId( 'P44' ), new StringValue( 'bar' ) ),
+);
+foreach( $statementList->getByPropertyId( PropertyId::newFromNumber( 99 ) )->getIterator() ) {
+    if( $statement->getReferences()->isEmpty() ) {
+        $statement->addNewReference( $referenceSnaks );
+    }
+}
+```
+
+#### Attempt to merge 2 items
+
+Try to merge Q999 and Q888 if possible, catch any errors.
+
+```php
 try{
-	$services->newItemMerger()->merge( 'Q999', 'Q888' );
+    $wbFactory->newItemMerger()->merge( 'Q999', 'Q888' );
 }
 catch( UsageException $e ) {
-	echo "Oh no! I failed to merge!";
+    echo "Oh no! I failed to merge!";
 }
+```
+
+#### Simple Lookups
+
+Easily lookup an item object, an individual label and redirect sources.
+
+```php
+$itemId = new ItemId( 'Q555' )
+$itemLookup = $wbFactory->newItemLookup();
+$termLookup = $wbFactory->newTermLookup();
+$entityRedirectLookup = $wbFactory->newEntityRedirectLookup();
+
+$item = $itemLookup->getItemForId( $itemId );
+$enLabel = $termLookup->getLabel( $itemId, 'en' );
+$redirectSources = $entityRedirectLookup->getRedirectIds( $itemId );
 ```
