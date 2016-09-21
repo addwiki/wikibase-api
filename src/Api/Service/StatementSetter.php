@@ -51,7 +51,7 @@ class StatementSetter {
 		}
 
 		$params = array(
-			'claim' => $this->statementSerializer->serialize( $statement ),
+			'claim' => json_encode( $this->statementSerializer->serialize( $statement ) ),
 		);
 
 		$this->api->postRequest( 'wbsetclaim', $params, $editInfo );
