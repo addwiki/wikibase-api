@@ -24,6 +24,9 @@ Use one of the below methods:
     {
         "require": {
             "addwiki/wikibase-api": "~0.7.0"
+            "data-values/geo": "1.1.*",
+            "data-values/time": "0.8.*",
+            "data-values/number": "0.8.*"
         }
     }
 
