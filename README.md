@@ -136,7 +136,7 @@ $statementList = $item->getStatements();
 $referenceSnaks = array(
     new PropertyValueSnak( new PropertyId( 'P44' ), new StringValue( 'bar' ) ),
 );
-foreach( $statementList->getByPropertyId( PropertyId::newFromNumber( 99 ) )->getIterator() ) {
+foreach( $statementList->getByPropertyId( PropertyId::newFromNumber( 99 ) )->getIterator() as $statement ) {
     if( $statement->getReferences()->isEmpty() ) {
         $statement->addNewReference( $referenceSnaks );
     }
