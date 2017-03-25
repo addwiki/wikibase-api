@@ -12,7 +12,7 @@ before_script:
   - composer install
 
 script:
-  - cd tests/unit && phpunit --coverage-clover=coverage.clover && cd ../../
+  - cd tests/unit && ../../vendor/bin/phpunit --coverage-clover=coverage.clover && cd ../../
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
