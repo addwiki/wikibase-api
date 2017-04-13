@@ -80,7 +80,10 @@ $saver = $wbFactory->newRevisionSaver();
 $edit = new Revision(
     new ItemContent( Item::newEmpty() )
 );
-$saver->save( $edit );
+$resultingItem = $saver->save( $edit );
+
+// You can get the ItemId object of the created item by doing the following
+$itemId = $resultingItem->getId()
 ```
 
 #### Set a label
