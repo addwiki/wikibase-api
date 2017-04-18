@@ -88,14 +88,14 @@ $itemId = $resultingItem->getId()
 
 #### Set a label
 
-Set an english label on the item Q87 assuming it exists.
+Set an english label on the item Q87 assuming it exists, using a custom summary.
 
 ```php
 $getter = $wbFactory->newRevisionGetter();
 
 $entityRevision = $getter->getFromId( 'Q87' );
 $entityRevision->getContent()->getData()->setDescription( 'en', 'I am A description' );
-$saver->save( $entityRevision );
+$saver->save( $entityRevision, new EditInfo( 'Custom edit summary' ) );
 ```
 
 #### Create a new statement
