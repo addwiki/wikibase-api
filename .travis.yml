@@ -1,15 +1,16 @@
 language: php
 
 php:
-  - hhvm
   - 5.5
   - 5.6
   - 7.0
+  - 7.1
+  - 7.2
 
 sudo: false
 
-before_script:
-  - composer install
+install:
+  - travis_retry composer install
 
 script:
   - cd tests/unit && ../../vendor/bin/phpunit --coverage-clover=coverage.clover && cd ../../
@@ -17,6 +18,10 @@ script:
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover ./tests/unit/coverage.clover
+
+cache:
+  directories:
+    - $HOME/.composer/cache
 
 notifications:
   irc:
