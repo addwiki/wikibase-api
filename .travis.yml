@@ -9,7 +9,7 @@ php:
 sudo: false
 
 before_script:
-  - composer install
+  - travis_retry composer install
 
 script:
   - cd tests/unit && ../../vendor/bin/phpunit --coverage-clover=coverage.clover && cd ../../
