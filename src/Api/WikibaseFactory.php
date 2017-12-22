@@ -8,7 +8,6 @@ use Serializers\Serializer;
 use Wikibase\Api\Lookup\EntityApiLookup;
 use Wikibase\Api\Lookup\ItemApiLookup;
 use Wikibase\Api\Lookup\PropertyApiLookup;
-use Wikibase\Api\Lookup\TermApiLookup;
 use Wikibase\Api\Service\AliasGroupSetter;
 use Wikibase\Api\Service\BadgeIdsGetter;
 use Wikibase\Api\Service\DescriptionSetter;
@@ -33,6 +32,7 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -297,7 +297,7 @@ class WikibaseFactory {
 	 * @return TermLookup
 	 */
 	public function newTermLookup() {
-		return new TermApiLookup( $this->newEntityLookup() );
+		return new EntityRetrievingTermLookup( $this->newEntityLookup() );
 	}
 
 	/**
