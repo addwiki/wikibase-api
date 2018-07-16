@@ -93,6 +93,8 @@ class RevisionSaver {
 
 		if( $editInfo->getBot() ) {
 			$params['bot'] = true;
+			// set maxlag for noninteractive requests
+			$params['maxlag'] = 5;
 		}
 		if( $editInfo->getMinor() ) {
 			$params['minor'] = true;
