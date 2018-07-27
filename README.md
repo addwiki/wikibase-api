@@ -115,7 +115,6 @@ if( $statementList->getByPropertyId( PropertyId::newFromNumber( 1320 ) )->isEmpt
         'Q777'
     );
 }
-$saver->save( $revision );
 ```
 
 #### Remove a statement using a GUID
