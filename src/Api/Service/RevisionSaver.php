@@ -76,8 +76,6 @@ class RevisionSaver {
 		if( !is_null( $entityId ) ) {
 			$params['id'] = $entityId->getSerialization();
 
-			// Always clear so that removing elements is possible
-			$params['clear'] = 'true';
 			// Add more detail to the default "Cleared an entity" summary
 			// Note: this is later overridden if a summary is provided in the EditInfo
 			$params['summary'] = 'Edited a ' . $entity->getType();
