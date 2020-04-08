@@ -12,6 +12,7 @@ use Wikibase\Api\Service\AliasGroupSetter;
 use Wikibase\Api\Service\BadgeIdsGetter;
 use Wikibase\Api\Service\DescriptionSetter;
 use Wikibase\Api\Service\EntityDocumentSaver;
+use Wikibase\Api\Service\EntitySearcher;
 use Wikibase\Api\Service\ItemMerger;
 use Wikibase\Api\Service\LabelSetter;
 use Wikibase\Api\Service\RedirectCreator;
@@ -306,6 +307,14 @@ class WikibaseFactory {
 	 */
 	public function newEntityDocumentSaver() {
 		return new EntityDocumentSaver( $this->newRevisionSaver() );
+	}
+
+	/**
+	 * @since 0.8
+	 * @return EntitySearcher
+	 */
+	public function newEntitySearcher() {
+		return new EntitySearcher( $this->api );
 	}
 
 }
