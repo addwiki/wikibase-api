@@ -7,7 +7,7 @@
 		"wikibase",
 		"wikidata"
 	],
-	"version": "0.8.0-dev",
+	"version": "0.8.1",
 	"license": "GPL-2.0+",
 	"authors": [
 		{
