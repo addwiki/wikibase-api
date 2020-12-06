@@ -49,7 +49,7 @@ $api->login( new ApiUser( 'username', 'password' ) );
 
 // Create our Factory, All services should be used through this!
 // You will need to add more or different datavalues here.
-// In the future Wikidata / Wikibase defaults will be provided in seperate a library.
+// In the future Wikidata / Wikibase defaults will be provided in a separate library.
 $dataValueClasses = array(
     'unknown' => 'DataValues\UnknownValue',
     'string' => 'DataValues\StringValue',
