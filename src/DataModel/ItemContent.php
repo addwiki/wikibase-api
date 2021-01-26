@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Item;
  */
 class ItemContent extends Content {
 
-	const MODEL = 'wikibase-item';
+	public const MODEL = 'wikibase-item';
 
 	/**
 	 * @param Item $item
