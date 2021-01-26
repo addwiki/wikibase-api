@@ -31,18 +31,18 @@ class SiteLinkLinker {
 	 * @param SiteLink $fromSiteLink
 	 * @param EditInfo|null $editInfo
 	 *
-	 * @returns bool
+	 * @return bool
 	 */
-	public function link ( SiteLink $toSiteLink, SiteLink $fromSiteLink, EditInfo $editInfo = null ) {
-		$params = array(
+	public function link( SiteLink $toSiteLink, SiteLink $fromSiteLink, EditInfo $editInfo = null ) {
+		$params = [
 			'tosite' => $toSiteLink->getSiteId(),
 			'totitle' => $toSiteLink->getPageName(),
 			'fromsite' => $fromSiteLink->getSiteId(),
 			'fromtitle' => $fromSiteLink->getPageName(),
-		);
+		];
 
 		$this->api->postRequest( 'wblinktitles', $params, $editInfo );
 		return true;
 	}
 
-} 
+}

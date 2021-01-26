@@ -37,25 +37,25 @@ class StatementRemover {
 	 * @throws UnexpectedValueException
 	 */
 	public function remove( $statement, EditInfo $editInfo = null ) {
-		if( is_string( $statement ) ) {
+		if ( is_string( $statement ) ) {
 			$guid = $statement;
-		} else if ( $statement instanceof StatementGuid ) {
+		} elseif ( $statement instanceof StatementGuid ) {
 			$guid = $statement->getSerialization();
-		} else if ( $statement instanceof Statement ) {
+		} elseif ( $statement instanceof Statement ) {
 			$guid = $statement->getGuid();
 		} else {
 			throw new UnexpectedValueException( 'Could not get statement guid from $statement' );
 		}
-		if( !is_string( $guid ) ) {
+		if ( !is_string( $guid ) ) {
 			throw new UnexpectedValueException( 'Unexpected statement guid got from $statement' );
 		}
 
-		$params = array(
+		$params = [
 			'claim' => $guid,
-		);
+		];
 
 		$this->api->postRequest( 'wbremoveclaims', $params, $editInfo );
 		return true;
 	}
 
-} 
+}

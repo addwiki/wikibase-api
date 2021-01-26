@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Api;
 
 use Mediawiki\Api\MediawikiApi;
@@ -15,7 +14,7 @@ use Mediawiki\DataModel\EditInfo;
 class WikibaseApi {
 
 	/**
-	 * @var MediawikiApi $api
+	 * @var MediawikiApi
 	 */
 	private $api;
 
@@ -40,7 +39,7 @@ class WikibaseApi {
 	}
 
 	private function getEditInfoParams( EditInfo $editInfo ) {
-		$params = array();
+		$params = [];
 
 		if ( $editInfo->getSummary() ) {
 			$params['summary'] = $editInfo->getSummary();

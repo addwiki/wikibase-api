@@ -2,9 +2,7 @@
 
 namespace Wikibase\Api\Service;
 
-use DataValues\DataValue;
 use Deserializers\Deserializer;
-use GuzzleHttp\Promise\Promise;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 use RuntimeException;
@@ -42,7 +40,7 @@ class ValueParser {
 	 * @param string|string[] $inputValues one or more
 	 * @param string $parser Id of the ValueParser to use
 	 *
-	 * @returns DataValue|DataValue[] if array parsed object has same array key as value
+	 * @return DataValue|DataValue[] if array parsed object has same array key as value
 	 */
 	public function parse( $inputValues, $parser ) {
 		return $this->parseAsync( $inputValues, $parser )->wait();
@@ -54,23 +52,23 @@ class ValueParser {
 	 * @param string|string[] $inputValues one or more
 	 * @param string $parser Id of the ValueParser to use
 	 *
-	 * @returns Promise of a DataValue object or array of DataValue objects with same keys as values
+	 * @return Promise of a DataValue object or array of DataValue objects with same keys as values
 	 */
 	public function parseAsync( $inputValues, $parser ) {
 		$promise = $this->api->getRequestAsync(
 			new SimpleRequest(
 				'wbparsevalue',
-				array(
+				[
 					'parser' => $parser,
 					'values' => implode( '|', $inputValues ),
-				)
+				]
 			)
 		);
 
 		return $promise->then(
 			function ( $result ) use ( $inputValues ) {
 				if ( is_array( $inputValues ) ) {
-					$indexedResults = array();
+					$indexedResults = [];
 					foreach ( $result['results'] as $resultElement ) {
 						if ( in_array( $resultElement['raw'], $inputValues ) ) {
 							$indexedResults[array_search( $resultElement['raw'], $inputValues )] =

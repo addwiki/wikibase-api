@@ -52,10 +52,10 @@ class RevisionSaver {
 	 *
 	 * @throws RuntimeException
 	 * @throws InvalidArgumentException
-	 * @returns Item|Property new version of the entity
+	 * @return Item|Property new version of the entity
 	 */
 	public function save( Revision $revision, EditInfo $editInfo = null ) {
-		if( !$revision->getContent()->getData() instanceof EntityDocument ) {
+		if ( !$revision->getContent()->getData() instanceof EntityDocument ) {
 			throw new RuntimeException( 'Can only save Content of EntityDocuments' );
 		}
 
@@ -63,17 +63,17 @@ class RevisionSaver {
 		$entity = $revision->getContent()->getData();
 		$serialized = $this->entitySerializer->serialize( $entity );
 
-		$params = array(
+		$params = [
 			'data' => json_encode( $serialized )
-		);
+		];
 
 		$revId = $revision->getId();
-		if( !is_null( $revId ) ) {
+		if ( $revId !== null ) {
 			$params['baserevid'] = $revId;
 		}
 
 		$entityId = $entity->getId();
-		if( !is_null( $entityId ) ) {
+		if ( $entityId !== null ) {
 			$params['id'] = $entityId->getSerialization();
 
 			// Always clear so that removing elements is possible
@@ -87,18 +87,18 @@ class RevisionSaver {
 		}
 
 		// If no editInfo is explicitly passed call back to the one in the revision?
-		if( $editInfo === null ) {
+		if ( $editInfo === null ) {
 			$editInfo = $revision->getEditInfo();
 		}
 
-		if( $editInfo->getBot() ) {
+		if ( $editInfo->getBot() ) {
 			$params['bot'] = true;
 		}
-		if( $editInfo->getMinor() ) {
+		if ( $editInfo->getMinor() ) {
 			$params['minor'] = true;
 		}
 		$summary = $editInfo->getSummary();
-		if( !empty( $summary ) ) {
+		if ( !empty( $summary ) ) {
 			$params['summary'] = $summary;
 		}
 
@@ -106,4 +106,4 @@ class RevisionSaver {
 		return $this->entityDeserializer->deserialize( $result['entity'] );
 	}
 
-} 
+}

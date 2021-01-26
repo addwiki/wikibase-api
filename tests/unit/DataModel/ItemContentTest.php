@@ -9,7 +9,7 @@ use Wikibase\DataModel\ItemContent;
  * @covers Wikibase\DataModel\ItemContent
  * @author Addshore
  */
-class ItemContentTest extends \PHPUnit_Framework_TestCase {
+class ItemContentTest extends \PHPUnit\Framework\TestCase {
 
 	public function testModel() {
 		$this->assertEquals( 'wikibase-item', ItemContent::MODEL );
@@ -19,7 +19,7 @@ class ItemContentTest extends \PHPUnit_Framework_TestCase {
 		$item = new Item();
 		$content = new ItemContent( $item );
 		$this->assertEquals( $item, $content->getData() );
-		$this->assertInternalType( 'string', $content->getHash() );
+		$this->assertIsString( $content->getHash() );
 	}
 
 }

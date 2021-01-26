@@ -9,7 +9,7 @@ use Wikibase\DataModel\PropertyContent;
  * @covers Wikibase\DataModel\PropertyContent
  * @author Addshore
  */
-class PropertyContentTest extends \PHPUnit_Framework_TestCase {
+class PropertyContentTest extends \PHPUnit\Framework\TestCase {
 
 	public function testModel() {
 		$this->assertEquals( 'wikibase-property', PropertyContent::MODEL );
@@ -19,7 +19,7 @@ class PropertyContentTest extends \PHPUnit_Framework_TestCase {
 		$property = Property::newFromType( 'string' );
 		$content = new PropertyContent( $property );
 		$this->assertEquals( $property, $content->getData() );
-		$this->assertInternalType( 'string', $content->getHash() );
+		$this->assertIsString( $content->getHash() );
 	}
 
 }

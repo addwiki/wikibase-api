@@ -61,10 +61,10 @@ class DescriptionSetter {
 	 * @todo Fix duplicated code
 	 */
 	private function throwExceptionsOnBadTarget( $target ) {
-		if( !$target instanceof EntityId && !$target instanceof Item && !$target instanceof Property && ! $target instanceof SiteLink ) {
+		if ( !$target instanceof EntityId && !$target instanceof Item && !$target instanceof Property && !$target instanceof SiteLink ) {
 			throw new UnexpectedValueException( '$target needs to be an EntityId, Item, Property or SiteLink' );
 		}
-		if( ( $target instanceof Item || $target instanceof Property ) && is_null( $target->getId() ) ) {
+		if ( ( $target instanceof Item || $target instanceof Property ) && $target->getId() === null ) {
 			throw new UnexpectedValueException( '$target Entity object needs to have an Id set' );
 		}
 	}
@@ -94,16 +94,16 @@ class DescriptionSetter {
 	 * @todo Fix duplicated code
 	 */
 	private function getTargetParamsFromTarget( $target ) {
-		if( $target instanceof EntityId ) {
-			return array( 'id' => $target->getSerialization() );
-		} elseif( $target instanceof SiteLink ) {
-			return array(
+		if ( $target instanceof EntityId ) {
+			return [ 'id' => $target->getSerialization() ];
+		} elseif ( $target instanceof SiteLink ) {
+			return [
 				'site' => $target->getSiteId(),
 				'title' => $target->getPageName(),
-			);
+			];
 		} else {
 			throw new UnexpectedValueException( '$target needs to be an EntityId or SiteLink' );
 		}
 	}
 
-} 
+}

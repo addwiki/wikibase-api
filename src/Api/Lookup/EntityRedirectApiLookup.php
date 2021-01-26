@@ -34,7 +34,7 @@ class EntityRedirectApiLookup implements EntityRedirectLookup {
 	public function getRedirectIds( EntityId $targetId ) {
 		// TODO: Implement getRedirectIds() method.
 		// Note: this is hard currently as we have to discover the namespace of the entity type?
-		throw new \BadMethodCallException('Not implemented yet');
+		throw new \BadMethodCallException( 'Not implemented yet' );
 	}
 
 	/**
@@ -43,16 +43,16 @@ class EntityRedirectApiLookup implements EntityRedirectLookup {
 	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ) {
 		$entityIdSerialization = $entityId->getSerialization();
 
-		$params = array( 'ids' => $entityIdSerialization );
+		$params = [ 'ids' => $entityIdSerialization ];
 		$result = $this->api->getRequest( new SimpleRequest( 'wbgetentities', $params ) );
 
 		$entitiesData = $result['entities'];
-		if( !array_key_exists( $entityIdSerialization, $entitiesData ) ) {
+		if ( !array_key_exists( $entityIdSerialization, $entitiesData ) ) {
 			throw new EntityRedirectLookupException( $entityId, "Failed to get $entityIdSerialization" );
 		}
 
 		$entityData = $entitiesData[$entityIdSerialization];
-		if( !array_key_exists( 'redirects', $entityData ) ) {
+		if ( !array_key_exists( 'redirects', $entityData ) ) {
 			throw new EntityRedirectLookupException( $entityId, "$entityIdSerialization is not a redirect" );
 		}
 

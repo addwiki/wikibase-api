@@ -31,7 +31,7 @@ class EntityApiLookup implements EntityLookup {
 	public function getEntity( EntityId $entityId ) {
 		$revision = $this->revisionGetter->getFromId( $entityId );
 
-		if( !$revision ) {
+		if ( !$revision ) {
 			return null;
 		}
 
@@ -44,7 +44,7 @@ class EntityApiLookup implements EntityLookup {
 	public function hasEntity( EntityId $entityId ) {
 		$revision = $this->revisionGetter->getFromId( $entityId );
 
-		if( !$revision ) {
+		if ( !$revision ) {
 			return false;
 		}
 

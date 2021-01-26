@@ -7,18 +7,18 @@ use Wikibase\Api\GenericOptions;
 /**
  * @covers Wikibase\Api\GenericOptions
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
  */
-class GenericOptionsTest extends \PHPUnit_Framework_TestCase {
+class GenericOptionsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstructor() {
-		$options = array(
+		$options = [
 			'foo' => 42,
 			'bar' => 4.2,
-			'baz' => array( 'o_O', false, null, '42' => 42, array() )
-		);
+			'baz' => [ 'o_O', false, null, '42' => 42, [] ]
+		];
 
 		$genericOptions = new GenericOptions( $options );
 
@@ -27,11 +27,11 @@ class GenericOptionsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testConstructorFail() {
-		$options = array(
+		$options = [
 			'foo' => 42,
 			'bar' => 4.2,
-			42 => array( 'o_O', false, null, '42' => 42, array() )
-		);
+			42 => [ 'o_O', false, null, '42' => 42, [] ]
+		];
 
 		$this->setExpectedException( 'Exception' );
 
@@ -39,14 +39,14 @@ class GenericOptionsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function setOptionProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$genericOptions = new GenericOptions();
 
-		$argLists[] = array( $genericOptions, 'foo', 42 );
-		$argLists[] = array( $genericOptions, 'bar', 42 );
-		$argLists[] = array( $genericOptions, 'foo', 'foo' );
-		$argLists[] = array( $genericOptions, 'foo', null );
+		$argLists[] = [ $genericOptions, 'foo', 42 ];
+		$argLists[] = [ $genericOptions, 'bar', 42 ];
+		$argLists[] = [ $genericOptions, 'foo', 'foo' ];
+		$argLists[] = [ $genericOptions, 'foo', null ];
 
 		return $argLists;
 	}
@@ -69,11 +69,11 @@ class GenericOptionsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testHashOption() {
-		$options = array(
+		$options = [
 			'foo' => 42,
 			'bar' => 4.2,
-			'baz' => array( 'o_O', false, null, '42' => 42, array() )
-		);
+			'baz' => [ 'o_O', false, null, '42' => 42, [] ]
+		];
 
 		$genericOptions = new GenericOptions( $options );
 
@@ -86,17 +86,17 @@ class GenericOptionsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetOption() {
-		$genericOptions = new GenericOptions( array( 'foo' => 'bar' ) );
+		$genericOptions = new GenericOptions( [ 'foo' => 'bar' ] );
 
-		$values = array(
-			array( 'foo', 'baz' ),
-			array( 'foo', 'bar' ),
-			array( 'onoez', '' ),
-			array( 'hax', 'zor' ),
-			array( 'nyan', 9001 ),
-			array( 'cat', 4.2 ),
-			array( 'spam', array( '~=[,,_,,]:3' ) ),
-		);
+		$values = [
+			[ 'foo', 'baz' ],
+			[ 'foo', 'bar' ],
+			[ 'onoez', '' ],
+			[ 'hax', 'zor' ],
+			[ 'nyan', 9001 ],
+			[ 'cat', 4.2 ],
+			[ 'spam', [ '~=[,,_,,]:3' ] ],
+		];
 
 		foreach ( $values as $value ) {
 			$genericOptions->setOption( $value[0], $value[1] );
@@ -113,7 +113,7 @@ class GenericOptionsTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetOption( $nonExistingOption ) {
 		$this->assertTrue( true );
-		$genericOptions = new GenericOptions( array( 'foo' => 'bar' ) );
+		$genericOptions = new GenericOptions( [ 'foo' => 'bar' ] );
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 
@@ -121,23 +121,23 @@ class GenericOptionsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function nonExistingOptionsProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( 'bar' );
-		$argLists[] = array( 'Foo' );
-		$argLists[] = array( 'FOO' );
-		$argLists[] = array( 'spam' );
-		$argLists[] = array( 'onoez' );
+		$argLists[] = [ 'bar' ];
+		$argLists[] = [ 'Foo' ];
+		$argLists[] = [ 'FOO' ];
+		$argLists[] = [ 'spam' ];
+		$argLists[] = [ 'onoez' ];
 
 		return $argLists;
 	}
 
 	public function testRequireOption() {
-		$options = array(
+		$options = [
 			'foo' => 42,
 			'bar' => 4.2,
-			'baz' => array( 'o_O', false, null, '42' => 42, array() )
-		);
+			'baz' => [ 'o_O', false, null, '42' => 42, [] ]
+		];
 
 		$genericOptions = new GenericOptions( $options );
 
@@ -151,11 +151,11 @@ class GenericOptionsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testDefaultOption() {
-		$options = array(
+		$options = [
 			'foo' => 42,
 			'bar' => 4.2,
-			'baz' => array( 'o_O', false, null, '42' => 42, array() )
-		);
+			'baz' => [ 'o_O', false, null, '42' => 42, [] ]
+		];
 
 		$genericOptions = new GenericOptions( $options );
 
@@ -169,12 +169,12 @@ class GenericOptionsTest extends \PHPUnit_Framework_TestCase {
 			);
 		}
 
-		$defaults = array(
+		$defaults = [
 			'N' => 42,
 			'y' => 4.2,
 			'a' => false,
-			'n' => array( '42' => 42, array( '' ) )
-		);
+			'n' => [ '42' => 42, [ '' ] ]
+		];
 
 		foreach ( $defaults as $option => $value ) {
 			$genericOptions->defaultOption( $option, $value );

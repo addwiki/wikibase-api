@@ -32,7 +32,7 @@ class TestEnvironment {
 
 	private function newDataValueDeserializer() {
 		return new DataValueDeserializer(
-			array(
+			[
 				'boolean' => 'DataValues\BooleanValue',
 				'number' => 'DataValues\NumberValue',
 				'string' => 'DataValues\StringValue',
@@ -42,7 +42,7 @@ class TestEnvironment {
 				'multilingualtext' => 'DataValues\MultilingualTextValue',
 				'quantity' => 'DataValues\QuantityValue',
 				'time' => 'DataValues\TimeValue',
-			)
+			]
 		);
 	}
 

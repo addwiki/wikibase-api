@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @author Addshore
  */
-class EntityRedirectApiLookupTest extends \PHPUnit_Framework_TestCase {
+class EntityRedirectApiLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetRedirectForEntityId() {
 		/** @var MediawikiApi|PHPUnit_Framework_MockObject_MockObject $apiMock */
@@ -21,15 +21,15 @@ class EntityRedirectApiLookupTest extends \PHPUnit_Framework_TestCase {
 			->getMock();
 		$apiMock->expects( $this->once() )
 			->method( 'getRequest' )
-			->will( $this->returnValue( array(
-				'entities' => array(
-					'Q404' => array(
-						'redirects' => array(
+			->will( $this->returnValue( [
+				'entities' => [
+					'Q404' => [
+						'redirects' => [
 							'to' => 'Q395',
-						),
-					),
-				),
-			)) );
+						],
+					],
+				],
+			] ) );
 
 		$lookup = new EntityRedirectApiLookup( $apiMock );
 		$this->assertEquals(

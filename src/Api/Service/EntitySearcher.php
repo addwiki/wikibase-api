@@ -32,17 +32,17 @@ class EntitySearcher {
 	 * @param string $language
 	 * @return string[] EntityIds
 	 */
-	public function search( $entityType, $string, $language ){
-		$params = array(
+	public function search( $entityType, $string, $language ) {
+		$params = [
 			'search' => $string,
 			'language' => $language,
 			'type' => $entityType,
-		);
+		];
 
 		$data = $this->api->getRequest( new SimpleRequest( 'wbsearchentities', $params ) );
 
 		$ids = [];
-		foreach( $data['search'] as $searchResult ) {
+		foreach ( $data['search'] as $searchResult ) {
 			$ids[] = $searchResult['id'];
 		}
 

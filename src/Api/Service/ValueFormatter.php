@@ -39,23 +39,23 @@ class ValueFormatter {
 	 *
 	 * @param DataValue $value
 	 * @param string $dataTypeId
-	 * @param GenericOptions $options
+	 * @param GenericOptions|null $options
 	 *
-	 * @returns string
+	 * @return string
 	 */
 	public function format( DataValue $value, $dataTypeId, GenericOptions $options = null ) {
-		if( $options === null ) {
+		if ( $options === null ) {
 			$options = new GenericOptions();
 		}
 
-		$params = array(
+		$params = [
 			'datavalue' => json_encode( $this->dataValueSerializer->serialize( $value ) ),
 			'datatype' => $dataTypeId,
 			'options' => json_encode( $options->getOptions() ),
-		);
+		];
 
 		$result = $this->api->getRequest( new SimpleRequest( 'wbformatvalue', $params ) );
 		return $result['result'];
 	}
 
-} 
+}

@@ -44,26 +44,26 @@ class RevisionGetter {
 	/**
 	 * @since 0.1
 	 * @param string|EntityId $id
-	 * @returns Revision
+	 * @return Revision
 	 */
 	public function getFromId( $id ) {
-		if( $id instanceof EntityId ) {
+		if ( $id instanceof EntityId ) {
 			$id = $id->getSerialization();
 		}
 
-		$result = $this->api->getRequest( new SimpleRequest( 'wbgetentities', array( 'ids' => $id ) ) );
+		$result = $this->api->getRequest( new SimpleRequest( 'wbgetentities', [ 'ids' => $id ] ) );
 		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 
 	/**
 	 * @since 0.1
 	 * @param SiteLink $siteLink
-	 * @returns Revision
+	 * @return Revision
 	 */
 	public function getFromSiteLink( SiteLink $siteLink ) {
 		$result = $this->api->getRequest( new SimpleRequest(
 			'wbgetentities',
-			array( 'sites' => $siteLink->getSiteId(), 'titles' => $siteLink->getPageName() )
+			[ 'sites' => $siteLink->getSiteId(), 'titles' => $siteLink->getPageName() ]
 		) );
 		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
@@ -72,24 +72,24 @@ class RevisionGetter {
 	 * @since 0.1
 	 * @param string $siteId
 	 * @param string $title
-	 * @returns Revision
+	 * @return Revision
 	 */
 	public function getFromSiteAndTitle( $siteId, $title ) {
 		$result = $this->api->getRequest( new SimpleRequest(
 			'wbgetentities',
-			array( 'sites' => $siteId, 'titles' => $title )
+			[ 'sites' => $siteId, 'titles' => $title ]
 		) );
 		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
-	
+
 	/**
 	 * @param array $entityResult
-	 * @returns Revision
+	 * @return Revision
 	 * @todo this could be factored into a different class?
 	 */
 	private function newRevisionFromResult( array $entityResult ) {
-		if( array_key_exists( 'missing', $entityResult ) ) {
-			return false; //Throw an exception?
+		if ( array_key_exists( 'missing', $entityResult ) ) {
+			return false; // Throw an exception?
 		}
 		return new Revision(
 			$this->getContentFromEntity( $this->entityDeserializer->deserialize( $entityResult ) ),

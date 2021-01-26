@@ -3,7 +3,6 @@
 namespace Wikibase\Api\Test;
 
 use Mediawiki\DataModel\Revision;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\ItemContent;
@@ -17,19 +16,19 @@ use Wikibase\DataModel\Term\Term;
  *
  * @author Addshore
  */
-class IntegrationTest extends PHPUnit_Framework_TestCase {
+class IntegrationTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var ItemId
 	 */
-	static private $itemId;
+	private static $itemId;
 
 	/**
 	 * @var Item
 	 */
-	static private $localItem;
+	private static $localItem;
 
-	public static function setUpBeforeClass() {
+	public static function setUpBeforeClass() : void {
 		parent::setUpBeforeClass();
 		self::$localItem = new Item();
 		self::$localItem->getFingerprint()->getLabels()->setTextForLanguage( 'en', 'TestItem - ' . strval( time() ) );
@@ -60,7 +59,7 @@ class IntegrationTest extends PHPUnit_Framework_TestCase {
 	public function testSetLabel() {
 		$factory = $factory = TestEnvironment::newDefault()->getFactory();
 		$labelDe = new Term( 'de', 'Foo' . microtime() );
-		$r = $factory->newLabelSetter()->set( $labelDe , self::$itemId );
+		$r = $factory->newLabelSetter()->set( $labelDe, self::$itemId );
 		$this->assertTrue( $r );
 		self::$localItem->getFingerprint()->getLabels()->setTerm( $labelDe );
 	}
@@ -81,7 +80,7 @@ class IntegrationTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testSetAliases() {
 		$factory = $factory = TestEnvironment::newDefault()->getFactory();
-		$aliasFr = new AliasGroup( 'fr', array( 'aa', 'bb' ) );
+		$aliasFr = new AliasGroup( 'fr', [ 'aa', 'bb' ] );
 		$r = $factory->newAliasGroupSetter()->set( $aliasFr, self::$itemId );
 		$this->assertTrue( $r );
 		self::$localItem->getFingerprint()->getAliasGroups()->setGroup( $aliasFr );

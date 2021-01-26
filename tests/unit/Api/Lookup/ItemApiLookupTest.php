@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
  *
  * @covers Wikibase\Api\Lookup\ItemApiLookup
  */
-class ItemApiLookupTest extends \PHPUnit_Framework_TestCase {
+class ItemApiLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetItemForId() {
 		/** @var EntityLookup|PHPUnit_Framework_MockObject_MockObject $lookupMock */
@@ -45,6 +45,6 @@ class ItemApiLookupTest extends \PHPUnit_Framework_TestCase {
 		$itemApiLookup = new ItemApiLookup( $lookupMock );
 
 		$result = $itemApiLookup->getItemForId( new ItemId( 'Q42' ) );
-		$this->assertEquals( null, $result );
+		$this->assertNull( $result );
 	}
 }

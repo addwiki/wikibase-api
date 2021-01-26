@@ -11,7 +11,7 @@ use RuntimeException;
  *
  * @since 0.2
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
  */
@@ -27,7 +27,7 @@ final class GenericOptions {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $options = array() ) {
+	public function __construct( array $options = [] ) {
 		foreach ( array_keys( $options ) as $option ) {
 			if ( !is_string( $option ) ) {
 				throw new InvalidArgumentException( 'Option names need to be strings' );
@@ -80,7 +80,7 @@ final class GenericOptions {
 	 *
 	 * @param string $option
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasOption( $option ) {
 		return array_key_exists( $option, $this->options );

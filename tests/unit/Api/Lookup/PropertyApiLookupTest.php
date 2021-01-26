@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
  *
  * @covers Wikibase\Api\Lookup\PropertyApiLookup
  */
-class PropertyApiLookupTest extends \PHPUnit_Framework_TestCase {
+class PropertyApiLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetPropertyForId() {
 		$property = new Property( new PropertyId( 'P42' ), null, 'string' );
@@ -47,6 +47,6 @@ class PropertyApiLookupTest extends \PHPUnit_Framework_TestCase {
 		$propertyApiLookup = new PropertyApiLookup( $lookupMock );
 
 		$result = $propertyApiLookup->getPropertyForId( new PropertyId( 'P42' ) );
-		$this->assertEquals( null, $result );
+		$this->assertNull( $result );
 	}
 }

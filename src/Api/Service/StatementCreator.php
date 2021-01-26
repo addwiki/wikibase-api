@@ -50,7 +50,7 @@ class StatementCreator {
 	 * @throws UnexpectedValueException
 	 */
 	public function create( Snak $mainSnak, $target, EditInfo $editInfo = null ) {
-		if( is_string( $target ) ) {
+		if ( is_string( $target ) ) {
 			$entityId = $target;
 		} elseif ( $target instanceof EntityId ) {
 			$entityId = $target->getSerialization();
@@ -60,12 +60,12 @@ class StatementCreator {
 			throw new UnexpectedValueException( '$target needs to be an EntityId, Entity or string' );
 		}
 
-		$params = array(
+		$params = [
 			'entity' => $entityId,
 			'snaktype' => $mainSnak->getType(),
 			'property' => $mainSnak->getPropertyId()->getSerialization(),
-		);
-		if( $mainSnak instanceof PropertyValueSnak ) {
+		];
+		if ( $mainSnak instanceof PropertyValueSnak ) {
 			$serializedDataValue = $this->dataValueSerializer->serialize( $mainSnak->getDataValue() );
 			$params['value'] = json_encode( $serializedDataValue['value'] );
 		}
@@ -74,4 +74,4 @@ class StatementCreator {
 		return $result['claim']['id'];
 	}
 
-} 
+}

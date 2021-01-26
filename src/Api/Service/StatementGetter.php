@@ -39,9 +39,9 @@ class StatementGetter {
 	 * @return Statement
 	 */
 	public function getFromGuid( $guid ) {
-		$params = array(
+		$params = [
 			'claim' => $guid,
-		);
+		];
 
 		$result = $this->api->getRequest( new SimpleRequest( 'wbgetclaims', $params ) );
 
@@ -50,4 +50,4 @@ class StatementGetter {
 		return $this->statementDeserializer->deserialize( $statementSerialization );
 	}
 
-} 
+}

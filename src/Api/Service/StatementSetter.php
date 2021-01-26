@@ -46,16 +46,16 @@ class StatementSetter {
 	 * @todo allow setting of indexes
 	 */
 	public function set( Statement $statement, EditInfo $editInfo = null ) {
-		if( $statement->getGuid() === null ) {
+		if ( $statement->getGuid() === null ) {
 			throw new InvalidArgumentException( 'Can not set a statement that does not have a GUID' );
 		}
 
-		$params = array(
+		$params = [
 			'claim' => json_encode( $this->statementSerializer->serialize( $statement ) ),
-		);
+		];
 
 		$this->api->postRequest( 'wbsetclaim', $params, $editInfo );
 		return true;
 	}
 
-} 
+}

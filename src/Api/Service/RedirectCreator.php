@@ -33,13 +33,13 @@ class RedirectCreator {
 	 * @return bool
 	 */
 	public function create( EntityId $from, EntityId $to, EditInfo $editInfo = null ) {
-		$params = array(
+		$params = [
 			'from' => $from->__toString(),
 			'to' => $to->__toString(),
-		);
+		];
 
 		$this->api->postRequest( 'wbcreateredirect', $params, $editInfo );
 		return true;
 	}
 
-} 
+}

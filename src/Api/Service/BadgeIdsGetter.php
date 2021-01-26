@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Api\Service;
 
 use Mediawiki\Api\MediawikiApi;
@@ -32,11 +31,11 @@ class BadgeIdsGetter {
 	 */
 	public function get() {
 		$result = $this->api->getRequest( new SimpleRequest( 'wbavailablebadges' ) );
-		$ids = array();
-		foreach( $result['badges'] as $badgeIdString ) {
+		$ids = [];
+		foreach ( $result['badges'] as $badgeIdString ) {
 			$ids[] = new ItemId( $badgeIdString );
 		}
 		return $ids;
 	}
 
-} 
+}

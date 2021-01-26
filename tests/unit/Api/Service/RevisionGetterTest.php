@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @covers Wikibase\Api\Service\RevisionGetter
  */
-class RevisionGetterTest extends \PHPUnit_Framework_TestCase {
+class RevisionGetterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return \PHPUnit_Framework_MockObject_MockObject|MediawikiApi
@@ -42,10 +42,10 @@ class RevisionGetterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideIds() {
-		return array(
-			array( 'Q1' ),
-			array( ItemId::newFromNumber( 1 ) ),
-		);
+		return [
+			[ 'Q1' ],
+			[ ItemId::newFromNumber( 1 ) ],
+		];
 	}
 
 	/**
@@ -58,22 +58,22 @@ class RevisionGetterTest extends \PHPUnit_Framework_TestCase {
 			->with(
 				$this->equalTo( new SimpleRequest(
 					'wbgetentities',
-					array( 'ids' => 'Q1' )
+					[ 'ids' => 'Q1' ]
 				) )
 			)
-			->will( $this->returnValue( array( 'entities' => array( 'Q123' => array(
+			->will( $this->returnValue( [ 'entities' => [ 'Q123' => [
 				'pageid' => '111',
 				'lastrevid' => '222',
 				'modified' => 'TIMESTAMP'
-			) ) ) ) );
+			] ] ] ) );
 		$deserializer = $this->getMockDeserializer();
 		$deserializer->expects( $this->once() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
+			->with( $this->equalTo( [
 						'pageid' => '111',
 						'lastrevid' => '222',
 						'modified' => 'TIMESTAMP'
-			) ) )
+			] ) )
 			->will( $this->returnValue( new Item() ) );
 
 		$service = new RevisionGetter( $api, $deserializer );
@@ -86,4 +86,4 @@ class RevisionGetterTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'TIMESTAMP', $result->getTimestamp() );
 	}
 
-} 
+}

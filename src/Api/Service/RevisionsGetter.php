@@ -56,15 +56,15 @@ class RevisionsGetter {
 	 * @return Revisions
 	 */
 	public function getRevisions( array $identifyingInfoArray ) {
-		$entityIdStrings = array();
-		$siteLinksStringMapping = array();
+		$entityIdStrings = [];
+		$siteLinksStringMapping = [];
 
-		foreach( $identifyingInfoArray as $someInfo ) {
-			if( $someInfo instanceof EntityId ) {
+		foreach ( $identifyingInfoArray as $someInfo ) {
+			if ( $someInfo instanceof EntityId ) {
 				$entityIdStrings[] = $someInfo->getSerialization();
 			} elseif ( $someInfo instanceof SiteLink ) {
 				$siteLinksStringMapping[ $someInfo->getSiteId() ][] = $someInfo->getPageName();
-			} elseif( is_string( $someInfo ) ) {
+			} elseif ( is_string( $someInfo ) ) {
 				$entityIdStrings[] = $someInfo;
 			} else {
 				throw new InvalidArgumentException( 'Unexpected $identifyingInfoArray in RevisionsGetter::getRevisions' );
@@ -74,10 +74,10 @@ class RevisionsGetter {
 		// The below makes as few requests as possible to get the Revisions required!
 		$gotRevisionsFromIds = false;
 		$revisions = new Revisions();
-		if( !empty( $siteLinksStringMapping ) ) {
-			foreach( $siteLinksStringMapping as $site => $siteLinkStrings ) {
-				$params = array( 'sites' => $site );
-				if( !$gotRevisionsFromIds && !empty( $entityIdStrings ) ) {
+		if ( !empty( $siteLinksStringMapping ) ) {
+			foreach ( $siteLinksStringMapping as $site => $siteLinkStrings ) {
+				$params = [ 'sites' => $site ];
+				if ( !$gotRevisionsFromIds && !empty( $entityIdStrings ) ) {
 					$params['ids'] = implode( '|', $entityIdStrings );
 					$gotRevisionsFromIds = true;
 				}
@@ -88,7 +88,7 @@ class RevisionsGetter {
 
 			}
 		} else {
-			$params = array( 'ids' => implode( '|', $entityIdStrings ) );
+			$params = [ 'ids' => implode( '|', $entityIdStrings ) ];
 			$result = $this->api->getRequest( new SimpleRequest( 'wbgetentities', $params ) );
 			$resultRevisions = $this->newRevisionsFromResult( $result['entities'] );
 			$revisions->addRevisions( $resultRevisions );
@@ -99,13 +99,13 @@ class RevisionsGetter {
 
 	/**
 	 * @param array $entitiesResult
-	 * @returns Revisions
+	 * @return Revisions
 	 * @todo this could be factored into a different class?
 	 */
 	private function newRevisionsFromResult( array $entitiesResult ) {
 		$revisions = new Revisions();
-		foreach( $entitiesResult as $entityResult ) {
-			if( array_key_exists( 'missing', $entityResult ) ) {
+		foreach ( $entitiesResult as $entityResult ) {
+			if ( array_key_exists( 'missing', $entityResult ) ) {
 				continue;
 			}
 			$revisions->addRevision( new Revision(
@@ -138,4 +138,4 @@ class RevisionsGetter {
 		}
 	}
 
-} 
+}

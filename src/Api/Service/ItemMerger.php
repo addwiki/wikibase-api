@@ -33,13 +33,13 @@ class ItemMerger {
 	 * @param Item|ItemId|string $to
 	 * @param EditInfo|null $editInfo
 	 *
-	 * @returns bool
+	 * @return bool
 	 */
 	public function merge( $from, $to, EditInfo $editInfo = null ) {
-		$params = array(
+		$params = [
 			'fromid' => $this->getIdFromInput( $from ),
 			'toid' => $this->getIdFromInput( $to )
-		);
+		];
 
 		$this->api->postRequest( 'wbmergeitems', $params, $editInfo );
 		return true;
@@ -52,15 +52,15 @@ class ItemMerger {
 	 * @return string the ItemId Serialization
 	 */
 	private function getIdFromInput( $input ) {
-		if( is_string( $input ) ) {
+		if ( is_string( $input ) ) {
 			return $input;
-		} elseif( $input instanceof ItemId ) {
+		} elseif ( $input instanceof ItemId ) {
 			return $input->getSerialization();
-		} elseif( $input instanceof Item ) {
+		} elseif ( $input instanceof Item ) {
 			return $input->getId()->getSerialization();
 		} else {
 			throw new InvalidArgumentException( 'Merge target should be either string, Item or ItemId' );
 		}
 	}
 
-} 
+}
