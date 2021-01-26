@@ -1,4 +1,8 @@
-These are the release notes for the [wikibase-api](README.md).
+# Release Notes
+
+## Version 2.6 (WIP)
+
+- Require PHP 7.2+
 
 ## Version 0.8 (2020-05-10)
 
@@ -31,13 +35,13 @@ These are the release notes for the [wikibase-api](README.md).
 
 ## Version 0.5 (2015-06-29)
 
-####Additions
+#### Additions
 
 * RevisionsGetter::getRevisions can now accept serialized EntityId strings
 * Added BadgeIdsGetter service
 * Added RedirectCreator service
 
-####Deprecations
+#### Deprecations
 
 * Renamed ClaimGetter to StatementGetter, leaving a b/c deprecated alias
 * Renamed ClaimSetter to StatementSetter, leaving a b/c deprecated alias
@@ -53,7 +57,7 @@ These are the release notes for the [wikibase-api](README.md).
 * Moved ItemApiLookup to Lookup namespace
 * Moved PropertyApiLookup to Lookup namespace
 
-####Libs
+#### Libs
 
 * NoLonger Require addwiki/mediawiki-api
 * Requires "wikibase/data-model": "~4.0"
@@ -73,25 +77,24 @@ These are the release notes for the [wikibase-api](README.md).
 
 ## Version 0.3 (2014-09-15)
 
-####Fixes
+#### Fixes
 
 * You can now clear an entity using RevisionSaver by passing an empty Item/Property/Entity object.
   Prior to this a UsageException would be thrown as the clear param was not passed to the api.
 * SiteLinkSetter now uses the correct API module (wbsetsitelink).
   Previous to this it was for some reason trying to use 'wblinktitles'.
 
-####Changes
+#### Changes
 
 * RevisionSaver->save() now returns an Entity object instead of always returning true.
 
-####Libs
+#### Libs
 
 We now require the following:
 * "wikibase/data-model-serialization": "~1.1"
 * "wikibase/data-model": "~2.0|~1.0"
 * "data-values/geo": "~1.0|~0.2.0"
 * "data-values/data-types": "~0.4.0",
-
 
 ## Version 0.2 (2014-07-15)
 
