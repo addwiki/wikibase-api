@@ -1,9 +1,9 @@
 {
     "name": "addwiki/wikibase-api",
     "type": "library",
-    "description": "A Wikibase api lib",
-    "keywords": ["Mediawiki", "wikibase", "wikidata"],
-    "license": "GPL-2.0+",
+    "description": "Wikibase API library",
+    "keywords": ["MediaWiki", "Wikibase", "Wikidata","API"],
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Addshore"
