@@ -33,7 +33,7 @@ class GenericOptionsTest extends \PHPUnit\Framework\TestCase {
 			42 => [ 'o_O', false, null, '42' => 42, [] ]
 		];
 
-		$this->setExpectedException( 'Exception' );
+		$this->expectException( 'Exception' );
 
 		new GenericOptions( $options );
 	}
@@ -115,7 +115,7 @@ class GenericOptionsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( true );
 		$genericOptions = new GenericOptions( [ 'foo' => 'bar' ] );
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->expectException( 'OutOfBoundsException' );
 
 		$genericOptions->getOption( $nonExistingOption );
 	}
@@ -145,7 +145,7 @@ class GenericOptionsTest extends \PHPUnit\Framework\TestCase {
 			$genericOptions->requireOption( $option );
 		}
 
-		$this->setExpectedException( 'Exception' );
+		$this->expectException( 'Exception' );
 
 		$genericOptions->requireOption( 'Foo' );
 	}

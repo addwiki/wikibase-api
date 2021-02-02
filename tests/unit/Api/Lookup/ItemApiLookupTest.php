@@ -17,9 +17,7 @@ class ItemApiLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetItemForId() {
 		/** @var EntityLookup|PHPUnit_Framework_MockObject_MockObject $lookupMock */
-		$lookupMock = $this->getMockBuilder( '\Wikibase\DataModel\Services\Lookup\EntityLookup' )
-			->disableOriginalConstructor()
-			->getMock();
+		$lookupMock = $this->createMock( '\Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$lookupMock->expects( $this->once() )
 			->method( 'getEntity' )
 			->with( $this->equalTo( new ItemId( 'Q42' ) ) )
@@ -34,9 +32,7 @@ class ItemApiLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetItemForIdWithException() {
 		/** @var EntityLookup|PHPUnit_Framework_MockObject_MockObject $lookupMock */
-		$lookupMock = $this->getMockBuilder( '\Wikibase\DataModel\Services\Lookup\EntityLookup' )
-			->disableOriginalConstructor()
-			->getMock();
+		$lookupMock = $this->createMock( '\Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$lookupMock->expects( $this->once() )
 			->method( 'getEntity' )
 			->with( $this->equalTo( new ItemId( 'Q42' ) ) )

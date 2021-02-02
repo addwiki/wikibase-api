@@ -19,8 +19,20 @@ class TestEnvironment {
 	private $factory;
 
 	public function __construct() {
+		$apiUrl = getenv( 'ADDWIKI_MW_API' );
+
+		if ( !$apiUrl ) {
+			$apiUrl = "http://localhost:8877/api.php";
+		}
+
+		if ( substr( $apiUrl, -7 ) !== 'api.php' ) {
+			$msg = "URL incorrect: $apiUrl"
+				. " (Set the ADDWIKI_MW_API environment variable correctly)";
+			throw new Exception( $msg );
+		}
+
 		$this->factory = new WikibaseFactory(
-			new MediawikiApi( 'http://localhost/w/api.php' ),
+			new MediawikiApi( $apiUrl ),
 			$this->newDataValueDeserializer(),
 			new DataValueSerializer()
 		);
@@ -37,7 +49,7 @@ class TestEnvironment {
 				'number' => 'DataValues\NumberValue',
 				'string' => 'DataValues\StringValue',
 				'unknown' => 'DataValues\UnknownValue',
-				'globecoordinate' => 'DataValues\GlobeCoordinateValue',
+				'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
 				'monolingualtext' => 'DataValues\MonolingualTextValue',
 				'multilingualtext' => 'DataValues\MultilingualTextValue',
 				'quantity' => 'DataValues\QuantityValue',

@@ -39,22 +39,15 @@ class WikibaseFactoryTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testNewFactoryObject( $method, $class ) {
 		/** @var Serializer $dvSerializer */
-		$dvSerializer = $this->getMock( 'Serializers\Serializer' );
+		$dvSerializer = $this->createMock( 'Serializers\Serializer' );
 		/** @var Deserializer $dvDeserializer */
-		$dvDeserializer = $this->getMock( 'Deserializers\Deserializer' );
+		$dvDeserializer = $this->createMock( 'Deserializers\Deserializer' );
 
-		$factory = new WikibaseFactory( $this->getMockApi(), $dvDeserializer, $dvSerializer );
+		$factory = new WikibaseFactory( $this->createMock( '\Mediawiki\Api\MediawikiApi' ), $dvDeserializer, $dvSerializer );
 
 		$this->assertTrue( method_exists( $factory, $method ) );
 		$object = $factory->$method();
 		$this->assertInstanceOf( $class, $object );
-	}
-
-	private function getMockApi() {
-		$mock = $this->getMockBuilder( '\Mediawiki\Api\MediawikiApi' )
-			->disableOriginalConstructor()
-			->getMock();
-		return $mock;
 	}
 
 }

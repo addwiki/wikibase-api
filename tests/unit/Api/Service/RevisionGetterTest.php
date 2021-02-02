@@ -19,25 +19,19 @@ class RevisionGetterTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return \PHPUnit_Framework_MockObject_MockObject|MediawikiApi
 	 */
-	private function getMockApi() {
-		$mock = $this->getMockBuilder( '\Mediawiki\Api\MediawikiApi' )
-			->disableOriginalConstructor()
-			->getMock();
-		return $mock;
+	private function createMockApi() {
+		return $this->createMock( '\Mediawiki\Api\MediawikiApi' );
 	}
 
 	/**
 	 * @return \PHPUnit_Framework_MockObject_MockObject|Deserializer
 	 */
-	public function getMockDeserializer() {
-		$mock = $this->getMockBuilder( '\Deserializers\Deserializer' )
-			->disableOriginalConstructor()
-			->getMock();
-		return $mock;
+	public function createMockDeserializer() {
+		return $this->createMock( '\Deserializers\Deserializer' );
 	}
 
 	public function testValidConstructionWorks() {
-		new RevisionGetter( $this->getMockApi(), $this->getMockDeserializer() );
+		new RevisionGetter( $this->createMockApi(), $this->createMockDeserializer() );
 		$this->assertTrue( true );
 	}
 
@@ -52,7 +46,7 @@ class RevisionGetterTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideIds
 	 */
 	public function testGetFromId( $id ) {
-		$api = $this->getMockApi();
+		$api = $this->createMockApi();
 		$api->expects( $this->once() )
 			->method( 'getRequest' )
 			->with(
@@ -66,7 +60,7 @@ class RevisionGetterTest extends \PHPUnit\Framework\TestCase {
 				'lastrevid' => '222',
 				'modified' => 'TIMESTAMP'
 			] ] ] ) );
-		$deserializer = $this->getMockDeserializer();
+		$deserializer = $this->createMockDeserializer();
 		$deserializer->expects( $this->once() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
