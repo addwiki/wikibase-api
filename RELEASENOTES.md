@@ -1,8 +1,10 @@
 # Release Notes
 
-## Version 2.6 (WIP)
+## Version 2.6 (2 February 2021)
 
 - Require PHP 7.2+
+- Initial release from new development monorepo
+- All addwiki libraries now have aligned version numbers
 
 ## Version 0.8 (2020-05-10)
 
