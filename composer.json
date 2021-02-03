@@ -2,7 +2,7 @@
     "name": "addwiki/wikibase-api",
     "type": "library",
     "description": "Wikibase API library",
-    "keywords": ["MediaWiki", "Wikibase", "Wikidata","API"],
+    "keywords": ["MediaWiki", "Wikibase", "Wikidata", "API"],
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -17,7 +17,7 @@
         "addwiki/mediawiki-api-base": "^2.6",
         "addwiki/mediawiki-datamodel": "^2.6",
         "serialization/serialization": "~3.2 || ~4.0",
-        "wikibase/data-model": "~8.0",
+        "wikibase/data-model": "~9.2|~8.0",
         "wikibase/data-model-serialization": "~2.0",
         "wikibase/data-model-services": "~3.0"
     },
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.6-dev"
+            "dev-master": "2.7-dev"
         }
     },
     "minimum-stability": "dev",
