@@ -14,8 +14,8 @@
     },
     "require": {
         "php": "^7.2",
-        "addwiki/mediawiki-api-base": "^2.6",
-        "addwiki/mediawiki-datamodel": "^2.6",
+        "addwiki/mediawiki-api-base": "^2.7",
+        "addwiki/mediawiki-datamodel": "^2.7",
         "serialization/serialization": "~3.2 || ~4.0",
         "wikibase/data-model": "~9.2|~8.0",
         "wikibase/data-model-serialization": "~2.0",
@@ -43,7 +43,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.7-dev"
+            "dev-main": "2.7-dev",
+            "dev-master": "2.7-dev"
         }
     },
     "minimum-stability": "dev",
