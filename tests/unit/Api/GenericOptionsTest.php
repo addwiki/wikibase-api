@@ -55,8 +55,8 @@ class GenericOptionsTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider setOptionProvider
 	 *
 	 * @param GenericOptions $options
-	 * @param $option
-	 * @param $value
+	 * @param string $option
+	 * @param mixed $value
 	 */
 	public function testSetAndGetOption( GenericOptions $options, $option, $value ) {
 		$options->setOption( $option, $value );
