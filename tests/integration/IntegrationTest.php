@@ -91,10 +91,10 @@ class IntegrationTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testSetSitelink() {
 		$factory = $factory = TestEnvironment::newDefault()->getFactory();
-		$enwikiLondon = new SiteLink( 'enwiki', 'London' );
-		$r = $factory->newSiteLinkSetter()->set( $enwikiLondon, self::$itemId );
-		$this->assertTrue( $r );
-		self::$localItem->getSiteLinkList()->addSiteLink( $enwikiLondon );
+		$enwikiLondon = new SiteLink( 'mywiki', 'Main Page' );
+		// Expect an exception as we didn't actually setup the test site fully
+		$this->expectExceptionMessage( "The external client site \"mywiki\" did not provide page information for page \"Main Page\"" );
+		$factory->newSiteLinkSetter()->set( $enwikiLondon, self::$itemId );
 	}
 
 	/**
@@ -103,11 +103,11 @@ class IntegrationTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testLinkSitelinks() {
 		$factory = $factory = TestEnvironment::newDefault()->getFactory();
-		$enwikiLondon = new SiteLink( 'enwiki', 'London' );
-		$dewikiBerlin = new Sitelink( 'dewiki', 'Berlin' );
-		$r = $factory->newSiteLinkLinker()->link( $enwikiLondon, $dewikiBerlin );
-		$this->assertTrue( $r );
-		self::$localItem->getSiteLinkList()->addSiteLink( $dewikiBerlin );
+		$enwikiLondon = new SiteLink( 'mywiki', 'Main Page' );
+		$dewikiBerlin = new Sitelink( 'dewiki', 'Main Page' );
+		// Expect an exception as we didn't actually setup dewiki as a test site
+		$this->expectExceptionMessage( "Unrecognized value for parameter \"fromsite\": dewiki." );
+		$factory->newSiteLinkLinker()->link( $enwikiLondon, $dewikiBerlin );
 	}
 
 	/**
