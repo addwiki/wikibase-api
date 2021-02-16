@@ -2,7 +2,9 @@
 
 namespace Wikibase\Api\Service;
 
+use DataValues\DataValue;
 use Deserializers\Deserializer;
+use GuzzleHttp\Promise\PromiseInterface;
 use Mediawiki\Api\MediawikiApi;
 use Mediawiki\Api\SimpleRequest;
 use RuntimeException;
@@ -52,7 +54,7 @@ class ValueParser {
 	 * @param string|string[] $inputValues one or more
 	 * @param string $parser Id of the ValueParser to use
 	 *
-	 * @return Promise of a DataValue object or array of DataValue objects with same keys as values
+	 * @return PromiseInterface of a DataValue object or array of DataValue objects with same keys as values
 	 */
 	public function parseAsync( $inputValues, $parser ) {
 		$promise = $this->api->getRequestAsync(
