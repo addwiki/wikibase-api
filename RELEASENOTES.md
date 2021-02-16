@@ -3,6 +3,7 @@
 ## Version 2.8 (16 February 2021)
 
 - Installable with 7.3+ (including PHP8)
+- Set `maxlag` parameter when `EditInfo` with maxlag is passed to `Wikibase\Api\WikibaseApi`
 
 ## Version 2.7 (15 February 2021)
 

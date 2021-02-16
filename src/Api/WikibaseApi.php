@@ -51,6 +51,9 @@ class WikibaseApi {
 			$params['bot'] = true;
 			$params['assert'] = 'bot';
 		}
+		if ( $editInfo->getMaxlag() ) {
+			$params['maxlag'] = $editInfo->getMaxlag();
+		}
 
 		return $params;
 	}

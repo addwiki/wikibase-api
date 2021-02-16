@@ -91,17 +91,6 @@ class RevisionSaver {
 			$editInfo = $revision->getEditInfo();
 		}
 
-		if ( $editInfo->getBot() ) {
-			$params['bot'] = true;
-		}
-		if ( $editInfo->getMinor() ) {
-			$params['minor'] = true;
-		}
-		$summary = $editInfo->getSummary();
-		if ( !empty( $summary ) ) {
-			$params['summary'] = $summary;
-		}
-
 		$result = $this->api->postRequest( 'wbeditentity', $params, $editInfo );
 		return $this->entityDeserializer->deserialize( $result['entity'] );
 	}
