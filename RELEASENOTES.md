@@ -4,6 +4,7 @@
 
 - Installable with 7.3+ (including PHP8)
 - Set `maxlag` parameter when `EditInfo` with maxlag is passed to `Wikibase\Api\WikibaseApi`
+- `RevisionSaver` only sets `clear` parameter if it is given an empty entity
 
 ## Version 2.7 (15 February 2021)
 
