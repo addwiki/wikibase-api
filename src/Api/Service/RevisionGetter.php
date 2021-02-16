@@ -93,7 +93,7 @@ class RevisionGetter {
 		}
 		return new Revision(
 			$this->getContentFromEntity( $this->entityDeserializer->deserialize( $entityResult ) ),
-			new PageIdentifier( null, intval( $entityResult['pageid'] ) ),
+			new PageIdentifier( null, (int)$entityResult['pageid'] ),
 			$entityResult['lastrevid'],
 			null,
 			null,

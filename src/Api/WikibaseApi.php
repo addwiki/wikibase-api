@@ -41,7 +41,7 @@ class WikibaseApi {
 	private function getEditInfoParams( EditInfo $editInfo ) {
 		$params = [];
 
-		if ( $editInfo->getSummary() ) {
+		if ( $editInfo->getSummary() !== '' ) {
 			$params['summary'] = $editInfo->getSummary();
 		}
 		if ( $editInfo->getMinor() ) {

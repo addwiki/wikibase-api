@@ -30,8 +30,6 @@ class ItemApiLookup implements ItemLookup {
 	 * @see ItemLookup::getItemForId
 	 */
 	public function getItemForId( ItemId $itemId ) {
-		$entity = $this->entityLookup->getEntity( $itemId );
-
-		return $entity;
+		return $this->entityLookup->getEntity( $itemId );
 	}
 }

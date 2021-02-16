@@ -44,8 +44,9 @@ class StatementGetter {
 		];
 
 		$result = $this->api->getRequest( new SimpleRequest( 'wbgetclaims', $params ) );
+		$arrayShift = array_shift( $result['claims'] );
 
-		$statementSerialization = array_shift( array_shift( $result['claims'] ) );
+		$statementSerialization = array_shift( $arrayShift );
 
 		return $this->statementDeserializer->deserialize( $statementSerialization );
 	}

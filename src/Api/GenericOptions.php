@@ -20,7 +20,7 @@ final class GenericOptions {
 	/**
 	 * @var array
 	 */
-	private $options;
+	private $options = [];
 
 	/**
 	 * @since 0.2
@@ -67,7 +67,7 @@ final class GenericOptions {
 	 */
 	public function getOption( $option ) {
 		if ( !array_key_exists( $option, $this->options ) ) {
-			throw new OutOfBoundsException( "Option '$option' has not been set so cannot be obtained" );
+			throw new OutOfBoundsException( sprintf( "Option '%s' has not been set so cannot be obtained", $option ) );
 		}
 
 		return $this->options[$option];

@@ -2,6 +2,8 @@
 
 namespace Wikibase\Api\Test;
 
+use OutOfBoundsException;
+use PHPUnit\Framework\TestCase;
 use Wikibase\Api\GenericOptions;
 
 /**
@@ -11,7 +13,7 @@ use Wikibase\Api\GenericOptions;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
  */
-class GenericOptionsTest extends \PHPUnit\Framework\TestCase {
+class GenericOptionsTest extends TestCase {
 
 	public function testConstructor() {
 		$options = [
@@ -115,7 +117,7 @@ class GenericOptionsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( true );
 		$genericOptions = new GenericOptions( [ 'foo' => 'bar' ] );
 
-		$this->expectException( 'OutOfBoundsException' );
+		$this->expectException( OutOfBoundsException::class );
 
 		$genericOptions->getOption( $nonExistingOption );
 	}

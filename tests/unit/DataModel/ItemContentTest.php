@@ -2,6 +2,7 @@
 
 namespace Wikibase\Api\DataModel\Test;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\ItemContent;
 
@@ -9,7 +10,7 @@ use Wikibase\DataModel\ItemContent;
  * @covers Wikibase\DataModel\ItemContent
  * @author Addshore
  */
-class ItemContentTest extends \PHPUnit\Framework\TestCase {
+class ItemContentTest extends TestCase {
 
 	public function testModel() {
 		$this->assertEquals( 'wikibase-item', ItemContent::MODEL );

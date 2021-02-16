@@ -30,8 +30,6 @@ class PropertyApiLookup implements PropertyLookup {
 	 * @see ItemLookup::getPropertyForId
 	 */
 	public function getPropertyForId( PropertyId $propertyId ) {
-		$entity = $this->entityLookup->getEntity( $propertyId );
-
-		return $entity;
+		return $this->entityLookup->getEntity( $propertyId );
 	}
 }
