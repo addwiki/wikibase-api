@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Api\Service;
+namespace Addwiki\Wikibase\Api\Service;
 
-use Mediawiki\DataModel\Content;
-use Mediawiki\DataModel\EditInfo;
-use Mediawiki\DataModel\Revision;
+use Addwiki\Mediawiki\DataModel\Content;
+use Addwiki\Mediawiki\DataModel\EditInfo;
+use Addwiki\Mediawiki\DataModel\Revision;
 use Wikibase\DataModel\Entity\EntityDocument;
 
 /**

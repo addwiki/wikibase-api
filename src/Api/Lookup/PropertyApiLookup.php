@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Api\Lookup;
+namespace Addwiki\Wikibase\Api\Lookup;
 
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;

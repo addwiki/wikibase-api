@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Api\Service;
+namespace Addwiki\Wikibase\Api\Service;
 
+use Addwiki\Mediawiki\DataModel\EditInfo;
+use Addwiki\Wikibase\Api\WikibaseApi;
 use Deserializers\Deserializer;
-use Mediawiki\DataModel\EditInfo;
 use Serializers\Serializer;
 use UnexpectedValueException;
-use Wikibase\Api\WikibaseApi;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;

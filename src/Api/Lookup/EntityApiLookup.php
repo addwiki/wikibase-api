@@ -1,8 +1,8 @@
 <?php
 
-namespace Wikibase\Api\Lookup;
+namespace Addwiki\Wikibase\Api\Lookup;
 
-use Wikibase\Api\Service\RevisionGetter;
+use Addwiki\Wikibase\Api\Service\RevisionGetter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 

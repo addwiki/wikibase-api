@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Api\Service;
+namespace Addwiki\Wikibase\Api\Service;
 
+use Addwiki\Mediawiki\Api\Client\MediawikiApi;
+use Addwiki\Mediawiki\Api\Client\SimpleRequest;
+use Addwiki\Wikibase\Api\GenericOptions;
 use DataValues\DataValue;
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\SimpleRequest;
 use Serializers\Serializer;
-use Wikibase\Api\GenericOptions;
 
 /**
  * @access private
@@ -26,7 +26,7 @@ class ValueFormatter {
 	private $dataValueSerializer;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param \Addwiki\Mediawiki\Api\Client\MediawikiApi $api
 	 * @param Serializer $dataValueSerializer
 	 */
 	public function __construct( MediawikiApi $api, Serializer $dataValueSerializer ) {

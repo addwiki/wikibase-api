@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Api\Service;
+namespace Addwiki\Wikibase\Api\Service;
 
+use Addwiki\Mediawiki\Api\Client\MediawikiApi;
+use Addwiki\Mediawiki\Api\Client\SimpleRequest;
 use DataValues\DataValue;
 use Deserializers\Deserializer;
 use GuzzleHttp\Promise\PromiseInterface;
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\SimpleRequest;
 use RuntimeException;
 
 /**

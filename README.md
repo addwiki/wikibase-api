@@ -8,23 +8,9 @@ Issue tracker: https://github.com/addwiki/addwiki/issues
 
 ## Installation
 
-Use one of the below methods:
+Use composer to install the library and all its dependencies:
 
-1 - Use composer to install the library and all its dependencies using the master branch:
-
-    composer require "addwiki/wikibase-api:dev-master"
-
-2 - Create a composer.json file that just defines a dependency on version 0.7 of this package, and run 'composer install' in the directory:
-
-    {
-        "require": {
-            "addwiki/wikibase-api": "~0.8.0"
-        }
-    }
-
-The tests can be run as follows:
-
-    phpunit -c tests/unit/
+    composer require "addwiki/wikibase-api:~3.0"
 
 ## Example Usage
 
@@ -56,7 +42,7 @@ $dataValueClasses = array(
     'multilingualtext' => 'DataValues\MultilingualTextValue',
     'quantity' => 'DataValues\QuantityValue',
     'time' => 'DataValues\TimeValue',
-    'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
+    'wikibase-entityid' => 'Addwiki\Wikibase\DataModel\Entity\EntityIdValue',
 );
 $wbFactory = new WikibaseFactory(
     $api,

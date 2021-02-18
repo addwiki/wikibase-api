@@ -1,16 +1,17 @@
 <?php
 
-namespace Wikibase\Api\Test;
+namespace Addwiki\Wikibase\Tests\Unit\Api\Service;
 
+use Addwiki\Mediawiki\Api\Client\MediawikiApi;
+use Addwiki\Mediawiki\Api\Client\SimpleRequest;
+use Addwiki\Mediawiki\DataModel\Revision;
+use Addwiki\Wikibase\Api\Service\RevisionGetter;
+use Addwiki\Wikibase\DataModel\ItemContent;
 use Deserializers\Deserializer;
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\SimpleRequest;
-use Mediawiki\DataModel\Revision;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Api\Service\RevisionGetter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\ItemContent;
 
 /**
  * @author Addshore
@@ -20,14 +21,14 @@ use Wikibase\DataModel\ItemContent;
 class RevisionGetterTest extends TestCase {
 
 	/**
-	 * @return \PHPUnit_Framework_MockObject_MockObject|MediawikiApi
+	 * @return MockObject|MediawikiApi
 	 */
 	private function createMockApi() {
 		return $this->createMock( MediawikiApi::class );
 	}
 
 	/**
-	 * @return \PHPUnit_Framework_MockObject_MockObject|Deserializer
+	 * @return MockObject|Deserializer
 	 */
 	public function createMockDeserializer() {
 		return $this->createMock( Deserializer::class );
@@ -53,25 +54,25 @@ class RevisionGetterTest extends TestCase {
 		$api->expects( $this->once() )
 			->method( 'getRequest' )
 			->with(
-				$this->equalTo( new SimpleRequest(
+				new SimpleRequest(
 					'wbgetentities',
 					[ 'ids' => 'Q1' ]
-				) )
+				)
 			)
-			->will( $this->returnValue( [ 'entities' => [ 'Q123' => [
+			->willReturn( [ 'entities' => [ 'Q123' => [
 				'pageid' => '111',
 				'lastrevid' => '222',
 				'modified' => 'TIMESTAMP'
-			] ] ] ) );
+			] ] ] );
 		$deserializer = $this->createMockDeserializer();
 		$deserializer->expects( $this->once() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( [
+			->with( [
 						'pageid' => '111',
 						'lastrevid' => '222',
 						'modified' => 'TIMESTAMP'
-			] ) )
-			->will( $this->returnValue( new Item() ) );
+			] )
+			->willReturn( new Item() );
 
 		$service = new RevisionGetter( $api, $deserializer );
 		$result = $service->getFromId( $id );

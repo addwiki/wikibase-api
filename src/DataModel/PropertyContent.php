@@ -1,8 +1,8 @@
 <?php
 
-namespace Wikibase\DataModel;
+namespace Addwiki\Wikibase\DataModel;
 
-use Mediawiki\DataModel\Content;
+use Addwiki\Mediawiki\DataModel\Content;
 use Wikibase\DataModel\Entity\Property;
 
 /**

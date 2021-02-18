@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Api;
+namespace Addwiki\Wikibase\Api;
 
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\SimpleRequest;
-use Mediawiki\DataModel\EditInfo;
+use Addwiki\Mediawiki\Api\Client\MediawikiApi;
+use Addwiki\Mediawiki\Api\Client\SimpleRequest;
+use Addwiki\Mediawiki\DataModel\EditInfo;
 
 /**
  * @access private

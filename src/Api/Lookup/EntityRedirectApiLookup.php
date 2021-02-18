@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Api\Lookup;
+namespace Addwiki\Wikibase\Api\Lookup;
 
+use Addwiki\Mediawiki\Api\Client\MediawikiApi;
+use Addwiki\Mediawiki\Api\Client\SimpleRequest;
 use BadMethodCallException;
-use Mediawiki\Api\MediawikiApi;
-use Mediawiki\Api\SimpleRequest;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
@@ -23,7 +23,7 @@ class EntityRedirectApiLookup implements EntityRedirectLookup {
 	private $api;
 
 	/**
-	 * @param MediawikiApi $api
+	 * @param \Addwiki\Mediawiki\Api\Client\MediawikiApi $api
 	 */
 	public function __construct( MediawikiApi $api ) {
 		$this->api = $api;

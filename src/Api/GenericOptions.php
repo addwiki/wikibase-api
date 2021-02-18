@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Api;
+namespace Addwiki\Wikibase\Api;
 
 use InvalidArgumentException;
 use OutOfBoundsException;

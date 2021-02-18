@@ -1,28 +1,28 @@
 <?php
 
-namespace Wikibase\Api\Test;
+namespace Addwiki\Wikibase\Tests\Unit;
 
+use Addwiki\Mediawiki\Api\Client\MediawikiApi;
+use Addwiki\Wikibase\Api\Service\AliasGroupSetter;
+use Addwiki\Wikibase\Api\Service\DescriptionSetter;
+use Addwiki\Wikibase\Api\Service\ItemMerger;
+use Addwiki\Wikibase\Api\Service\LabelSetter;
+use Addwiki\Wikibase\Api\Service\ReferenceRemover;
+use Addwiki\Wikibase\Api\Service\ReferenceSetter;
+use Addwiki\Wikibase\Api\Service\RevisionGetter;
+use Addwiki\Wikibase\Api\Service\RevisionSaver;
+use Addwiki\Wikibase\Api\Service\SiteLinkLinker;
+use Addwiki\Wikibase\Api\Service\SiteLinkSetter;
+use Addwiki\Wikibase\Api\Service\StatementCreator;
+use Addwiki\Wikibase\Api\Service\StatementGetter;
+use Addwiki\Wikibase\Api\Service\StatementRemover;
+use Addwiki\Wikibase\Api\Service\StatementSetter;
+use Addwiki\Wikibase\Api\Service\ValueFormatter;
+use Addwiki\Wikibase\Api\Service\ValueParser;
+use Addwiki\Wikibase\Api\WikibaseFactory;
 use Deserializers\Deserializer;
-use Mediawiki\Api\MediawikiApi;
 use PHPUnit\Framework\TestCase;
 use Serializers\Serializer;
-use Wikibase\Api\Service\AliasGroupSetter;
-use Wikibase\Api\Service\DescriptionSetter;
-use Wikibase\Api\Service\ItemMerger;
-use Wikibase\Api\Service\LabelSetter;
-use Wikibase\Api\Service\ReferenceRemover;
-use Wikibase\Api\Service\ReferenceSetter;
-use Wikibase\Api\Service\RevisionGetter;
-use Wikibase\Api\Service\RevisionSaver;
-use Wikibase\Api\Service\SiteLinkLinker;
-use Wikibase\Api\Service\SiteLinkSetter;
-use Wikibase\Api\Service\StatementCreator;
-use Wikibase\Api\Service\StatementGetter;
-use Wikibase\Api\Service\StatementRemover;
-use Wikibase\Api\Service\StatementSetter;
-use Wikibase\Api\Service\ValueFormatter;
-use Wikibase\Api\Service\ValueParser;
-use Wikibase\Api\WikibaseFactory;
 
 /**
  * @author Addshore

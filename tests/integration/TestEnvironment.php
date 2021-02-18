@@ -1,7 +1,9 @@
 <?php
 
-namespace Wikibase\Api\Test;
+namespace Addwiki\Wikibase\Tests\Integration;
 
+use Addwiki\Mediawiki\Api\Client\MediawikiApi;
+use Addwiki\Wikibase\Api\WikibaseFactory;
 use DataValues\BooleanValue;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
@@ -13,8 +15,7 @@ use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
-use Mediawiki\Api\MediawikiApi;
-use Wikibase\Api\WikibaseFactory;
+use Exception;
 
 /**
  * @author Addshore

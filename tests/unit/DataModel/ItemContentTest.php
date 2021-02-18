@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Api\DataModel\Test;
+namespace Addwiki\Wikibase\Tests\Unit\DataModel;
 
+use Addwiki\Wikibase\DataModel\ItemContent;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\ItemContent;
 
 /**
  * @covers Wikibase\DataModel\ItemContent

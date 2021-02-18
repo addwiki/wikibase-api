@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Api\Lookup\Test;
+namespace Addwiki\Wikibase\Tests\Unit\Api\Lookup;
 
+use Addwiki\Wikibase\Api\Lookup\ItemApiLookup;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
-use Wikibase\Api\Lookup\ItemApiLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -17,12 +17,12 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 class ItemApiLookupTest extends TestCase {
 
 	public function testGetItemForId() {
-		/** @var EntityLookup|PHPUnit_Framework_MockObject_MockObject $lookupMock */
+		/** @var EntityLookup|MockObject $lookupMock */
 		$lookupMock = $this->createMock( EntityLookup::class );
 		$lookupMock->expects( $this->once() )
 			->method( 'getEntity' )
-			->with( $this->equalTo( new ItemId( 'Q42' ) ) )
-			->will( $this->returnValue( new Item( new ItemId( 'Q42' ) ) ) );
+			->with( new ItemId( 'Q42' ) )
+			->willReturn( new Item( new ItemId( 'Q42' ) ) );
 
 		$itemApiLookup = new ItemApiLookup( $lookupMock );
 		$this->assertEquals(
