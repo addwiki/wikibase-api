@@ -15,18 +15,12 @@ use Serializers\Serializer;
  */
 class ValueFormatter {
 
-	/**
-	 * @var MediawikiApi
-	 */
-	private $api;
+	private MediawikiApi $api;
+
+	private \Serializers\Serializer $dataValueSerializer;
 
 	/**
-	 * @var Serializer
-	 */
-	private $dataValueSerializer;
-
-	/**
-	 * @param \Addwiki\Mediawiki\Api\Client\MediawikiApi $api
+	 * @param MediawikiApi $api
 	 * @param Serializer $dataValueSerializer
 	 */
 	public function __construct( MediawikiApi $api, Serializer $dataValueSerializer ) {
@@ -37,13 +31,10 @@ class ValueFormatter {
 	/**
 	 * @since 0.2
 	 *
-	 * @param DataValue $value
-	 * @param string $dataTypeId
 	 * @param GenericOptions|null $options
 	 *
-	 * @return string
 	 */
-	public function format( DataValue $value, $dataTypeId, GenericOptions $options = null ) {
+	public function format( DataValue $value, string $dataTypeId, GenericOptions $options = null ): string {
 		if ( $options === null ) {
 			$options = new GenericOptions();
 		}

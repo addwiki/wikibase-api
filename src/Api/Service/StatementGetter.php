@@ -14,15 +14,9 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementGetter {
 
-	/**
-	 * @var MediawikiApi
-	 */
-	private $api;
+	private MediawikiApi $api;
 
-	/**
-	 * @var Deserializer
-	 */
-	private $statementDeserializer;
+	private \Deserializers\Deserializer $statementDeserializer;
 
 	/**
 	 * @param MediawikiApi $api
@@ -33,12 +27,8 @@ class StatementGetter {
 		$this->statementDeserializer = $statementDeserializer;
 	}
 
-	/**
-	 * @param string $guid
-	 *
-	 * @return Statement
-	 */
-	public function getFromGuid( $guid ) {
+	/** @noRector \Rector\TypeDeclaration\Rector\FunctionLike\ReturnTypeDeclarationRector */
+	public function getFromGuid( string $guid ): Statement {
 		$params = [
 			'claim' => $guid,
 		];

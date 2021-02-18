@@ -12,11 +12,11 @@ use Wikibase\DataModel\Entity\Property;
  */
 class PropertyContentTest extends TestCase {
 
-	public function testModel() {
+	public function testModel(): void {
 		$this->assertEquals( 'wikibase-property', PropertyContent::MODEL );
 	}
 
-	public function testValidConstruction() {
+	public function testValidConstruction(): void {
 		$property = Property::newFromType( 'string' );
 		$content = new PropertyContent( $property );
 		$this->assertEquals( $property, $content->getData() );

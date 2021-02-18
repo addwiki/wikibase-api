@@ -22,15 +22,9 @@ use Wikibase\DataModel\SiteLink;
  */
 class RevisionGetter {
 
-	/**
-	 * @var \Addwiki\Mediawiki\Api\Client\MediawikiApi
-	 */
-	protected $api;
+	protected MediawikiApi $api;
 
-	/**
-	 * @var Deserializer
-	 */
-	protected $entityDeserializer;
+	protected \Deserializers\Deserializer $entityDeserializer;
 
 	/**
 	 * @param MediawikiApi $api
@@ -44,9 +38,8 @@ class RevisionGetter {
 	/**
 	 * @since 0.1
 	 * @param string|EntityId $id
-	 * @return Revision
 	 */
-	public function getFromId( $id ) {
+	public function getFromId( $id ): Revision {
 		if ( $id instanceof EntityId ) {
 			$id = $id->getSerialization();
 		}
@@ -58,9 +51,8 @@ class RevisionGetter {
 	/**
 	 * @since 0.1
 	 * @param SiteLink $siteLink
-	 * @return Revision
 	 */
-	public function getFromSiteLink( SiteLink $siteLink ) {
+	public function getFromSiteLink( SiteLink $siteLink ): Revision {
 		$result = $this->api->getRequest( new SimpleRequest(
 			'wbgetentities',
 			[ 'sites' => $siteLink->getSiteId(), 'titles' => $siteLink->getPageName() ]
@@ -70,11 +62,8 @@ class RevisionGetter {
 
 	/**
 	 * @since 0.1
-	 * @param string $siteId
-	 * @param string $title
-	 * @return Revision
 	 */
-	public function getFromSiteAndTitle( $siteId, $title ) {
+	public function getFromSiteAndTitle( string $siteId, string $title ): Revision {
 		$result = $this->api->getRequest( new SimpleRequest(
 			'wbgetentities',
 			[ 'sites' => $siteId, 'titles' => $title ]
@@ -84,7 +73,7 @@ class RevisionGetter {
 
 	/**
 	 * @param array $entityResult
-	 * @return Revision
+	 * @return bool|Revision
 	 * @todo this could be factored into a different class?
 	 */
 	private function newRevisionFromResult( array $entityResult ) {
@@ -105,7 +94,7 @@ class RevisionGetter {
 	 * @param Item|Property $entity
 	 *
 	 * @throws RuntimeException
-	 * @return ItemContent|PropertyContent
+	 * @return ItemContent|PropertyContent|void
 	 * @todo this could be factored into a different class?
 	 */
 	private function getContentFromEntity( $entity ) {

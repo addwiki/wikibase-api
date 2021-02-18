@@ -15,10 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class ItemMerger {
 
-	/**
-	 * @var WikibaseApi
-	 */
-	private $api;
+	private WikibaseApi $api;
 
 	/**
 	 * @param WikibaseApi $api
@@ -32,10 +29,8 @@ class ItemMerger {
 	 * @param Item|ItemId|string $from
 	 * @param Item|ItemId|string $to
 	 * @param EditInfo|null $editInfo
-	 *
-	 * @return bool
 	 */
-	public function merge( $from, $to, EditInfo $editInfo = null ) {
+	public function merge( $from, $to, EditInfo $editInfo = null ): bool {
 		$params = [
 			'fromid' => $this->getIdFromInput( $from ),
 			'toid' => $this->getIdFromInput( $to )
@@ -49,7 +44,7 @@ class ItemMerger {
 	 * @param Item|ItemId|string $input
 	 *
 	 * @throws InvalidArgumentException
-	 * @return string the ItemId Serialization
+	 * @return string|void the ItemId Serialization
 	 */
 	private function getIdFromInput( $input ) {
 		if ( is_string( $input ) ) {

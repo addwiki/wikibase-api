@@ -7,6 +7,8 @@ use Addwiki\Mediawiki\Api\Client\SimpleRequest;
 use BadMethodCallException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 
@@ -17,13 +19,10 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
  */
 class EntityRedirectApiLookup implements EntityRedirectLookup {
 
-	/**
-	 * @var MediawikiApi
-	 */
-	private $api;
+	private MediawikiApi $api;
 
 	/**
-	 * @param \Addwiki\Mediawiki\Api\Client\MediawikiApi $api
+	 * @param MediawikiApi $api
 	 */
 	public function __construct( MediawikiApi $api ) {
 		$this->api = $api;
@@ -40,6 +39,7 @@ class EntityRedirectApiLookup implements EntityRedirectLookup {
 
 	/**
 	 * @see EntityRedirectLookup::getRedirectForEntityId
+	 * @return ItemId|PropertyId
 	 */
 	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ) {
 		$entityIdSerialization = $entityId->getSerialization();

@@ -32,11 +32,7 @@ use Serializers\Serializer;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\DataModel\Services\Lookup\ItemLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyLookup;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
 
 /**
  * @author Addshore
@@ -45,27 +41,18 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
  */
 class WikibaseFactory {
 
-	/**
-	 * @var MediawikiApi
-	 */
-	private $api;
+	private MediawikiApi $api;
+
+	private \Deserializers\Deserializer $dataValueDeserializer;
+
+	private \Serializers\Serializer $dataValueSerializer;
 
 	/**
-	 * @var Deserializer
-	 */
-	private $dataValueDeserializer;
-
-	/**
-	 * @var Serializer
-	 */
-	private $dataValueSerializer;
-
-	/**
-	 * @param \Addwiki\Mediawiki\Api\Client\MediawikiApi $api
+	 * @param MediawikiApi $api
 	 * @param Deserializer $dvDeserializer
 	 * @param Serializer $dvSerializer
 	 */
-	public function __construct( \Addwiki\Mediawiki\Api\Client\MediawikiApi $api, Deserializer $dvDeserializer, Serializer $dvSerializer ) {
+	public function __construct( MediawikiApi $api, Deserializer $dvDeserializer, Serializer $dvSerializer ) {
 		$this->api = $api;
 		$this->dataValueDeserializer = $dvDeserializer;
 		$this->dataValueSerializer = $dvSerializer;
@@ -73,9 +60,8 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.1
-	 * @return RevisionSaver
 	 */
-	public function newRevisionSaver() {
+	public function newRevisionSaver(): RevisionSaver {
 		return new RevisionSaver(
 			$this->newWikibaseApi(),
 			$this->newDataModelDeserializerFactory()->newEntityDeserializer(),
@@ -85,9 +71,8 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.1
-	 * @return RevisionGetter
 	 */
-	public function newRevisionGetter() {
+	public function newRevisionGetter(): RevisionGetter {
 		return new RevisionGetter(
 			$this->api,
 			$this->newDataModelDeserializerFactory()->newEntityDeserializer()
@@ -96,9 +81,8 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.4
-	 * @return RevisionsGetter
 	 */
-	public function newRevisionsGetter() {
+	public function newRevisionsGetter(): RevisionsGetter {
 		return new RevisionsGetter(
 			$this->api,
 			$this->newDataModelDeserializerFactory()->newEntityDeserializer()
@@ -107,9 +91,8 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.2
-	 * @return ValueParser
 	 */
-	public function newValueParser() {
+	public function newValueParser(): ValueParser {
 		return new ValueParser(
 			$this->api,
 			$this->dataValueDeserializer
@@ -118,9 +101,8 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.2
-	 * @return ValueFormatter
 	 */
-	public function newValueFormatter() {
+	public function newValueFormatter(): ValueFormatter {
 		return new ValueFormatter(
 			$this->api,
 			$this->dataValueSerializer
@@ -129,49 +111,43 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.2
-	 * @return ItemMerger
 	 */
-	public function newItemMerger() {
+	public function newItemMerger(): ItemMerger {
 		return new ItemMerger( $this->newWikibaseApi() );
 	}
 
 	/**
 	 * @since 0.2
-	 * @return AliasGroupSetter
 	 */
-	public function newAliasGroupSetter() {
+	public function newAliasGroupSetter(): AliasGroupSetter {
 		return new AliasGroupSetter( $this->newWikibaseApi() );
 	}
 
 	/**
 	 * @since 0.2
-	 * @return DescriptionSetter
 	 */
-	public function newDescriptionSetter() {
+	public function newDescriptionSetter(): DescriptionSetter {
 		return new DescriptionSetter( $this->newWikibaseApi() );
 	}
 
 	/**
 	 * @since 0.2
-	 * @return LabelSetter
 	 */
-	public function newLabelSetter() {
+	public function newLabelSetter(): LabelSetter {
 		return new LabelSetter( $this->newWikibaseApi() );
 	}
 
 	/**
 	 * @since 0.2
-	 * @return ReferenceRemover
 	 */
-	public function newReferenceRemover() {
+	public function newReferenceRemover(): ReferenceRemover {
 		return new ReferenceRemover( $this->newWikibaseApi() );
 	}
 
 	/**
 	 * @since 0.2
-	 * @return ReferenceSetter
 	 */
-	public function newReferenceSetter() {
+	public function newReferenceSetter(): ReferenceSetter {
 		return new ReferenceSetter(
 			$this->newWikibaseApi(),
 			$this->newDataModelSerializerFactory()->newReferenceSerializer()
@@ -180,52 +156,47 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.2
-	 * @return SiteLinkLinker
 	 */
-	public function newSiteLinkLinker() {
+	public function newSiteLinkLinker(): SiteLinkLinker {
 		return new SiteLinkLinker( $this->newWikibaseApi() );
 	}
 
 	/**
 	 * @since 0.2
-	 * @return SiteLinkSetter
 	 */
-	public function newSiteLinkSetter() {
+	public function newSiteLinkSetter(): SiteLinkSetter {
 		return new SiteLinkSetter( $this->newWikibaseApi() );
 	}
 
 	/**
 	 * @since 0.5
-	 * @return BadgeIdsGetter
 	 */
-	public function newBadgeIdsGetter() {
+	public function newBadgeIdsGetter(): BadgeIdsGetter {
 		return new BadgeIdsGetter( $this->api );
 	}
 
 	/**
 	 * @since 0.5
-	 * @return RedirectCreator
 	 */
-	public function newRedirectCreator() {
+	public function newRedirectCreator(): RedirectCreator {
 		return new RedirectCreator( $this->newWikibaseApi() );
 	}
 
-	private function newDataModelDeserializerFactory() {
+	private function newDataModelDeserializerFactory(): DeserializerFactory {
 		return new DeserializerFactory(
 			$this->dataValueDeserializer,
 			new BasicEntityIdParser()
 		);
 	}
 
-	private function newDataModelSerializerFactory() {
+	private function newDataModelSerializerFactory(): SerializerFactory {
 		return new SerializerFactory( $this->dataValueSerializer );
 	}
 
 	/**
 	 * @since 0.5
-	 * @return StatementGetter
 	 */
-	public function newStatementGetter() {
+	public function newStatementGetter(): StatementGetter {
 		return new StatementGetter(
 			$this->api,
 			$this->newDataModelDeserializerFactory()->newStatementDeserializer()
@@ -234,9 +205,8 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.5
-	 * @return StatementSetter
 	 */
-	public function newStatementSetter() {
+	public function newStatementSetter(): StatementSetter {
 		return new StatementSetter(
 			$this->newWikibaseApi(),
 			$this->newDataModelSerializerFactory()->newStatementSerializer()
@@ -245,9 +215,8 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.5
-	 * @return StatementCreator
 	 */
-	public function newStatementCreator() {
+	public function newStatementCreator(): StatementCreator {
 		return new StatementCreator(
 			$this->newWikibaseApi(),
 			$this->dataValueSerializer
@@ -256,64 +225,54 @@ class WikibaseFactory {
 
 	/**
 	 * @since 0.5
-	 * @return StatementRemover
 	 */
-	public function newStatementRemover() {
+	public function newStatementRemover(): StatementRemover {
 		return new StatementRemover( $this->newWikibaseApi() );
 	}
 
-	/**
-	 * @return WikibaseApi
-	 */
-	private function newWikibaseApi() {
+	private function newWikibaseApi(): WikibaseApi {
 		return new WikibaseApi( $this->api );
 	}
 
 	/**
 	 * @since 0.7
-	 * @return EntityLookup
 	 */
-	public function newEntityLookup() {
+	public function newEntityLookup(): EntityApiLookup {
 		return new EntityApiLookup( $this->newRevisionGetter() );
 	}
 
 	/**
 	 * @since 0.7
-	 * @return ItemLookup
 	 */
-	public function newItemLookup() {
+	public function newItemLookup(): ItemApiLookup {
 		return new ItemApiLookup( $this->newEntityLookup() );
 	}
 
 	/**
 	 * @since 0.7
-	 * @return PropertyLookup
 	 */
-	public function newPropertyLookup() {
+	public function newPropertyLookup(): PropertyApiLookup {
 		return new PropertyApiLookup( $this->newEntityLookup() );
 	}
 
 	/**
 	 * @since 0.7
-	 * @return TermLookup
 	 */
-	public function newTermLookup() {
+	public function newTermLookup(): EntityRetrievingTermLookup {
 		return new EntityRetrievingTermLookup( $this->newEntityLookup() );
 	}
 
 	/**
 	 * @since 0.7
-	 * @return EntityDocumentSaver
 	 */
-	public function newEntityDocumentSaver() {
+	public function newEntityDocumentSaver(): EntityDocumentSaver {
 		return new EntityDocumentSaver( $this->newRevisionSaver() );
 	}
 
 	/**
 	 * @since 0.8
-	 * @return EntitySearcher
 	 */
-	public function newEntitySearcher() {
+	public function newEntitySearcher(): EntitySearcher {
 		return new EntitySearcher( $this->api );
 	}
 

@@ -18,10 +18,7 @@ use Wikibase\DataModel\Term\Term;
  */
 class LabelSetter {
 
-	/**
-	 * @var WikibaseApi
-	 */
-	private $api;
+	private WikibaseApi $api;
 
 	/**
 	 * @param WikibaseApi $api
@@ -36,10 +33,8 @@ class LabelSetter {
 	 * @param Term $label
 	 * @param EntityId|Item|Property|SiteLink $target
 	 * @param EditInfo|null $editInfo
-	 *
-	 * @return bool
 	 */
-	public function set( Term $label, $target, EditInfo $editInfo = null ) {
+	public function set( Term $label, $target, EditInfo $editInfo = null ): bool {
 		$this->throwExceptionsOnBadTarget( $target );
 
 		$params = $this->getTargetParamsFromTarget(
@@ -60,7 +55,7 @@ class LabelSetter {
 	 *
 	 * @todo Fix duplicated code
 	 */
-	private function throwExceptionsOnBadTarget( $target ) {
+	private function throwExceptionsOnBadTarget( $target ): void {
 		if ( !$target instanceof EntityId && !$target instanceof Item && !$target instanceof Property && !$target instanceof SiteLink ) {
 			throw new UnexpectedValueException( '$target needs to be an EntityId, Item, Property or SiteLink' );
 		}

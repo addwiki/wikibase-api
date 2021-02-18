@@ -15,10 +15,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
  */
 class StatementRemover {
 
-	/**
-	 * @var WikibaseApi
-	 */
-	private $api;
+	private WikibaseApi $api;
 
 	/**
 	 * @param WikibaseApi $api
@@ -33,10 +30,9 @@ class StatementRemover {
 	 * @param Statement|StatementGuid|string $statement Statement object or GUID
 	 * @param EditInfo|null $editInfo
 	 *
-	 * @return bool
 	 * @throws UnexpectedValueException
 	 */
-	public function remove( $statement, EditInfo $editInfo = null ) {
+	public function remove( $statement, EditInfo $editInfo = null ): bool {
 		if ( is_string( $statement ) ) {
 			$guid = $statement;
 		} elseif ( $statement instanceof StatementGuid ) {

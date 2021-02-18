@@ -16,7 +16,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
  */
 class PropertyApiLookupTest extends TestCase {
 
-	public function testGetPropertyForId() {
+	public function testGetPropertyForId(): void {
 		$property = new Property( new PropertyId( 'P42' ), null, 'string' );
 
 		/** @var EntityLookup|MockObject $lookupMock */
@@ -33,7 +33,7 @@ class PropertyApiLookupTest extends TestCase {
 		);
 	}
 
-	public function testGetPropertyForIdWithException() {
+	public function testGetPropertyForIdWithException(): void {
 		/** @var EntityLookup|PHPUnit_Framework_MockObject_MockObject $lookupMock */
 		$lookupMock = $this->createMock( EntityLookup::class );
 		$lookupMock->expects( $this->once() )

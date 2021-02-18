@@ -17,15 +17,9 @@ use Wikibase\DataModel\Statement\StatementGuid;
  */
 class ReferenceSetter {
 
-	/**
-	 * @var WikibaseApi
-	 */
-	private $api;
+	private WikibaseApi $api;
 
-	/**
-	 * @var Serializer
-	 */
-	private $referenceSerializer;
+	private \Serializers\Serializer $referenceSerializer;
 
 	/**
 	 * @param WikibaseApi $api
@@ -44,10 +38,9 @@ class ReferenceSetter {
 	 * @param Reference|string|null $targetReference target (old) reference of hash
 	 * @param EditInfo|null $editInfo
 	 *
-	 * @return bool
 	 * @throws UnexpectedValueException
 	 */
-	public function set( Reference $reference, $statement, $targetReference = null, EditInfo $editInfo = null ) {
+	public function set( Reference $reference, $statement, $targetReference = null, EditInfo $editInfo = null ): bool {
 		if ( is_string( $statement ) ) {
 			$guid = $statement;
 		} elseif ( $statement instanceof StatementGuid ) {

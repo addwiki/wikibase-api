@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
  */
 class GenericOptionsTest extends TestCase {
 
-	public function testConstructor() {
+	public function testConstructor(): void {
 		$options = [
 			'foo' => 42,
 			'bar' => 4.2,
@@ -28,7 +28,7 @@ class GenericOptionsTest extends TestCase {
 		$this->assertFalse( $genericOptions->hasOption( 'ohi' ) );
 	}
 
-	public function testConstructorFail() {
+	public function testConstructorFail(): void {
 		$options = [
 			'foo' => 42,
 			'bar' => 4.2,
@@ -40,7 +40,7 @@ class GenericOptionsTest extends TestCase {
 		new GenericOptions( $options );
 	}
 
-	public function setOptionProvider() {
+	public function setOptionProvider(): array {
 		$argLists = [];
 
 		$genericOptions = new GenericOptions();
@@ -56,11 +56,9 @@ class GenericOptionsTest extends TestCase {
 	/**
 	 * @dataProvider setOptionProvider
 	 *
-	 * @param GenericOptions $options
-	 * @param string $option
 	 * @param mixed $value
 	 */
-	public function testSetAndGetOption( GenericOptions $options, $option, $value ) {
+	public function testSetAndGetOption( GenericOptions $options, string $option, $value ): void {
 		$options->setOption( $option, $value );
 
 		$this->assertEquals(
@@ -70,7 +68,7 @@ class GenericOptionsTest extends TestCase {
 		);
 	}
 
-	public function testHashOption() {
+	public function testHashOption(): void {
 		$options = [
 			'foo' => 42,
 			'bar' => 4.2,
@@ -87,7 +85,7 @@ class GenericOptionsTest extends TestCase {
 		$this->assertFalse( $genericOptions->hasOption( 'Foo' ) );
 	}
 
-	public function testSetOption() {
+	public function testSetOption(): void {
 		$genericOptions = new GenericOptions( [ 'foo' => 'bar' ] );
 
 		$values = [
@@ -106,14 +104,14 @@ class GenericOptionsTest extends TestCase {
 		}
 	}
 
-	public function testForSomeReasonPhpSegfaultsIfThereIsOneMethodLess() {
+	public function testForSomeReasonPhpSegfaultsIfThereIsOneMethodLess(): void {
 		$this->assertTrue( (bool)'This is fucking weird' );
 	}
 
 	/**
 	 * @dataProvider nonExistingOptionsProvider
 	 */
-	public function testGetOption( $nonExistingOption ) {
+	public function testGetOption( $nonExistingOption ): void {
 		$this->assertTrue( true );
 		$genericOptions = new GenericOptions( [ 'foo' => 'bar' ] );
 
@@ -122,7 +120,7 @@ class GenericOptionsTest extends TestCase {
 		$genericOptions->getOption( $nonExistingOption );
 	}
 
-	public function nonExistingOptionsProvider() {
+	public function nonExistingOptionsProvider(): array {
 		$argLists = [];
 
 		$argLists[] = [ 'bar' ];
@@ -134,7 +132,7 @@ class GenericOptionsTest extends TestCase {
 		return $argLists;
 	}
 
-	public function testRequireOption() {
+	public function testRequireOption(): void {
 		$options = [
 			'foo' => 42,
 			'bar' => 4.2,
@@ -152,7 +150,7 @@ class GenericOptionsTest extends TestCase {
 		$genericOptions->requireOption( 'Foo' );
 	}
 
-	public function testDefaultOption() {
+	public function testDefaultOption(): void {
 		$options = [
 			'foo' => 42,
 			'bar' => 4.2,

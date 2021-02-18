@@ -20,20 +20,11 @@ use Wikibase\DataModel\Entity\Property;
  */
 class RevisionSaver {
 
-	/**
-	 * @var WikibaseApi
-	 */
-	protected $api;
+	protected WikibaseApi $api;
 
-	/**
-	 * @var Deserializer
-	 */
-	private $entityDeserializer;
+	private \Deserializers\Deserializer $entityDeserializer;
 
-	/**
-	 * @var Serializer
-	 */
-	private $entitySerializer;
+	private Serializer $entitySerializer;
 
 	/**
 	 * @param WikibaseApi $api
@@ -54,7 +45,7 @@ class RevisionSaver {
 	 * @throws InvalidArgumentException
 	 * @return Item|Property new version of the entity
 	 */
-	public function save( Revision $revision, EditInfo $editInfo = null ) {
+	public function save( Revision $revision, EditInfo $editInfo = null ): object {
 		if ( !$revision->getContent()->getData() instanceof EntityDocument ) {
 			throw new RuntimeException( 'Can only save Content of EntityDocuments' );
 		}

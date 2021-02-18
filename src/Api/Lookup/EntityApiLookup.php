@@ -13,10 +13,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
  */
 class EntityApiLookup implements EntityLookup {
 
-	/**
-	 * @var RevisionGetter
-	 */
-	private $revisionGetter;
+	private RevisionGetter $revisionGetter;
 
 	/**
 	 * @param RevisionGetter $revisionGetter
@@ -27,6 +24,7 @@ class EntityApiLookup implements EntityLookup {
 
 	/**
 	 * @see EntityLookup::getEntity
+	 * @return null|mixed
 	 */
 	public function getEntity( EntityId $entityId ) {
 		$revision = $this->revisionGetter->getFromId( $entityId );
@@ -40,6 +38,7 @@ class EntityApiLookup implements EntityLookup {
 
 	/**
 	 * @see EntityLookup::hasEntity
+	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId ) {
 		$revision = $this->revisionGetter->getFromId( $entityId );

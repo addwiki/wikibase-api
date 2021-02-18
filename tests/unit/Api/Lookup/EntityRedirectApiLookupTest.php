@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class EntityRedirectApiLookupTest extends TestCase {
 
-	public function testGetRedirectForEntityId() {
+	public function testGetRedirectForEntityId(): void {
 		/** @var MediawikiApi|MockObject $apiMock */
 		$apiMock = $this->createMock( MediawikiApi::class );
 		$apiMock->expects( $this->once() )

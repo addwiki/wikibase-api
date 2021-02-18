@@ -13,23 +13,18 @@ use Addwiki\Mediawiki\DataModel\EditInfo;
  */
 class WikibaseApi {
 
-	/**
-	 * @var MediawikiApi
-	 */
-	private $api;
+	private MediawikiApi $api;
 
 	public function __construct( MediawikiApi $api ) {
 		$this->api = $api;
 	}
 
 	/**
-	 * @param string $action
-	 * @param array $params
 	 * @param EditInfo|null $editInfo
 	 *
 	 * @return mixed
 	 */
-	public function postRequest( $action, array $params, EditInfo $editInfo = null ) {
+	public function postRequest( string $action, array $params, EditInfo $editInfo = null ) {
 		if ( $editInfo !== null ) {
 			$params = array_merge( $this->getEditInfoParams( $editInfo ), $params );
 		}
@@ -38,7 +33,7 @@ class WikibaseApi {
 		return $this->api->postRequest( new SimpleRequest( $action, $params ) );
 	}
 
-	private function getEditInfoParams( EditInfo $editInfo ) {
+	private function getEditInfoParams( EditInfo $editInfo ): array {
 		$params = [];
 
 		if ( $editInfo->getSummary() !== '' ) {

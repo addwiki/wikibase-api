@@ -25,9 +25,8 @@ class PropertyContent extends Content {
 	/**
 	 * @required
 	 * @see Content::getData
-	 * @return Property
 	 */
-	public function getData() {
+	public function getData(): \Wikibase\DataModel\Entity\Property {
 		return parent::getData();
 	}
 

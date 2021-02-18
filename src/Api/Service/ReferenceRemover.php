@@ -16,10 +16,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
  */
 class ReferenceRemover {
 
-	/**
-	 * @var WikibaseApi
-	 */
-	private $api;
+	private WikibaseApi $api;
 
 	/**
 	 * @param WikibaseApi $api
@@ -36,9 +33,8 @@ class ReferenceRemover {
 	 * @param EditInfo|null $editInfo
 	 *
 	 * @throws UnexpectedValueException
-	 * @return bool
 	 */
-	public function set( $reference, $target, EditInfo $editInfo = null ) {
+	public function set( $reference, $target, EditInfo $editInfo = null ): bool {
 		if ( $reference instanceof Reference ) {
 			$reference = $reference->getHash();
 		}

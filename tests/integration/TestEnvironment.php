@@ -22,11 +22,11 @@ use Exception;
  */
 class TestEnvironment {
 
-	public static function newDefault() {
+	public static function newDefault(): TestEnvironment {
 		return new self();
 	}
 
-	private $factory;
+	private WikibaseFactory $factory;
 
 	public function __construct() {
 		$apiUrl = getenv( 'ADDWIKI_MW_API' );
@@ -48,11 +48,11 @@ class TestEnvironment {
 		);
 	}
 
-	public function getFactory() {
+	public function getFactory(): WikibaseFactory {
 		return $this->factory;
 	}
 
-	private function newDataValueDeserializer() {
+	private function newDataValueDeserializer(): DataValueDeserializer {
 		return new DataValueDeserializer(
 			[
 				'boolean' => BooleanValue::class,

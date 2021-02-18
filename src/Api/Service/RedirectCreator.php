@@ -13,10 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 class RedirectCreator {
 
-	/**
-	 * @var WikibaseApi
-	 */
-	private $api;
+	private WikibaseApi $api;
 
 	/**
 	 * @param WikibaseApi $api
@@ -29,10 +26,8 @@ class RedirectCreator {
 	 * @param EntityId $from
 	 * @param EntityId $to
 	 * @param EditInfo|null $editInfo
-	 *
-	 * @return bool
 	 */
-	public function create( EntityId $from, EntityId $to, EditInfo $editInfo = null ) {
+	public function create( EntityId $from, EntityId $to, EditInfo $editInfo = null ): bool {
 		$params = [
 			'from' => $from->__toString(),
 			'to' => $to->__toString(),

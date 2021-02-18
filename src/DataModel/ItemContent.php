@@ -25,9 +25,8 @@ class ItemContent extends Content {
 	/**
 	 * @required
 	 * @see Content::getData
-	 * @return Item
 	 */
-	public function getData() {
+	public function getData(): \Wikibase\DataModel\Entity\Item {
 		return parent::getData();
 	}
 }

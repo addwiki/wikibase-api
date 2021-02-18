@@ -16,7 +16,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
  */
 class ItemApiLookupTest extends TestCase {
 
-	public function testGetItemForId() {
+	public function testGetItemForId(): void {
 		/** @var EntityLookup|MockObject $lookupMock */
 		$lookupMock = $this->createMock( EntityLookup::class );
 		$lookupMock->expects( $this->once() )
@@ -31,7 +31,7 @@ class ItemApiLookupTest extends TestCase {
 		);
 	}
 
-	public function testGetItemForIdWithException() {
+	public function testGetItemForIdWithException(): void {
 		/** @var EntityLookup|PHPUnit_Framework_MockObject_MockObject $lookupMock */
 		$lookupMock = $this->createMock( EntityLookup::class );
 		$lookupMock->expects( $this->once() )

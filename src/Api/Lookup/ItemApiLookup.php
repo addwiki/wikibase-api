@@ -2,6 +2,7 @@
 
 namespace Addwiki\Wikibase\Api\Lookup;
 
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
@@ -14,10 +15,7 @@ use Wikibase\DataModel\Services\Lookup\ItemLookup;
  */
 class ItemApiLookup implements ItemLookup {
 
-	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
+	private \Wikibase\DataModel\Services\Lookup\EntityLookup $entityLookup;
 
 	/**
 	 * @param EntityLookup $entityLookup
@@ -28,6 +26,7 @@ class ItemApiLookup implements ItemLookup {
 
 	/**
 	 * @see ItemLookup::getItemForId
+	 * @return EntityDocument|null
 	 */
 	public function getItemForId( ItemId $itemId ) {
 		return $this->entityLookup->getEntity( $itemId );

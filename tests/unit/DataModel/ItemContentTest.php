@@ -12,11 +12,11 @@ use Wikibase\DataModel\Entity\Item;
  */
 class ItemContentTest extends TestCase {
 
-	public function testModel() {
+	public function testModel(): void {
 		$this->assertEquals( 'wikibase-item', ItemContent::MODEL );
 	}
 
-	public function testValidConstruction() {
+	public function testValidConstruction(): void {
 		$item = new Item();
 		$content = new ItemContent( $item );
 		$this->assertEquals( $item, $content->getData() );

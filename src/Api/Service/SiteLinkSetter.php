@@ -17,10 +17,7 @@ use Wikibase\DataModel\SiteLink;
  */
 class SiteLinkSetter {
 
-	/**
-	 * @var WikibaseApi
-	 */
-	private $api;
+	private WikibaseApi $api;
 
 	/**
 	 * @param WikibaseApi $api
@@ -35,10 +32,8 @@ class SiteLinkSetter {
 	 * @param SiteLink $siteLink
 	 * @param EntityId|Item|Property|SiteLink $target
 	 * @param EditInfo|null $editInfo
-	 *
-	 * @return bool
 	 */
-	public function set( SiteLink $siteLink, $target, EditInfo $editInfo = null ) {
+	public function set( SiteLink $siteLink, $target, EditInfo $editInfo = null ): bool {
 		$this->throwExceptionsOnBadTarget( $target );
 
 		$params = $this->getTargetParamsFromTarget(
@@ -60,7 +55,7 @@ class SiteLinkSetter {
 	 *
 	 * @todo Fix duplicated code
 	 */
-	private function throwExceptionsOnBadTarget( $target ) {
+	private function throwExceptionsOnBadTarget( $target ): void {
 		if ( !$target instanceof EntityId && !$target instanceof Item && !$target instanceof Property && !$target instanceof SiteLink ) {
 			throw new UnexpectedValueException( '$target needs to be an EntityId, Item, Property or SiteLink' );
 		}

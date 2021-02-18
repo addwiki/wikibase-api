@@ -17,15 +17,13 @@ use RuntimeException;
  */
 final class GenericOptions {
 
-	/**
-	 * @var array
-	 */
-	private $options = [];
+	private array $options = [];
 
 	/**
 	 * @since 0.2
 	 *
 	 * @throws InvalidArgumentException
+	 * @param mixed[] $options
 	 */
 	public function __construct( array $options = [] ) {
 		foreach ( array_keys( $options ) as $option ) {
@@ -42,12 +40,10 @@ final class GenericOptions {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $option
 	 * @param mixed $value
-	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function setOption( $option, $value ) {
+	public function setOption( string $option, $value ): void {
 		if ( !is_string( $option ) ) {
 			throw new InvalidArgumentException( 'Option name needs to be a string' );
 		}
@@ -61,11 +57,10 @@ final class GenericOptions {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $option
 	 *
 	 * @throws OutOfBoundsException
 	 */
-	public function getOption( $option ) {
+	public function getOption( string $option ) {
 		if ( !array_key_exists( $option, $this->options ) ) {
 			throw new OutOfBoundsException( sprintf( "Option '%s' has not been set so cannot be obtained", $option ) );
 		}
@@ -78,11 +73,9 @@ final class GenericOptions {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $option
 	 *
-	 * @return bool
 	 */
-	public function hasOption( $option ) {
+	public function hasOption( string $option ): bool {
 		return array_key_exists( $option, $this->options );
 	}
 
@@ -91,10 +84,9 @@ final class GenericOptions {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $option
 	 * @param mixed $default
 	 */
-	public function defaultOption( $option, $default ) {
+	public function defaultOption( string $option, $default ): void {
 		if ( !$this->hasOption( $option ) ) {
 			$this->setOption( $option, $default );
 		}
@@ -106,11 +98,10 @@ final class GenericOptions {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $option
 	 *
 	 * @throws RuntimeException
 	 */
-	public function requireOption( $option ) {
+	public function requireOption( string $option ): void {
 		if ( !$this->hasOption( $option ) ) {
 			throw new RuntimeException( 'Required option"' . $option . '" is not set' );
 		}
@@ -121,9 +112,9 @@ final class GenericOptions {
 	 *
 	 * @since 0.2
 	 *
-	 * @return array
+	 * @return mixed[]
 	 */
-	public function getOptions() {
+	public function getOptions(): array {
 		return $this->options;
 	}
 

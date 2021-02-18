@@ -6,6 +6,8 @@ use Addwiki\Mediawiki\DataModel\Content;
 use Addwiki\Mediawiki\DataModel\EditInfo;
 use Addwiki\Mediawiki\DataModel\Revision;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * @access private
@@ -14,10 +16,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
  */
 class EntityDocumentSaver {
 
-	/**
-	 * @var RevisionSaver
-	 */
-	private $revisionSaver;
+	private RevisionSaver $revisionSaver;
 
 	public function __construct( RevisionSaver $revisionSaver ) {
 		$this->revisionSaver = $revisionSaver;
@@ -29,7 +28,7 @@ class EntityDocumentSaver {
 	 * @param EntityDocument $entityDocument
 	 * @param EditInfo $editInfo
 	 *
-	 * @return EntityDocument
+	 * @return Item|Property
 	 */
 	public function save( EntityDocument $entityDocument, EditInfo $editInfo ) {
 		return $this->revisionSaver->save( new Revision( new Content( $entityDocument ) ), $editInfo );

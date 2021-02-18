@@ -12,13 +12,10 @@ use Addwiki\Mediawiki\Api\Client\SimpleRequest;
  */
 class EntitySearcher {
 
-	/**
-	 * @var MediawikiApi
-	 */
-	private $api;
+	private MediawikiApi $api;
 
 	/**
-	 * @param \Addwiki\Mediawiki\Api\Client\MediawikiApi $api
+	 * @param MediawikiApi $api
 	 */
 	public function __construct( MediawikiApi $api ) {
 		$this->api = $api;
@@ -27,12 +24,9 @@ class EntitySearcher {
 	/**
 	 * @since 0.8
 	 *
-	 * @param string $entityType
-	 * @param string $string
-	 * @param string $language
 	 * @return string[] EntityIds
 	 */
-	public function search( $entityType, $string, $language ) {
+	public function search( string $entityType, string $string, string $language ): array {
 		$params = [
 			'search' => $string,
 			'language' => $language,

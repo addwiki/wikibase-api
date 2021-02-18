@@ -17,15 +17,9 @@ use RuntimeException;
  */
 class ValueParser {
 
-	/**
-	 * @var MediawikiApi
-	 */
-	private $api;
+	private MediawikiApi $api;
 
-	/**
-	 * @var Deserializer
-	 */
-	private $dataValueDeserializer;
+	private \Deserializers\Deserializer $dataValueDeserializer;
 
 	/**
 	 * @param MediawikiApi $api
@@ -44,7 +38,7 @@ class ValueParser {
 	 *
 	 * @return DataValue|DataValue[] if array parsed object has same array key as value
 	 */
-	public function parse( $inputValues, $parser ) {
+	public function parse( $inputValues, string $parser ) {
 		return $this->parseAsync( $inputValues, $parser )->wait();
 	}
 
@@ -56,7 +50,7 @@ class ValueParser {
 	 *
 	 * @return PromiseInterface of a DataValue object or array of DataValue objects with same keys as values
 	 */
-	public function parseAsync( $inputValues, $parser ) {
+	public function parseAsync( $inputValues, string $parser ): \GuzzleHttp\Promise\PromiseInterface {
 		$promise = $this->api->getRequestAsync(
 			new SimpleRequest(
 				'wbparsevalue',

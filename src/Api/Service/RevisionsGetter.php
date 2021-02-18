@@ -24,15 +24,9 @@ use Wikibase\DataModel\SiteLink;
  */
 class RevisionsGetter {
 
-	/**
-	 * @var MediawikiApi
-	 */
-	protected $api;
+	protected MediawikiApi $api;
 
-	/**
-	 * @var Deserializer
-	 */
-	private $entityDeserializer;
+	private \Deserializers\Deserializer $entityDeserializer;
 
 	/**
 	 * @param MediawikiApi $api
@@ -52,10 +46,8 @@ class RevisionsGetter {
 	 *     string Serialized entity ids (these are not validated before passing to the api)
 	 *
 	 * @since 0.4
-	 *
-	 * @return Revisions
 	 */
-	public function getRevisions( array $identifyingInfoArray ) {
+	public function getRevisions( array $identifyingInfoArray ): Revisions {
 		$entityIdStrings = [];
 		$siteLinksStringMapping = [];
 
@@ -99,10 +91,9 @@ class RevisionsGetter {
 
 	/**
 	 * @param array $entitiesResult
-	 * @return Revisions
 	 * @todo this could be factored into a different class?
 	 */
-	private function newRevisionsFromResult( array $entitiesResult ) {
+	private function newRevisionsFromResult( array $entitiesResult ): Revisions {
 		$revisions = new Revisions();
 		foreach ( $entitiesResult as $entityResult ) {
 			if ( array_key_exists( 'missing', $entityResult ) ) {
@@ -124,7 +115,7 @@ class RevisionsGetter {
 	 * @param Item|Property $entity
 	 *
 	 * @throws RuntimeException
-	 * @return ItemContent|PropertyContent
+	 * @return ItemContent|PropertyContent|void
 	 * @todo this could be factored into a different class?
 	 */
 	private function getContentFromEntity( $entity ) {

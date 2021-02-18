@@ -20,15 +20,9 @@ use Wikibase\DataModel\Term\Term;
  */
 class IntegrationTest extends TestCase {
 
-	/**
-	 * @var ItemId
-	 */
-	private static $itemId;
+	private static ItemId $itemId;
 
-	/**
-	 * @var Item
-	 */
-	private static $localItem;
+	private static ?Item $localItem = null;
 
 	public static function setUpBeforeClass() : void {
 		parent::setUpBeforeClass();
@@ -37,7 +31,7 @@ class IntegrationTest extends TestCase {
 		self::$localItem->getFingerprint()->getDescriptions()->setTextForLanguage( 'en', 'TestDescription - ' . microtime() );
 	}
 
-	public function testCreateItem() {
+	public function testCreateItem(): void {
 		$factory = TestEnvironment::newDefault()->getFactory();
 
 		$newItem = $factory->newRevisionSaver()->save( new Revision( new ItemContent( self::$localItem ) ) );
@@ -49,7 +43,7 @@ class IntegrationTest extends TestCase {
 	/**
 	 * @depends testCreateItem
 	 */
-	public function testGetNewlyCreatedItem() {
+	public function testGetNewlyCreatedItem(): void {
 		$factory = TestEnvironment::newDefault()->getFactory();
 		// Make sure the RevisionGetter will also return the same Item as expected
 		$gotItem = $factory->newRevisionGetter()->getFromId( self::$itemId )->getContent()->getData();
@@ -59,7 +53,7 @@ class IntegrationTest extends TestCase {
 	/**
 	 * @depends testCreateItem
 	 */
-	public function testSetLabel() {
+	public function testSetLabel(): void {
 		$factory = TestEnvironment::newDefault()->getFactory();
 
 		$labelDe = new Term( 'de', 'Foo' . microtime() );
@@ -71,7 +65,7 @@ class IntegrationTest extends TestCase {
 	/**
 	 * @depends testCreateItem
 	 */
-	public function testSetDescription() {
+	public function testSetDescription(): void {
 		$factory = TestEnvironment::newDefault()->getFactory();
 
 		$descDe = new Term( 'de', 'FooBarDesc' . microtime() );
@@ -83,7 +77,7 @@ class IntegrationTest extends TestCase {
 	/**
 	 * @depends testCreateItem
 	 */
-	public function testSetAliases() {
+	public function testSetAliases(): void {
 		$factory = TestEnvironment::newDefault()->getFactory();
 
 		$aliasFr = new AliasGroup( 'fr', [ 'aa', 'bb' ] );
@@ -95,7 +89,7 @@ class IntegrationTest extends TestCase {
 	/**
 	 * @depends testCreateItem
 	 */
-	public function testSetSitelink() {
+	public function testSetSitelink(): void {
 		$factory = TestEnvironment::newDefault()->getFactory();
 
 		$enwikiLondon = new SiteLink( 'mywiki', 'Main Page' );
@@ -108,7 +102,7 @@ class IntegrationTest extends TestCase {
 	 * @depends testCreateItem
 	 * @depends testSetSitelink
 	 */
-	public function testLinkSitelinks() {
+	public function testLinkSitelinks(): void {
 		$factory = TestEnvironment::newDefault()->getFactory();
 
 		$enwikiLondon = new SiteLink( 'mywiki', 'Main Page' );
@@ -121,7 +115,7 @@ class IntegrationTest extends TestCase {
 	/**
 	 * @depends testCreateItem
 	 */
-	public function testEmptyItem() {
+	public function testEmptyItem(): void {
 		$factory = TestEnvironment::newDefault()->getFactory();
 
 		self::$localItem = new Item();

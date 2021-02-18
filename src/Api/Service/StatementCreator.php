@@ -4,7 +4,6 @@ namespace Addwiki\Wikibase\Api\Service;
 
 use Addwiki\Mediawiki\DataModel\EditInfo;
 use Addwiki\Wikibase\Api\WikibaseApi;
-use Deserializers\Deserializer;
 use Serializers\Serializer;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityId;
@@ -20,15 +19,9 @@ use Wikibase\DataModel\Snak\Snak;
  */
 class StatementCreator {
 
-	/**
-	 * @var WikibaseApi
-	 */
-	private $api;
+	private WikibaseApi $api;
 
-	/**
-	 * @var Deserializer
-	 */
-	private $dataValueSerializer;
+	private \Serializers\Serializer $dataValueSerializer;
 
 	/**
 	 * @param WikibaseApi $api
@@ -49,7 +42,7 @@ class StatementCreator {
 	 * @return string the GUID of the claim
 	 * @throws UnexpectedValueException
 	 */
-	public function create( Snak $mainSnak, $target, EditInfo $editInfo = null ) {
+	public function create( Snak $mainSnak, $target, EditInfo $editInfo = null ): string {
 		if ( is_string( $target ) ) {
 			$entityId = $target;
 		} elseif ( $target instanceof EntityId ) {

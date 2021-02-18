@@ -13,10 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class BadgeIdsGetter {
 
-	/**
-	 * @var MediawikiApi
-	 */
-	private $api;
+	private MediawikiApi $api;
 
 	/**
 	 * @param MediawikiApi $api
@@ -29,7 +26,7 @@ class BadgeIdsGetter {
 	 * @since 0.5
 	 * @return ItemId[]
 	 */
-	public function get() {
+	public function get(): array {
 		$result = $this->api->getRequest( new SimpleRequest( 'wbavailablebadges' ) );
 		$ids = [];
 		foreach ( $result['badges'] as $badgeIdString ) {
