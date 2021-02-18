@@ -12,27 +12,19 @@ use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class ReferenceSetter {
 
 	private WikibaseApi $api;
 
-	private \Serializers\Serializer $referenceSerializer;
+	private Serializer $referenceSerializer;
 
-	/**
-	 * @param WikibaseApi $api
-	 * @param Serializer $referenceSerializer
-	 */
 	public function __construct( WikibaseApi $api, Serializer $referenceSerializer ) {
 		$this->api = $api;
 		$this->referenceSerializer = $referenceSerializer;
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @param Reference $reference new reference value
 	 * @param Statement|StatementGuid|string $statement Statement object or GUID which has the reference
 	 * @param Reference|string|null $targetReference target (old) reference of hash

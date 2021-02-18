@@ -10,8 +10,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 
 /**
- * @author Addshore
- *
  * @covers Wikibase\Api\Lookup\PropertyApiLookup
  */
 class PropertyApiLookupTest extends TestCase {

@@ -14,27 +14,19 @@ use Wikibase\DataModel\Snak\Snak;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class StatementCreator {
 
 	private WikibaseApi $api;
 
-	private \Serializers\Serializer $dataValueSerializer;
+	private Serializer $dataValueSerializer;
 
-	/**
-	 * @param WikibaseApi $api
-	 * @param Serializer $dataValueSerializer
-	 */
 	public function __construct( WikibaseApi $api, Serializer $dataValueSerializer ) {
 		$this->api = $api;
 		$this->dataValueSerializer = $dataValueSerializer;
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @param Snak $mainSnak
 	 * @param EntityId|Item|Property|string $target
 	 * @param EditInfo|null $editInfo

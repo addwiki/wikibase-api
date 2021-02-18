@@ -5,9 +5,6 @@ namespace Addwiki\Wikibase\DataModel;
 use Addwiki\Mediawiki\DataModel\Content;
 use Wikibase\DataModel\Entity\Property;
 
-/**
- * @author Addshore
- */
 class PropertyContent extends Content {
 
 	/**
@@ -15,9 +12,6 @@ class PropertyContent extends Content {
 	 */
 	public const MODEL = 'wikibase-property';
 
-	/**
-	 * @param Property $property
-	 */
 	public function __construct( Property $property ) {
 		parent::__construct( $property, self::MODEL );
 	}
@@ -26,7 +20,7 @@ class PropertyContent extends Content {
 	 * @required
 	 * @see Content::getData
 	 */
-	public function getData(): \Wikibase\DataModel\Entity\Property {
+	public function getData(): Property {
 		return parent::getData();
 	}
 

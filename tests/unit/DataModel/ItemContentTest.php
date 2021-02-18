@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\Item;
 
 /**
  * @covers Wikibase\DataModel\ItemContent
- * @author Addshore
  */
 class ItemContentTest extends TestCase {
 

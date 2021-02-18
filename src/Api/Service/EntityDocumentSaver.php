@@ -11,8 +11,6 @@ use Wikibase\DataModel\Entity\Property;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class EntityDocumentSaver {
 
@@ -23,8 +21,6 @@ class EntityDocumentSaver {
 	}
 
 	/**
-	 * @since 0.7
-	 *
 	 * @param EntityDocument $entityDocument
 	 * @param EditInfo $editInfo
 	 *

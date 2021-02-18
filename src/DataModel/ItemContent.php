@@ -5,9 +5,6 @@ namespace Addwiki\Wikibase\DataModel;
 use Addwiki\Mediawiki\DataModel\Content;
 use Wikibase\DataModel\Entity\Item;
 
-/**
- * @author Addshore
- */
 class ItemContent extends Content {
 
 	/**
@@ -15,9 +12,6 @@ class ItemContent extends Content {
 	 */
 	public const MODEL = 'wikibase-item';
 
-	/**
-	 * @param Item $item
-	 */
 	public function __construct( Item $item ) {
 		parent::__construct( $item, self::MODEL );
 	}
@@ -26,7 +20,7 @@ class ItemContent extends Content {
 	 * @required
 	 * @see Content::getData
 	 */
-	public function getData(): \Wikibase\DataModel\Entity\Item {
+	public function getData(): Item {
 		return parent::getData();
 	}
 }

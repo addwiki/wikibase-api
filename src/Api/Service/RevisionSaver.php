@@ -15,21 +15,13 @@ use Wikibase\DataModel\Entity\Property;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class RevisionSaver {
 
 	protected WikibaseApi $api;
-
-	private \Deserializers\Deserializer $entityDeserializer;
-
+	private Deserializer $entityDeserializer;
 	private Serializer $entitySerializer;
 
-	/**
-	 * @param WikibaseApi $api
-	 * @param Deserializer $entityDeserializer
-	 */
 	public function __construct( WikibaseApi $api, Deserializer $entityDeserializer, Serializer $entitySerializer ) {
 		$this->api = $api;
 		$this->entityDeserializer = $entityDeserializer;
@@ -37,7 +29,6 @@ class RevisionSaver {
 	}
 
 	/**
-	 * @since 0.1
 	 * @param Revision $revision
 	 * @param EditInfo|null $editInfo
 	 *

@@ -17,26 +17,19 @@ use Wikibase\DataModel\SiteLink;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class RevisionGetter {
 
 	protected MediawikiApi $api;
 
-	protected \Deserializers\Deserializer $entityDeserializer;
+	protected Deserializer $entityDeserializer;
 
-	/**
-	 * @param MediawikiApi $api
-	 * @param Deserializer $entityDeserializer
-	 */
 	public function __construct( MediawikiApi $api, Deserializer $entityDeserializer ) {
 		$this->api = $api;
 		$this->entityDeserializer = $entityDeserializer;
 	}
 
 	/**
-	 * @since 0.1
 	 * @param string|EntityId $id
 	 */
 	public function getFromId( $id ): Revision {
@@ -49,7 +42,6 @@ class RevisionGetter {
 	}
 
 	/**
-	 * @since 0.1
 	 * @param SiteLink $siteLink
 	 */
 	public function getFromSiteLink( SiteLink $siteLink ): Revision {
@@ -60,9 +52,6 @@ class RevisionGetter {
 		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 
-	/**
-	 * @since 0.1
-	 */
 	public function getFromSiteAndTitle( string $siteId, string $title ): Revision {
 		$result = $this->api->getRequest( new SimpleRequest(
 			'wbgetentities',

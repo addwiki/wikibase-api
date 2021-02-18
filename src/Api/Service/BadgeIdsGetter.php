@@ -8,22 +8,16 @@ use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class BadgeIdsGetter {
 
 	private MediawikiApi $api;
 
-	/**
-	 * @param MediawikiApi $api
-	 */
 	public function __construct( MediawikiApi $api ) {
 		$this->api = $api;
 	}
 
 	/**
-	 * @since 0.5
 	 * @return ItemId[]
 	 */
 	public function get(): array {

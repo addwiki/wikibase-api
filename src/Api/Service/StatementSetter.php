@@ -10,27 +10,19 @@ use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class StatementSetter {
 
 	private WikibaseApi $api;
 
-	private \Serializers\Serializer $statementSerializer;
+	private Serializer $statementSerializer;
 
-	/**
-	 * @param WikibaseApi $api
-	 * @param Serializer $statementSerializer
-	 */
 	public function __construct( WikibaseApi $api, Serializer $statementSerializer ) {
 		$this->api = $api;
 		$this->statementSerializer = $statementSerializer;
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param Statement $statement
 	 * @param EditInfo|null $editInfo
 	 *

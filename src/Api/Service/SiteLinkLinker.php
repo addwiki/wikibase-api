@@ -8,22 +8,16 @@ use Wikibase\DataModel\SiteLink;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class SiteLinkLinker {
 
 	private WikibaseApi $api;
 
-	/**
-	 * @param WikibaseApi $api
-	 */
 	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;
 	}
 
 	/**
-	 * @since 0.2
 	 * @param SiteLink $toSiteLink
 	 * @param SiteLink $fromSiteLink
 	 * @param EditInfo|null $editInfo

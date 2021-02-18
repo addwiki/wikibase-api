@@ -8,10 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers Wikibase\Api\GenericOptions
- *
- * @license GPL-2.0-or-later
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Addshore
  */
 class GenericOptionsTest extends TestCase {
 

@@ -17,9 +17,6 @@ use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use Exception;
 
-/**
- * @author Addshore
- */
 class TestEnvironment {
 
 	public static function newDefault(): TestEnvironment {

@@ -10,8 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\Api\Lookup\EntityRedirectApiLookup
- *
- * @author Addshore
  */
 class EntityRedirectApiLookupTest extends TestCase {
 

@@ -7,17 +7,12 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 
 /**
- * @author Addshore
- *
  * @access private
  */
 class EntityApiLookup implements EntityLookup {
 
 	private RevisionGetter $revisionGetter;
 
-	/**
-	 * @param RevisionGetter $revisionGetter
-	 */
 	public function __construct( RevisionGetter $revisionGetter ) {
 		$this->revisionGetter = $revisionGetter;
 	}

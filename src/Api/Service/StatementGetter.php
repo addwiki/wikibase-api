@@ -9,19 +9,13 @@ use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class StatementGetter {
 
 	private MediawikiApi $api;
 
-	private \Deserializers\Deserializer $statementDeserializer;
+	private Deserializer $statementDeserializer;
 
-	/**
-	 * @param MediawikiApi $api
-	 * @param Deserializer $statementDeserializer
-	 */
 	public function __construct( MediawikiApi $api, Deserializer $statementDeserializer ) {
 		$this->api = $api;
 		$this->statementDeserializer = $statementDeserializer;

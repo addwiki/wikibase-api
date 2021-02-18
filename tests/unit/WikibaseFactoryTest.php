@@ -25,8 +25,6 @@ use PHPUnit\Framework\TestCase;
 use Serializers\Serializer;
 
 /**
- * @author Addshore
- *
  * @covers Wikibase\Api\WikibaseFactory
  */
 class WikibaseFactoryTest extends TestCase {

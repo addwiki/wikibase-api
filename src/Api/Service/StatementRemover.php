@@ -10,23 +10,16 @@ use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class StatementRemover {
 
 	private WikibaseApi $api;
 
-	/**
-	 * @param WikibaseApi $api
-	 */
 	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @param Statement|StatementGuid|string $statement Statement object or GUID
 	 * @param EditInfo|null $editInfo
 	 *

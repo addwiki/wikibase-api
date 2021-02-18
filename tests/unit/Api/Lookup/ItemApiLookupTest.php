@@ -10,8 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 
 /**
- * @author Addshore
- *
  * @covers Wikibase\Api\Lookup\ItemApiLookup
  */
 class ItemApiLookupTest extends TestCase {

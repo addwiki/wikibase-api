@@ -11,28 +11,19 @@ use RuntimeException;
 
 /**
  * @access private
- *
- * @author Addshore
- * @author Thomas Arrow
  */
 class ValueParser {
 
 	private MediawikiApi $api;
 
-	private \Deserializers\Deserializer $dataValueDeserializer;
+	private Deserializer $dataValueDeserializer;
 
-	/**
-	 * @param MediawikiApi $api
-	 * @param Deserializer $dataValueDeserializer
-	 */
 	public function __construct( MediawikiApi $api, Deserializer $dataValueDeserializer ) {
 		$this->api = $api;
 		$this->dataValueDeserializer = $dataValueDeserializer;
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @param string|string[] $inputValues one or more
 	 * @param string $parser Id of the ValueParser to use
 	 *
@@ -43,14 +34,12 @@ class ValueParser {
 	}
 
 	/**
-	 * @since 0.7
-	 *
 	 * @param string|string[] $inputValues one or more
 	 * @param string $parser Id of the ValueParser to use
 	 *
 	 * @return PromiseInterface of a DataValue object or array of DataValue objects with same keys as values
 	 */
-	public function parseAsync( $inputValues, string $parser ): \GuzzleHttp\Promise\PromiseInterface {
+	public function parseAsync( $inputValues, string $parser ): PromiseInterface {
 		$promise = $this->api->getRequestAsync(
 			new SimpleRequest(
 				'wbparsevalue',

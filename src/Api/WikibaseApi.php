@@ -8,8 +8,6 @@ use Addwiki\Mediawiki\DataModel\EditInfo;
 
 /**
  * @access private
- *
- * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class WikibaseApi {
 

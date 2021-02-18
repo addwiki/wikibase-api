@@ -12,23 +12,16 @@ use Wikibase\DataModel\SiteLink;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class SiteLinkSetter {
 
 	private WikibaseApi $api;
 
-	/**
-	 * @param WikibaseApi $api
-	 */
 	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @param SiteLink $siteLink
 	 * @param EntityId|Item|Property|SiteLink $target
 	 * @param EditInfo|null $editInfo

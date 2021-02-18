@@ -19,19 +19,13 @@ use Wikibase\DataModel\SiteLink;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class RevisionsGetter {
 
 	protected MediawikiApi $api;
 
-	private \Deserializers\Deserializer $entityDeserializer;
+	private Deserializer $entityDeserializer;
 
-	/**
-	 * @param MediawikiApi $api
-	 * @param Deserializer $entityDeserializer
-	 */
 	public function __construct( MediawikiApi $api, Deserializer $entityDeserializer ) {
 		$this->api = $api;
 		$this->entityDeserializer = $entityDeserializer;
@@ -44,8 +38,6 @@ class RevisionsGetter {
 	 *     EntityId EntityId objects
 	 *     SiteLink SiteLink objects
 	 *     string Serialized entity ids (these are not validated before passing to the api)
-	 *
-	 * @since 0.4
 	 */
 	public function getRevisions( array $identifyingInfoArray ): Revisions {
 		$entityIdStrings = [];

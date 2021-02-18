@@ -10,22 +10,16 @@ use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @access private
- *
- * @author Addshore
  */
 class ItemMerger {
 
 	private WikibaseApi $api;
 
-	/**
-	 * @param WikibaseApi $api
-	 */
 	public function __construct( WikibaseApi $api ) {
 		$this->api = $api;
 	}
 
 	/**
-	 * @since 0.2
 	 * @param Item|ItemId|string $from
 	 * @param Item|ItemId|string $to
 	 * @param EditInfo|null $editInfo

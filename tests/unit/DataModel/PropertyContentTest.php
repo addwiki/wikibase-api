@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\Property;
 
 /**
  * @covers Wikibase\DataModel\PropertyContent
- * @author Addshore
  */
 class PropertyContentTest extends TestCase {
 

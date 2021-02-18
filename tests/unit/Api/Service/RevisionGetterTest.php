@@ -14,8 +14,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @author Addshore
- *
  * @covers Wikibase\Api\Service\RevisionGetter
  */
 class RevisionGetterTest extends TestCase {
