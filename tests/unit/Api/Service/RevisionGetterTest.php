@@ -3,7 +3,7 @@
 namespace Addwiki\Wikibase\Tests\Unit\Api\Service;
 
 use Addwiki\Mediawiki\Api\Client\MediawikiApi;
-use Addwiki\Mediawiki\Api\Client\SimpleRequest;
+use Addwiki\Mediawiki\Api\Client\Request\SimpleRequest;
 use Addwiki\Mediawiki\DataModel\Revision;
 use Addwiki\Wikibase\Api\Service\RevisionGetter;
 use Addwiki\Wikibase\DataModel\ItemContent;

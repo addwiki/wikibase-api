@@ -3,7 +3,7 @@
 namespace Addwiki\Wikibase\Api;
 
 use Addwiki\Mediawiki\Api\Client\MediawikiApi;
-use Addwiki\Mediawiki\Api\Client\SimpleRequest;
+use Addwiki\Mediawiki\Api\Client\Request\SimpleRequest;
 use Addwiki\Mediawiki\DataModel\EditInfo;
 
 /**
