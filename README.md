@@ -26,8 +26,7 @@ Note: this library uses namespaces so please remember to add the relevant [use c
 ```php
 require_once( __DIR__ . '/vendor/autoload.php' );
 
-$api = new MediawikiApi( 'http://localhost/w/api.php' );
-$api->login( new ApiUser( 'username', 'password' ) );
+$api = new MediawikiApi( 'http://localhost/w/api.php', new UserAndPassword( 'username', 'password' ) );
 
 // Create our Factory, All services should be used through this!
 // You will need to add more or different datavalues here.
