@@ -32,7 +32,7 @@ class RevisionGetter {
 	/**
 	 * @param string|EntityId $id
 	 */
-	public function getFromId( $id ): Revision {
+	public function getFromId( $id ): ?Revision {
 		if ( $id instanceof EntityId ) {
 			$id = $id->getSerialization();
 		}
@@ -44,7 +44,7 @@ class RevisionGetter {
 	/**
 	 * @param SiteLink $siteLink
 	 */
-	public function getFromSiteLink( SiteLink $siteLink ): Revision {
+	public function getFromSiteLink( SiteLink $siteLink ): ?Revision {
 		$result = $this->api->request( ActionRequest::simpleGet(
 			'wbgetentities',
 			[ 'sites' => $siteLink->getSiteId(), 'titles' => $siteLink->getPageName() ]
@@ -52,7 +52,7 @@ class RevisionGetter {
 		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 
-	public function getFromSiteAndTitle( string $siteId, string $title ): Revision {
+	public function getFromSiteAndTitle( string $siteId, string $title ): ?Revision {
 		$result = $this->api->request( ActionRequest::simpleGet(
 			'wbgetentities',
 			[ 'sites' => $siteId, 'titles' => $title ]
@@ -60,14 +60,9 @@ class RevisionGetter {
 		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 
-	/**
-	 * @param array $entityResult
-	 * @return bool|Revision
-	 * @todo this could be factored into a different class?
-	 */
-	private function newRevisionFromResult( array $entityResult ) {
+	private function newRevisionFromResult( array $entityResult ): ?Revision {
 		if ( array_key_exists( 'missing', $entityResult ) ) {
-			return false; // Throw an exception?
+			return null; // Throw an exception?
 		}
 		return new Revision(
 			$this->getContentFromEntity( $this->entityDeserializer->deserialize( $entityResult ) ),
