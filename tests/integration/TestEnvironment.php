@@ -2,7 +2,7 @@
 
 namespace Addwiki\Wikibase\Tests\Integration;
 
-use Addwiki\Mediawiki\Api\Client\MediawikiApi;
+use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
 use Addwiki\Wikibase\Api\WikibaseFactory;
 use DataValues\BooleanValue;
 use DataValues\Deserializers\DataValueDeserializer;
@@ -39,7 +39,7 @@ class TestEnvironment {
 		}
 
 		$this->factory = new WikibaseFactory(
-			new MediawikiApi( $apiUrl ),
+			new ActionApi( $apiUrl ),
 			$this->newDataValueDeserializer(),
 			new DataValueSerializer()
 		);

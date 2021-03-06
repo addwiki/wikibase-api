@@ -2,8 +2,8 @@
 
 namespace Addwiki\Wikibase\Api;
 
-use Addwiki\Mediawiki\Api\Client\MediawikiApi;
-use Addwiki\Mediawiki\Api\Client\Request\SimpleRequest;
+use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
+use Addwiki\Mediawiki\Api\Client\Action\Request\ActionRequest;
 use Addwiki\Mediawiki\DataModel\EditInfo;
 
 /**
@@ -11,9 +11,9 @@ use Addwiki\Mediawiki\DataModel\EditInfo;
  */
 class WikibaseApi {
 
-	private MediawikiApi $api;
+	private ActionApi $api;
 
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( ActionApi $api ) {
 		$this->api = $api;
 	}
 
@@ -28,7 +28,7 @@ class WikibaseApi {
 		}
 
 		$params['token'] = $this->api->getToken();
-		return $this->api->postRequest( new SimpleRequest( $action, $params ) );
+		return $this->api->request( ActionRequest::simplePost( $action, $params ) );
 	}
 
 	private function getEditInfoParams( EditInfo $editInfo ): array {

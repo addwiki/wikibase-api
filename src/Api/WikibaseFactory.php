@@ -2,7 +2,7 @@
 
 namespace Addwiki\Wikibase\Api;
 
-use Addwiki\Mediawiki\Api\Client\MediawikiApi;
+use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
 use Addwiki\Wikibase\Api\Lookup\EntityApiLookup;
 use Addwiki\Wikibase\Api\Lookup\ItemApiLookup;
 use Addwiki\Wikibase\Api\Lookup\PropertyApiLookup;
@@ -39,11 +39,11 @@ use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
  */
 class WikibaseFactory {
 
-	private MediawikiApi $api;
+	private ActionApi $api;
 	private Deserializer $dataValueDeserializer;
 	private Serializer $dataValueSerializer;
 
-	public function __construct( MediawikiApi $api, Deserializer $dvDeserializer, Serializer $dvSerializer ) {
+	public function __construct( ActionApi $api, Deserializer $dvDeserializer, Serializer $dvSerializer ) {
 		$this->api = $api;
 		$this->dataValueDeserializer = $dvDeserializer;
 		$this->dataValueSerializer = $dvSerializer;

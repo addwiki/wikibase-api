@@ -2,8 +2,8 @@
 
 namespace Addwiki\Wikibase\Api\Lookup;
 
-use Addwiki\Mediawiki\Api\Client\MediawikiApi;
-use Addwiki\Mediawiki\Api\Client\Request\SimpleRequest;
+use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
+use Addwiki\Mediawiki\Api\Client\Action\Request\ActionRequest;
 use BadMethodCallException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -17,9 +17,9 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
  */
 class EntityRedirectApiLookup implements EntityRedirectLookup {
 
-	private MediawikiApi $api;
+	private ActionApi $api;
 
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( ActionApi $api ) {
 		$this->api = $api;
 	}
 
@@ -40,7 +40,7 @@ class EntityRedirectApiLookup implements EntityRedirectLookup {
 		$entityIdSerialization = $entityId->getSerialization();
 
 		$params = [ 'ids' => $entityIdSerialization ];
-		$result = $this->api->getRequest( new SimpleRequest( 'wbgetentities', $params ) );
+		$result = $this->api->request( ActionRequest::simpleGet( 'wbgetentities', $params ) );
 
 		$entitiesData = $result['entities'];
 		if ( !array_key_exists( $entityIdSerialization, $entitiesData ) ) {

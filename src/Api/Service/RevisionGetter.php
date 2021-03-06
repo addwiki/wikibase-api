@@ -2,8 +2,8 @@
 
 namespace Addwiki\Wikibase\Api\Service;
 
-use Addwiki\Mediawiki\Api\Client\MediawikiApi;
-use Addwiki\Mediawiki\Api\Client\Request\SimpleRequest;
+use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
+use Addwiki\Mediawiki\Api\Client\Action\Request\ActionRequest;
 use Addwiki\Mediawiki\DataModel\PageIdentifier;
 use Addwiki\Mediawiki\DataModel\Revision;
 use Addwiki\Wikibase\DataModel\ItemContent;
@@ -20,11 +20,11 @@ use Wikibase\DataModel\SiteLink;
  */
 class RevisionGetter {
 
-	protected MediawikiApi $api;
+	protected ActionApi $api;
 
 	protected Deserializer $entityDeserializer;
 
-	public function __construct( MediawikiApi $api, Deserializer $entityDeserializer ) {
+	public function __construct( ActionApi $api, Deserializer $entityDeserializer ) {
 		$this->api = $api;
 		$this->entityDeserializer = $entityDeserializer;
 	}
@@ -37,7 +37,7 @@ class RevisionGetter {
 			$id = $id->getSerialization();
 		}
 
-		$result = $this->api->getRequest( new SimpleRequest( 'wbgetentities', [ 'ids' => $id ] ) );
+		$result = $this->api->request( ActionRequest::simpleGet( 'wbgetentities', [ 'ids' => $id ] ) );
 		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 
@@ -45,7 +45,7 @@ class RevisionGetter {
 	 * @param SiteLink $siteLink
 	 */
 	public function getFromSiteLink( SiteLink $siteLink ): Revision {
-		$result = $this->api->getRequest( new SimpleRequest(
+		$result = $this->api->request( ActionRequest::simpleGet(
 			'wbgetentities',
 			[ 'sites' => $siteLink->getSiteId(), 'titles' => $siteLink->getPageName() ]
 		) );
@@ -53,7 +53,7 @@ class RevisionGetter {
 	}
 
 	public function getFromSiteAndTitle( string $siteId, string $title ): Revision {
-		$result = $this->api->getRequest( new SimpleRequest(
+		$result = $this->api->request( ActionRequest::simpleGet(
 			'wbgetentities',
 			[ 'sites' => $siteId, 'titles' => $title ]
 		) );

@@ -2,8 +2,8 @@
 
 namespace Addwiki\Wikibase\Tests\Unit\Api\Service;
 
-use Addwiki\Mediawiki\Api\Client\MediawikiApi;
-use Addwiki\Mediawiki\Api\Client\Request\SimpleRequest;
+use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
+use Addwiki\Mediawiki\Api\Client\Action\Request\ActionRequest;
 use Addwiki\Mediawiki\DataModel\Revision;
 use Addwiki\Wikibase\Api\Service\RevisionGetter;
 use Addwiki\Wikibase\DataModel\ItemContent;
@@ -13,16 +13,13 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 
-/**
- * @covers Wikibase\Api\Service\RevisionGetter
- */
 class RevisionGetterTest extends TestCase {
 
 	/**
-	 * @return MockObject|MediawikiApi
+	 * @return MockObject|ActionApi
 	 */
 	private function createMockApi() {
-		return $this->createMock( MediawikiApi::class );
+		return $this->createMock( ActionApi::class );
 	}
 
 	/**
@@ -50,9 +47,9 @@ class RevisionGetterTest extends TestCase {
 	public function testGetFromId( $id ): void {
 		$api = $this->createMockApi();
 		$api->expects( $this->once() )
-			->method( 'getRequest' )
+			->method( 'request' )
 			->with(
-				new SimpleRequest(
+				ActionRequest::simpleGet(
 					'wbgetentities',
 					[ 'ids' => 'Q1' ]
 				)

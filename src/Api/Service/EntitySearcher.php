@@ -2,17 +2,17 @@
 
 namespace Addwiki\Wikibase\Api\Service;
 
-use Addwiki\Mediawiki\Api\Client\MediawikiApi;
-use Addwiki\Mediawiki\Api\Client\Request\SimpleRequest;
+use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
+use Addwiki\Mediawiki\Api\Client\Action\Request\ActionRequest;
 
 /**
  * @access private
  */
 class EntitySearcher {
 
-	private MediawikiApi $api;
+	private ActionApi $api;
 
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( ActionApi $api ) {
 		$this->api = $api;
 	}
 
@@ -26,7 +26,7 @@ class EntitySearcher {
 			'type' => $entityType,
 		];
 
-		$data = $this->api->getRequest( new SimpleRequest( 'wbsearchentities', $params ) );
+		$data = $this->api->request( ActionRequest::simpleGet( 'wbsearchentities', $params ) );
 
 		$ids = [];
 		foreach ( $data['search'] as $searchResult ) {

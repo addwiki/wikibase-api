@@ -2,7 +2,7 @@
 
 namespace Addwiki\Wikibase\Tests\Unit;
 
-use Addwiki\Mediawiki\Api\Client\MediawikiApi;
+use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
 use Addwiki\Wikibase\Api\Service\AliasGroupSetter;
 use Addwiki\Wikibase\Api\Service\DescriptionSetter;
 use Addwiki\Wikibase\Api\Service\ItemMerger;
@@ -59,7 +59,7 @@ class WikibaseFactoryTest extends TestCase {
 		/** @var Deserializer $dvDeserializer */
 		$dvDeserializer = $this->createMock( Deserializer::class );
 
-		$factory = new WikibaseFactory( $this->createMock( MediawikiApi::class ), $dvDeserializer, $dvSerializer );
+		$factory = new WikibaseFactory( $this->createMock( ActionApi::class ), $dvDeserializer, $dvSerializer );
 
 		$this->assertTrue( method_exists( $factory, $method ) );
 		$object = $factory->$method();

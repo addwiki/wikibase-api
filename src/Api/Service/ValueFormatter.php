@@ -2,8 +2,8 @@
 
 namespace Addwiki\Wikibase\Api\Service;
 
-use Addwiki\Mediawiki\Api\Client\MediawikiApi;
-use Addwiki\Mediawiki\Api\Client\Request\SimpleRequest;
+use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
+use Addwiki\Mediawiki\Api\Client\Action\Request\ActionRequest;
 use Addwiki\Wikibase\Api\GenericOptions;
 use DataValues\DataValue;
 use Serializers\Serializer;
@@ -13,11 +13,11 @@ use Serializers\Serializer;
  */
 class ValueFormatter {
 
-	private MediawikiApi $api;
+	private ActionApi $api;
 
 	private Serializer $dataValueSerializer;
 
-	public function __construct( MediawikiApi $api, Serializer $dataValueSerializer ) {
+	public function __construct( ActionApi $api, Serializer $dataValueSerializer ) {
 		$this->api = $api;
 		$this->dataValueSerializer = $dataValueSerializer;
 	}
@@ -36,7 +36,7 @@ class ValueFormatter {
 			'options' => json_encode( $options->getOptions() ),
 		];
 
-		$result = $this->api->getRequest( new SimpleRequest( 'wbformatvalue', $params ) );
+		$result = $this->api->request( ActionRequest::simpleGet( 'wbformatvalue', $params ) );
 		return $result['result'];
 	}
 

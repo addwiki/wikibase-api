@@ -2,8 +2,8 @@
 
 namespace Addwiki\Wikibase\Api\Service;
 
-use Addwiki\Mediawiki\Api\Client\MediawikiApi;
-use Addwiki\Mediawiki\Api\Client\Request\SimpleRequest;
+use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
+use Addwiki\Mediawiki\Api\Client\Action\Request\ActionRequest;
 use DataValues\DataValue;
 use Deserializers\Deserializer;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -14,11 +14,11 @@ use RuntimeException;
  */
 class ValueParser {
 
-	private MediawikiApi $api;
+	private ActionApi $api;
 
 	private Deserializer $dataValueDeserializer;
 
-	public function __construct( MediawikiApi $api, Deserializer $dataValueDeserializer ) {
+	public function __construct( ActionApi $api, Deserializer $dataValueDeserializer ) {
 		$this->api = $api;
 		$this->dataValueDeserializer = $dataValueDeserializer;
 	}
@@ -40,8 +40,8 @@ class ValueParser {
 	 * @return PromiseInterface of a DataValue object or array of DataValue objects with same keys as values
 	 */
 	public function parseAsync( $inputValues, string $parser ): PromiseInterface {
-		$promise = $this->api->getRequestAsync(
-			new SimpleRequest(
+		$promise = $this->api->requestAsync(
+			ActionRequest::simpleGet(
 				'wbparsevalue',
 				[
 					'parser' => $parser,

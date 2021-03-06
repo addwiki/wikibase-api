@@ -2,8 +2,8 @@
 
 namespace Addwiki\Wikibase\Api\Service;
 
-use Addwiki\Mediawiki\Api\Client\MediawikiApi;
-use Addwiki\Mediawiki\Api\Client\Request\SimpleRequest;
+use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
+use Addwiki\Mediawiki\Api\Client\Action\Request\ActionRequest;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -11,9 +11,9 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class BadgeIdsGetter {
 
-	private MediawikiApi $api;
+	private ActionApi $api;
 
-	public function __construct( MediawikiApi $api ) {
+	public function __construct( ActionApi $api ) {
 		$this->api = $api;
 	}
 
@@ -21,7 +21,7 @@ class BadgeIdsGetter {
 	 * @return ItemId[]
 	 */
 	public function get(): array {
-		$result = $this->api->getRequest( new SimpleRequest( 'wbavailablebadges' ) );
+		$result = $this->api->request( ActionRequest::simpleGet( 'wbavailablebadges' ) );
 		$ids = [];
 		foreach ( $result['badges'] as $badgeIdString ) {
 			$ids[] = new ItemId( $badgeIdString );
