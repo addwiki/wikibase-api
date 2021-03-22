@@ -18,8 +18,6 @@ class SiteLinkLinker {
 	}
 
 	/**
-	 * @param SiteLink $toSiteLink
-	 * @param SiteLink $fromSiteLink
 	 * @param EditInfo|null $editInfo
 	 */
 	public function link( SiteLink $toSiteLink, SiteLink $fromSiteLink, EditInfo $editInfo = null ): bool {

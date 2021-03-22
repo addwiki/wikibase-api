@@ -21,8 +21,6 @@ class EntityDocumentSaver {
 	}
 
 	/**
-	 * @param EntityDocument $entityDocument
-	 * @param EditInfo $editInfo
 	 *
 	 * @return Item|Property
 	 */

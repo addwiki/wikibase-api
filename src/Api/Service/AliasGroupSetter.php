@@ -23,7 +23,6 @@ class AliasGroupSetter {
 	}
 
 	/**
-	 * @param AliasGroup $aliasGroup
 	 * @param EntityId|Item|Property|SiteLink $target
 	 * @param EditInfo|null $editInfo
 	 */

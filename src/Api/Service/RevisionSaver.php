@@ -29,7 +29,6 @@ class RevisionSaver {
 	}
 
 	/**
-	 * @param Revision $revision
 	 * @param EditInfo|null $editInfo
 	 *
 	 * @throws RuntimeException

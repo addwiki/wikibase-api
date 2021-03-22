@@ -18,8 +18,6 @@ class RedirectCreator {
 	}
 
 	/**
-	 * @param EntityId $from
-	 * @param EntityId $to
 	 * @param EditInfo|null $editInfo
 	 */
 	public function create( EntityId $from, EntityId $to, EditInfo $editInfo = null ): bool {

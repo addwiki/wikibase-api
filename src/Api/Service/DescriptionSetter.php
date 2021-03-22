@@ -23,7 +23,6 @@ class DescriptionSetter {
 	}
 
 	/**
-	 * @param Term $description
 	 * @param EntityId|Item|Property|SiteLink $target
 	 * @param EditInfo|null $editInfo
 	 */

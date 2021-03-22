@@ -82,7 +82,6 @@ class RevisionsGetter {
 	}
 
 	/**
-	 * @param array $entitiesResult
 	 * @todo this could be factored into a different class?
 	 */
 	private function newRevisionsFromResult( array $entitiesResult ): Revisions {

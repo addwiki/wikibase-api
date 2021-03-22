@@ -27,7 +27,6 @@ class StatementCreator {
 	}
 
 	/**
-	 * @param Snak $mainSnak
 	 * @param EntityId|Item|Property|string $target
 	 * @param EditInfo|null $editInfo
 	 *

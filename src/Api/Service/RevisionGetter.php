@@ -41,9 +41,6 @@ class RevisionGetter {
 		return $this->newRevisionFromResult( array_shift( $result['entities'] ) );
 	}
 
-	/**
-	 * @param SiteLink $siteLink
-	 */
 	public function getFromSiteLink( SiteLink $siteLink ): ?Revision {
 		$result = $this->api->request( ActionRequest::simpleGet(
 			'wbgetentities',

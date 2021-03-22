@@ -2,6 +2,7 @@
 
 namespace Addwiki\Wikibase\Api\Lookup;
 
+use Addwiki\Mediawiki\DataModel\Revision;
 use Addwiki\Wikibase\Api\Service\RevisionGetter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -24,7 +25,7 @@ class EntityApiLookup implements EntityLookup {
 	public function getEntity( EntityId $entityId ) {
 		$revision = $this->revisionGetter->getFromId( $entityId );
 
-		if ( !$revision ) {
+		if ( !$revision instanceof Revision ) {
 			return null;
 		}
 

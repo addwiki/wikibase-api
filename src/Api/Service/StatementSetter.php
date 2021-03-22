@@ -23,11 +23,9 @@ class StatementSetter {
 	}
 
 	/**
-	 * @param Statement $statement
 	 * @param EditInfo|null $editInfo
 	 *
 	 * @throws InvalidArgumentException
-	 *
 	 * @todo allow setting of indexes
 	 */
 	public function set( Statement $statement, EditInfo $editInfo = null ): bool {
