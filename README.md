@@ -68,7 +68,7 @@ $itemId = $resultingItem->getId()
 
 #### Set a label
 
-Set an english label on the item Q87 assuming it exists, using a custom summary.
+Set an English label on the item Q87 assuming it exists, using a custom summary.
 
 ```php
 $getter = $wbFactory->newRevisionGetter();
