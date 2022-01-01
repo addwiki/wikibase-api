@@ -22,7 +22,7 @@ class IntegrationTest extends TestCase {
 
 	private static ?Item $localItem = null;
 
-	public static function setUpBeforeClass() : void {
+	public static function setUpBeforeClass(): void {
 		parent::setUpBeforeClass();
 		self::$localItem = new Item();
 		self::$localItem->getFingerprint()->getLabels()->setTextForLanguage( 'en', 'TestItem - ' . strval( time() ) );
