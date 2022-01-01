@@ -1,6 +1,6 @@
 <?php
 
-namespace Addwiki\Wikibase\Tests\Unit\Api;
+namespace Addwiki\Wikibase\Api\Tests\Unit;
 
 use Addwiki\Wikibase\Api\GenericOptions;
 use OutOfBoundsException;

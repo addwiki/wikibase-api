@@ -1,6 +1,6 @@
 <?php
 
-namespace Addwiki\Wikibase\Tests\Unit\Api\Service;
+namespace Addwiki\Wikibase\Api\Tests\Unit\Service;
 
 use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
 use Addwiki\Mediawiki\Api\Client\Action\Request\ActionRequest;

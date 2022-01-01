@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- ...
+- Split `\DataModel` namespace out into `wikibase-datamodel` package.
 
 ## Version 3.0 (23 October 2021)
 

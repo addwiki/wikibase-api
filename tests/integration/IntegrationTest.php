@@ -1,9 +1,8 @@
 <?php
 
-namespace Addwiki\Wikibase\Tests\Integration\Api;
+namespace Addwiki\Wikibase\Api\Tests\Integration;
 
 use Addwiki\Mediawiki\DataModel\Revision;
-use Addwiki\Wikibase\Api\Tests\Integration\TestEnvironment;
 use Addwiki\Wikibase\DataModel\ItemContent;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;

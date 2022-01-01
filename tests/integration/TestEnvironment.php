@@ -1,6 +1,6 @@
 <?php
 
-namespace Addwiki\Wikibase\Tests\Integration;
+namespace Addwiki\Wikibase\Api\Tests\Integration;
 
 use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
 use Addwiki\Wikibase\Api\WikibaseFactory;

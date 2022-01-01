@@ -1,6 +1,6 @@
 <?php
 
-namespace Addwiki\Wikibase\Tests\Unit\Api\Lookup;
+namespace Addwiki\Wikibase\Api\Tests\Unit\Lookup;
 
 use Addwiki\Wikibase\Api\Lookup\ItemApiLookup;
 use PHPUnit\Framework\MockObject\MockObject;
