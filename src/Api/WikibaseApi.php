@@ -37,13 +37,16 @@ class WikibaseApi {
 		if ( $editInfo->getSummary() !== '' ) {
 			$params['summary'] = $editInfo->getSummary();
 		}
+
 		if ( $editInfo->getMinor() ) {
 			$params['minor'] = true;
 		}
+
 		if ( $editInfo->getBot() ) {
 			$params['bot'] = true;
 			$params['assert'] = 'bot';
 		}
+
 		if ( $editInfo->getMaxlag() ) {
 			$params['maxlag'] = $editInfo->getMaxlag();
 		}

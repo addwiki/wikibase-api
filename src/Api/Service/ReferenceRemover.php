@@ -31,6 +31,7 @@ class ReferenceRemover {
 		if ( $reference instanceof Reference ) {
 			$reference = $reference->getHash();
 		}
+
 		if ( !is_string( $reference ) ) {
 			throw new UnexpectedValueException( 'Could not get reference hash from $reference' );
 		}
@@ -44,6 +45,7 @@ class ReferenceRemover {
 		} else {
 			throw new UnexpectedValueException( 'Could not get statement guid from $target' );
 		}
+
 		if ( !is_string( $guid ) ) {
 			throw new UnexpectedValueException( 'Unexpected statement guid got from $target' );
 		}

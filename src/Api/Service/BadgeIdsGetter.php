@@ -26,6 +26,7 @@ class BadgeIdsGetter {
 		foreach ( $result['badges'] as $badgeIdString ) {
 			$ids[] = new ItemId( $badgeIdString );
 		}
+
 		return $ids;
 	}
 

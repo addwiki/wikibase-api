@@ -35,6 +35,7 @@ class StatementRemover {
 		} else {
 			throw new UnexpectedValueException( 'Could not get statement guid from $statement' );
 		}
+
 		if ( !is_string( $guid ) ) {
 			throw new UnexpectedValueException( 'Unexpected statement guid got from $statement' );
 		}

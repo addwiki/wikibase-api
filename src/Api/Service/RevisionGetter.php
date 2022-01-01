@@ -61,6 +61,7 @@ class RevisionGetter {
 		if ( array_key_exists( 'missing', $entityResult ) ) {
 			return null; // Throw an exception?
 		}
+
 		return new Revision(
 			$this->getContentFromEntity( $this->entityDeserializer->deserialize( $entityResult ) ),
 			new PageIdentifier( null, (int)$entityResult['pageid'] ),

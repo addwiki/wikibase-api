@@ -40,7 +40,9 @@ use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 class WikibaseFactory {
 
 	private ActionApi $api;
+
 	private Deserializer $dataValueDeserializer;
+
 	private Serializer $dataValueSerializer;
 
 	public function __construct( ActionApi $api, Deserializer $dvDeserializer, Serializer $dvSerializer ) {

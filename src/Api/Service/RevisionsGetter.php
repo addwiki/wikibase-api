@@ -65,6 +65,7 @@ class RevisionsGetter {
 					$params['ids'] = implode( '|', $entityIdStrings );
 					$gotRevisionsFromIds = true;
 				}
+
 				$params['titles'] = implode( '|', $siteLinkStrings );
 				$result = $this->api->request( ActionRequest::simpleGet( 'wbgetentities', $params ) );
 				$resultRevisions = $this->newRevisionsFromResult( $result['entities'] );
@@ -90,6 +91,7 @@ class RevisionsGetter {
 			if ( array_key_exists( 'missing', $entityResult ) ) {
 				continue;
 			}
+
 			$revisions->addRevision( new Revision(
 				$this->getContentFromEntity( $this->entityDeserializer->deserialize( $entityResult ) ),
 				new PageIdentifier( null, $entityResult['pageid'] ),
@@ -99,6 +101,7 @@ class RevisionsGetter {
 				$entityResult['modified']
 			) );
 		}
+
 		return $revisions;
 	}
 

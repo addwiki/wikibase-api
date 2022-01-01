@@ -42,6 +42,7 @@ class ReferenceSetter {
 		} else {
 			throw new UnexpectedValueException( 'Could not get statement guid from $statement' );
 		}
+
 		if ( !is_string( $guid ) ) {
 			throw new UnexpectedValueException( 'Unexpected statement guid got from $statement' );
 		}
@@ -58,9 +59,11 @@ class ReferenceSetter {
 			if ( $targetReference instanceof Reference ) {
 				$targetReference = $reference->getHash();
 			}
+
 			if ( !is_string( $targetReference ) ) {
 				throw new UnexpectedValueException( 'Could not get reference hash from $targetReference' );
 			}
+
 			$params['reference'] = $targetReference;
 		}
 

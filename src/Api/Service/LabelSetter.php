@@ -51,6 +51,7 @@ class LabelSetter {
 		if ( !$target instanceof EntityId && !$target instanceof Item && !$target instanceof Property && !$target instanceof SiteLink ) {
 			throw new UnexpectedValueException( '$target needs to be an EntityId, Item, Property or SiteLink' );
 		}
+
 		if ( ( $target instanceof Item || $target instanceof Property ) && $target->getId() === null ) {
 			throw new UnexpectedValueException( '$target Entity object needs to have an Id set' );
 		}
