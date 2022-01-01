@@ -4,6 +4,7 @@ namespace Addwiki\Wikibase\Api\Tests\Integration;
 
 use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
 use Addwiki\Wikibase\Api\WikibaseFactory;
+use Addwiki\Wikibase\DataModel\DataModelFactory;
 use DataValues\BooleanValue;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
@@ -40,8 +41,10 @@ class TestEnvironment {
 
 		$this->factory = new WikibaseFactory(
 			new ActionApi( $apiUrl ),
-			$this->newDataValueDeserializer(),
-			new DataValueSerializer()
+			new DataModelFactory(
+				$this->newDataValueDeserializer(),
+				new DataValueSerializer()
+			)
 		);
 	}
 

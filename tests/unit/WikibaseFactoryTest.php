@@ -20,6 +20,7 @@ use Addwiki\Wikibase\Api\Service\StatementSetter;
 use Addwiki\Wikibase\Api\Service\ValueFormatter;
 use Addwiki\Wikibase\Api\Service\ValueParser;
 use Addwiki\Wikibase\Api\WikibaseFactory;
+use Addwiki\Wikibase\DataModel\DataModelFactory;
 use Deserializers\Deserializer;
 use PHPUnit\Framework\TestCase;
 use Serializers\Serializer;
@@ -59,7 +60,13 @@ class WikibaseFactoryTest extends TestCase {
 		/** @var Deserializer $dvDeserializer */
 		$dvDeserializer = $this->createMock( Deserializer::class );
 
-		$factory = new WikibaseFactory( $this->createMock( ActionApi::class ), $dvDeserializer, $dvSerializer );
+		$factory = new WikibaseFactory(
+			$this->createMock( ActionApi::class ),
+			new DataModelFactory(
+				$dvDeserializer,
+				$dvSerializer
+			)
+		);
 
 		$this->assertTrue( method_exists( $factory, $method ) );
 		$object = $factory->$method();

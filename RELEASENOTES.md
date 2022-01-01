@@ -3,6 +3,9 @@
 ## Unreleased
 
 - Split `\DataModel` namespace out into `wikibase-datamodel` package.
+- `RevisionGetter` now returns a generic `Content` object if the entity type is known but content mapping is not, instead of throwing.
+- `WikibaseFactory` default consstruction changed, with backward compatable fallback.
+- Can now be used to iteract with WikibaseMediaInfo entities, thanks to new functioanlity in the `addwiki/wikibase-datamodel` package.
 
 ## Version 3.0 (23 October 2021)
 

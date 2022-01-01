@@ -4,6 +4,7 @@ namespace Addwiki\Wikibase\Api\Service;
 
 use Addwiki\Mediawiki\Api\Client\Action\ActionApi;
 use Addwiki\Mediawiki\Api\Client\Action\Request\ActionRequest;
+use Addwiki\Mediawiki\DataModel\Content;
 use Addwiki\Mediawiki\DataModel\PageIdentifier;
 use Addwiki\Mediawiki\DataModel\Revision;
 use Addwiki\Wikibase\DataModel\ItemContent;
@@ -86,7 +87,8 @@ class RevisionGetter {
 			case Property::ENTITY_TYPE:
 				return new PropertyContent( $entity );
 			default:
-				throw new RuntimeException( 'I cant get a content for this type of entity' );
+				// We can always create a default content object, we just dont know the model
+				return new Content( $entity, 'addwiki-unknown-wikibase-entity-content-' . $entity->getType() );
 		}
 	}
 

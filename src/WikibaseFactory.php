@@ -27,11 +27,7 @@ use Addwiki\Wikibase\Api\Service\StatementRemover;
 use Addwiki\Wikibase\Api\Service\StatementSetter;
 use Addwiki\Wikibase\Api\Service\ValueFormatter;
 use Addwiki\Wikibase\Api\Service\ValueParser;
-use Deserializers\Deserializer;
-use Serializers\Serializer;
-use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\SerializerFactory;
+use Addwiki\Wikibase\DataModel\DataModelFactory;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 
 /**
@@ -41,49 +37,57 @@ class WikibaseFactory {
 
 	private ActionApi $api;
 
-	private Deserializer $dataValueDeserializer;
+	private DataModelFactory $datamodelFactory;
 
-	private Serializer $dataValueSerializer;
-
-	public function __construct( ActionApi $api, Deserializer $dvDeserializer, Serializer $dvSerializer ) {
+	public function __construct( ActionApi $api, $datamodelFactory ) {
 		$this->api = $api;
-		$this->dataValueDeserializer = $dvDeserializer;
-		$this->dataValueSerializer = $dvSerializer;
+
+		if ( $datamodelFactory instanceof DataModelFactory ) {
+			$this->datamodelFactory = $datamodelFactory;
+		} else {
+			// Back compact from older constructor signature
+			// ( ActionApi $api, Deserializer $dvDeserializer, Serializer $dvSerializer )
+			$arg_list = func_get_args();
+			$this->datamodelFactory = new DataModelFactory(
+				$arg_list[1],
+				$arg_list[2]
+			);
+		}
 	}
 
 	public function newRevisionSaver(): RevisionSaver {
 		return new RevisionSaver(
 			$this->newWikibaseApi(),
-			$this->newDataModelDeserializerFactory()->newEntityDeserializer(),
-			$this->newDataModelSerializerFactory()->newEntitySerializer()
+			$this->datamodelFactory->newEntityDeserializer(),
+			$this->datamodelFactory->newEntitySerializer()
 		);
 	}
 
 	public function newRevisionGetter(): RevisionGetter {
 		return new RevisionGetter(
 			$this->api,
-			$this->newDataModelDeserializerFactory()->newEntityDeserializer()
+			$this->datamodelFactory->newEntityDeserializer()
 		);
 	}
 
 	public function newRevisionsGetter(): RevisionsGetter {
 		return new RevisionsGetter(
 			$this->api,
-			$this->newDataModelDeserializerFactory()->newEntityDeserializer()
+			$this->datamodelFactory->newEntityDeserializer()
 		);
 	}
 
 	public function newValueParser(): ValueParser {
 		return new ValueParser(
 			$this->api,
-			$this->dataValueDeserializer
+			$this->datamodelFactory->getDataValueDeserializer()
 		);
 	}
 
 	public function newValueFormatter(): ValueFormatter {
 		return new ValueFormatter(
 			$this->api,
-			$this->dataValueSerializer
+			$this->datamodelFactory->getDataValueSerializer()
 		);
 	}
 
@@ -110,7 +114,7 @@ class WikibaseFactory {
 	public function newReferenceSetter(): ReferenceSetter {
 		return new ReferenceSetter(
 			$this->newWikibaseApi(),
-			$this->newDataModelSerializerFactory()->newReferenceSerializer()
+			$this->datamodelFactory->newReferenceSerializer()
 		);
 	}
 
@@ -130,35 +134,24 @@ class WikibaseFactory {
 		return new RedirectCreator( $this->newWikibaseApi() );
 	}
 
-	private function newDataModelDeserializerFactory(): DeserializerFactory {
-		return new DeserializerFactory(
-			$this->dataValueDeserializer,
-			new BasicEntityIdParser()
-		);
-	}
-
-	private function newDataModelSerializerFactory(): SerializerFactory {
-		return new SerializerFactory( $this->dataValueSerializer );
-	}
-
 	public function newStatementGetter(): StatementGetter {
 		return new StatementGetter(
 			$this->api,
-			$this->newDataModelDeserializerFactory()->newStatementDeserializer()
+			$this->datamodelFactory->newStatementDeserializer()
 		);
 	}
 
 	public function newStatementSetter(): StatementSetter {
 		return new StatementSetter(
 			$this->newWikibaseApi(),
-			$this->newDataModelSerializerFactory()->newStatementSerializer()
+			$this->datamodelFactory->newStatementSerializer()
 		);
 	}
 
 	public function newStatementCreator(): StatementCreator {
 		return new StatementCreator(
 			$this->newWikibaseApi(),
-			$this->dataValueSerializer
+			$this->datamodelFactory->getDataValueSerializer()
 		);
 	}
 

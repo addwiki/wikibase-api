@@ -45,8 +45,10 @@ $dataValueClasses = array(
 );
 $wbFactory = new WikibaseFactory(
     $api,
-    new DataValues\Deserializers\DataValueDeserializer( $dataValueClasses ),
-    new DataValues\Serializers\DataValueSerializer()
+	new Addwiki\Wikibase\DataModel\DataModelFactory(
+		new DataValues\Deserializers\DataValueDeserializer( $dataValueClasses ),
+		new DataValues\Serializers\DataValueSerializer()
+	)
 );
 ```
 
