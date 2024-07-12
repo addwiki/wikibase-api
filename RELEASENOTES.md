@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Installatble with PHP 8.1+
+* Requires "wikibase/data-model-services": "~4.0"
 - Split `\DataModel` namespace out into `wikibase-datamodel` package.
 - `RevisionGetter` now returns a generic `Content` object if the entity type is known but content mapping is not, instead of throwing.
 - `WikibaseFactory` default consstruction changed, with backward compatable fallback.
