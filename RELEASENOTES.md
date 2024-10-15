@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased
+## Version 3.1 (October 2024)
 
 - Installatble with PHP 8.1+
 * Requires "wikibase/data-model-services": "~4.0"
